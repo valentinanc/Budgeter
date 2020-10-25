@@ -12,3 +12,10 @@ npm -v
 
 localhost:4200 UI
 localhost:3000 API
+
+
+start Angular: 
+ng serve --proxy-config proxy.conf.json
+
+start NodeJs Server API:
+npm start
