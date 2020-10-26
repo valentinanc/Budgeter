@@ -9,6 +9,23 @@ Check that you have both by running node the following two commands in your term
 node -v
 npm -v
 
+First time when running the project, and each time after when adding new modules:
+
+within BudgeterUI run:
+
+npm install
+
+within BudgeterAPI run:
+
+npm install
+
 
 localhost:4200 UI
 localhost:3000 API
+
+
+start Angular: 
+ng serve --proxy-config proxy.conf.json
+
+start NodeJs Server API:
+npm start
