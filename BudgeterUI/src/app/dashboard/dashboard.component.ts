@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { AboutYouComponent } from '../about-you/about-you.component';
 import { UserInfoModel } from '../models/userInfo';
 
 @Component({
@@ -16,8 +18,8 @@ export class DashboardComponent implements OnInit {
 		last_name: "Doe", 
 		email: "email@email.com", 
 		password: "Idasn2x2#"});
-
-	constructor(private http: HttpClient, private route: ActivatedRoute) {
+	checker: boolean;
+	constructor(private http: HttpClient, private route: ActivatedRoute, private matDialog: MatDialog) {
 
 	}
 
@@ -30,8 +32,18 @@ export class DashboardComponent implements OnInit {
 	       this.http.get('/api/v1/customer/' + params.uid).subscribe((data:any) => {
 
 				this.user = new UserInfoModel(data.customer);
+				this.checker=true;
+				if (this.checker){
+					this.openDialog();	
+				}
 		    });
 	    });
 	}
+	
+	openDialog() {
+		const dialogConfig = new MatDialogConfig();
+		this.matDialog.open(AboutYouComponent, dialogConfig);
+	  }
+	
 
 }

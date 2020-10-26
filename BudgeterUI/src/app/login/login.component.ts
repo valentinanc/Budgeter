@@ -9,9 +9,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  guid: string;
   userForm: FormGroup;
-  constructor(private formBuilder: FormBuilder, private http: HttpClient,private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private http: HttpClient,private router: Router) {
+    this.http.get('/api/v1/generate_uid').subscribe((data:any) => {
+      this.guid = data.guid;
+    }, error => {
+        console.log("There was an error generating the proper GUID on the server", error);
+    });
+
+   }
 
   ngOnInit(): void {
     this.userForm = this.formBuilder.group({
@@ -23,9 +30,14 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    let data: 123
-    let path = '/user/' + data;
-    this.router.navigate([path]);
+    let data: any = Object.assign({guid: this.guid}, this.userForm.value);
+
+    this.http.post('/api/v1/customer', data).subscribe((data:any) => {
+	      
+      let path = '/user/' + data.customer.uid;
+
+      this.router.navigate([path]);
+    });
   }
 
 }

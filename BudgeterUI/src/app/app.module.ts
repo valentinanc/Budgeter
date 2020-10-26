@@ -20,7 +20,13 @@ import { HeaderComponent } from './header/header.component';
 import { AboutYouComponent } from './about-you/about-you.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatSliderModule } from '@angular/material/slider';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatButtonModule} from '@angular/material/button';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatIconModule} from '@angular/material/icon';
 const routes: Routes = [
   {
     path: '',
@@ -62,8 +68,16 @@ const routes: Routes = [
     MatSliderModule,
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
+    MatDialogModule,
+    MatStepperModule,
+    MatButtonModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatIconModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [AboutYouComponent]
+
 })
 export class AppModule { }
