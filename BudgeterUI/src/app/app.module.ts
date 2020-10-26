@@ -18,11 +18,17 @@ import { FinancialGoalsComponent } from './financial-goals/financial-goals.compo
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { AboutYouComponent } from './about-you/about-you.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { MatSliderModule } from '@angular/material/slider';
 const routes: Routes = [
   {
     path: '',
-    component: RegisterComponent
+    component:LoginComponent 
+  },
+  {
+    path: 'register',
+    component:RegisterComponent 
   },
   {
     path: 'user/:uid',
@@ -45,14 +51,17 @@ const routes: Routes = [
     FinancialGoalsComponent,
     FooterComponent,
     HeaderComponent,
-    AboutYouComponent
+    AboutYouComponent,
   ],
   imports: [
+    // AngularFontAwesomeModule,
     BrowserModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(routes)
+    MatSliderModule,
+    RouterModule.forRoot(routes),
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

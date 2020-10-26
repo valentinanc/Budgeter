@@ -26,25 +26,25 @@ class CustomerService
 {
 	static create(data)
 	{
-		var vres = customerValidator.validate(data, customerVSchema);
+		// var vres = customerValidator.validate(data, customerVSchema);
 		
-		/* validation failed */
-		if(!(vres === true))
-		{
-			let errors = {}, item;
+		// /* validation failed */
+		// if(!(vres === true))
+		// {
+		// 	let errors = {}, item;
 
-			for(const index in vres)
-			{
-				item = vres[index];
+		// 	for(const index in vres)
+		// 	{
+		// 		item = vres[index];
 
-				errors[item.field] = item.message;
-			}
+		// 		errors[item.field] = item.message;
+		// 	}
 			
-			throw {
-			    name: "ValidationError",
-			    message: errors
-			};
-		}
+		// 	throw {
+		// 	    name: "ValidationError",
+		// 	    message: errors
+		// 	};
+		// }
 
 		let customer = new CustomerModel(data.first_name, data.last_name, data.email, data.password);
 

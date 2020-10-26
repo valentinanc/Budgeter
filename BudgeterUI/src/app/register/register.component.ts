@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgModule, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
@@ -40,7 +40,6 @@ export class RegisterComponent implements OnInit {
   	return (this.submitted && (this.serviceErrors.email != null || this.userForm.controls.email.errors != null));
   }
 
-
   invalidPassword()
   {
   	return (this.submitted && (this.serviceErrors.password != null || this.userForm.controls.password.errors != null));
@@ -52,20 +51,22 @@ export class RegisterComponent implements OnInit {
   		first_name: ['', [Validators.required, Validators.maxLength(50)]],
   		last_name: ['', [Validators.required, Validators.maxLength(50)]],
   		email: ['', [Validators.required, Validators.email, Validators.maxLength(75)]],
-  		password: ['', [Validators.required, Validators.minLength(5),]],
+  		password: ['', [Validators.required, Validators.minLength(5)]]
   	});
   }
 
   onSubmit()
   {
+	console.log("Testing");
   	this.submitted = true;
-
-  	if(this.userForm.invalid == true)
-  	{
-  		return;
-  	}
-  	else
-  	{
+	// this.userForm.invalid = false;
+  	// if(this.userForm.invalid == true)
+  	// {
+  	// 	return;
+  	// }
+  	// else
+  	// {
+		  console.log('working')
   		let data: any = Object.assign({guid: this.guid}, this.userForm.value);
 
   		this.http.post('/api/v1/customer', data).subscribe((data:any) => {
@@ -80,7 +81,13 @@ export class RegisterComponent implements OnInit {
 
   		this.registered = true;
 
-  	}
+  	// }
+  }
+
+  signIn(){
+	let path = '';
+
+	this.router.navigate([path]);
   }
 
 };

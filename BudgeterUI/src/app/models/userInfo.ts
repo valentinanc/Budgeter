@@ -7,7 +7,6 @@ export class UserInfoModel
 	last_name: string;
 
 	email: string;
-	zipcode: string;
 
 	password: string;
 

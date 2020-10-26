@@ -15,7 +15,6 @@ export class DashboardComponent implements OnInit {
 		first_name: "John", 
 		last_name: "Doe", 
 		email: "email@email.com", 
-		zipcode: 10283,
 		password: "Idasn2x2#"});
 
 	constructor(private http: HttpClient, private route: ActivatedRoute) {
