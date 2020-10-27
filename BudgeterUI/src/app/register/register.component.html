@@ -12,25 +12,33 @@
             <h5 class="card-title text-center">Register</h5>
             <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="form-signin">
 
-              <div class="form-label-group">
-                <input type="text" id="inputUserame" class="form-control" placeholder="Username" required autofocus>
-                <label for="inputUserame">Username</label>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <input type="text" class="form-control" id="inputFname" placeholder="First Name">
               </div>
+              <div class="form-group col-md-6">
+                <input type="text" class="form-control" id="inputLname" placeholder="Last Name">
+              </div>
+              <hr>
+            </div>
+        
+            <div class="form-group">
+              <input type="email" class="form-control" id="inputEmail" placeholder="Email Address">
+            </div>
 
-              <div class="form-label-group">
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required>
-                <label for="inputEmail">Email address</label>
-              </div>
+            <hr>
+            <div class="form-row">
               
-              <div class="form-label-group">
+              <div class="form-group col-md-6">
                 <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                <label for="inputPassword">Password</label>
               </div>
 
-              <div class="form-label-group">
-                <input type="password" id="inputConfirmPassword" class="form-control" placeholder="Password" required>
-                <label for="inputConfirmPassword">Confirm password</label>
+              <div class="form-group col-md-6">
+                <input type="password" id="inputConfirmPassword" class="form-control" placeholder="Confirm Password" required>
               </div>
+
+              
+            </div>
 
               <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Register</button>
               <a class="d-block text-center mt-2 small" href="" (click)="signIn()">Sign In</a>
