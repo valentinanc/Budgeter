@@ -1,33 +1,80 @@
-<legend>User Information</legend>
-<div>
-	<div class="form-group row"> <!-- GUD -->
-		<label class="col-xs-6 col-form-label">GUID</label>
-		<div class="col-xs-6">{{user.guid}}</div>
+<div class="main-content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-3 col-md-6 col-sm-6">
+				<div class="card card-stats">
+					<div class="card-header card-header-warning card-header-icon">
+						<div class="card-icon">
+							<i class="material-icons">content_copy</i>
+						</div>
+						<p class="card-category">Total Budget</p>
+						<h3 class="card-title">49/50
+							<small>GB</small>
+						</h3>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6 col-sm-6">
+				<div class="card card-stats">
+					<div class="card-header card-header-success card-header-icon">
+						<div class="card-icon">
+							<i class="material-icons">store</i>
+						</div>
+						<p class="card-category">Remaining Monthly Budget</p>
+						<h3 class="card-title">$34,245</h3>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6 col-sm-6">
+				<div class="card card-stats">
+					<div class="card-header card-header-danger card-header-icon">
+						<div class="card-icon">
+							<i class="material-icons">info_outline</i>
+						</div>
+						<p class="card-category">Monthly Expenses</p>
+						<h3 class="card-title">75</h3>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6 col-sm-6">
+				<div class="card card-stats">
+					<div class="card-header card-header-info card-header-icon">
+						<div class="card-icon">
+							<i class="fa fa-twitter"></i>
+						</div>
+						<p class="card-category">Monthly Savings</p>
+						<h3 class="card-title">+245</h3>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-
-	<div class="form-group row"> <!-- Customer UID -->
-		<label class="col-xs-6 col-form-label">Customer UID</label>
-		<div class="col-xs-6">{{user.uid}}</div>
-	</div>
-
-	<div class="form-group row"> <!-- First Name -->
-		<label class="col-xs-6 col-form-label">First Name</label>
-		<div class="col-xs-6">{{user.first_name}}</div>
-	</div>
-
-	<div class="form-group row"> <!-- Last Name -->
-		<label class="col-xs-6 col-form-label">Last Name</label>
-		<div class="col-xs-6">{{user.last_name}}</div>
-	</div>
-
-	<div class="form-group row"> <!-- E-mail -->
-		<label class="col-xs-6 col-form-label">E-mail</label>
-		<div class="col-xs-6">{{user.email}}</div>
-	</div>
-
-	<div class="form-group row"> <!-- Password -->
-		<label class="col-xs-6 col-form-label">Password</label>
-		<div class="col-xs-6">{{user.password}}</div>
-	</div>
-
-</div>	
+</div>
+<mat-tab-group mat-align-tabs="center">
+	<mat-tab>
+  <!-- #docregion label-directive -->
+	  <ng-template mat-tab-label>
+		<mat-icon class="example-tab-icon">thumb_up</mat-icon>
+		Budget
+	  </ng-template>
+  <!-- #enddocregion label-directive -->
+	  <budget></budget>
+	</mat-tab>    
+  
+	<mat-tab>
+	  <ng-template mat-tab-label>
+		<mat-icon class="example-tab-icon">thumb_up</mat-icon>
+		Expenses
+	  </ng-template>
+	  <expense></expense>
+	</mat-tab>
+  
+	<mat-tab>
+	  <ng-template mat-tab-label>
+		<mat-icon class="example-tab-icon">thumb_up</mat-icon>
+		Savings
+	  </ng-template>
+  
+	  <savings></savings>
+	</mat-tab>
+</mat-tab-group>

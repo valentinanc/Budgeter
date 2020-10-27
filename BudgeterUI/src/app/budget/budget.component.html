@@ -1,1 +1,89 @@
 <p>budget works!</p>
+<mat-grid-list cols="2" rowHeight="1:1" rowWidth="3:1">
+	<mat-grid-tile>
+		<div>
+			<div>
+			  <div style="display: block">
+				<canvas baseChart
+				  [datasets]="barChartData"
+				  [labels]="barChartLabels"
+				  [options]="barChartOptions"
+				  [legend]="barChartLegend"
+				  [chartType]="barChartType">
+				</canvas>
+			  </div>
+			  <button mat-button mat-raised-button color="primary" (click)="update()">Update</button>
+			</div>
+		  </div>
+	</mat-grid-tile>
+	<mat-grid-tile>
+
+		Budget Writing Stuff
+		
+	</mat-grid-tile>
+</mat-grid-list>
+<mat-grid-list cols="2" rowHeight="1:1" rowWidth="3:1">
+	<mat-grid-tile>
+		<div>
+			<div>
+			  <div class="chart">
+				<canvas baseChart
+				  [data]="pieChartData"
+				  [labels]="pieChartLabels"
+				  [chartType]="pieChartType"
+				  [options]="pieChartOptions"
+				  [colors]="pieChartColors"
+				  [legend]="pieChartLegend">
+				</canvas>
+			  </div>
+			</div>
+		  </div>
+	</mat-grid-tile>
+	<mat-grid-tile>
+		<financial-goals></financial-goals>
+	</mat-grid-tile>
+</mat-grid-list>
+
+<div class="example-container mat-elevation-z8">
+	<mat-table #table [dataSource]="dataSource">
+
+		<!-- Position Column -->
+		<ng-container matColumnDef="position">
+			<mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+			<mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+		</ng-container>
+
+		<!-- Name Column -->
+		<ng-container matColumnDef="name">
+			<mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+			<mat-cell *matCellDef="let element">
+				<mat-form-field floatLabel="never">
+					<input matInput placeholder="Name" [value]="element.name" [(ngModel)]="element.name">
+				</mat-form-field>
+			</mat-cell>
+		</ng-container>
+
+		<!-- Weight Column -->
+		<ng-container matColumnDef="weight">
+			<mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
+			<mat-cell *matCellDef="let element">
+				<mat-form-field floatLabel="never">
+					<input matInput placeholder="weight" [value]="element.weight" [(ngModel)]="element.weight">
+				</mat-form-field>
+			</mat-cell>
+		</ng-container>
+
+		<!-- Symbol Column -->
+		<ng-container matColumnDef="symbol">
+			<mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
+			<mat-cell *matCellDef="let element">
+				<mat-form-field floatLabel="never">
+					<input matInput placeholder="Symbol" [value]="element.symbol" [(ngModel)]="element.symbol">
+				</mat-form-field>
+			</mat-cell>
+		</ng-container>
+
+		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+		<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+	</mat-table>
+</div>
