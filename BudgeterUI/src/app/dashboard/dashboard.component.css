@@ -1,0 +1,22 @@
+.card-header {
+    border-bottom: none;
+}
+.card-category {
+    font-size: 1.3rem;
+}
+
+.border-left-primary {
+    border-left: .45rem solid #4e73df;
+}
+
+.border-left-success {
+    border-left: .45rem solid #1cc88a;
+}
+
+.border-left-warning {
+    border-left: .45rem solid #f6c23e;
+}
+
+.border-left-danger {
+    border-left: .45rem solid #e74a3b;
+}

@@ -1,6 +1,13 @@
-<!-- <p>header works!</p> -->
 <p>
-    <mat-toolbar>
-      <span>Budgeter</span>
-    </mat-toolbar>
-  </p>
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <h1>Budgeter</h1>
+      <span class="menu-spacer"></span>
+      <div>
+        <a mat-button [routerLink]="'/budget'"> Budget </a>
+        <a mat-button [routerLink]="'/expenses'"> Expenses </a>
+        <a mat-button [routerLink]="'/savings'"> Savings </a>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</p>
