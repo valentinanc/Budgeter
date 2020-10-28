@@ -20,3 +20,14 @@
 .border-left-danger {
     border-left: .45rem solid #e74a3b;
 }
+
+.mat-tab-label {
+    margin-top: 10px;
+    padding: 15px;
+    color:#4e73df;
+}
+
+h2 {
+    color: #4e73df;
+    padding: 10px;
+}

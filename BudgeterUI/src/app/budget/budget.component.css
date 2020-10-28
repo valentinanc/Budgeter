@@ -19,4 +19,11 @@
     overflow: auto;
     max-height: 750px;
   }
-  
+
+.card-header {
+  border-radius: .35rem;
+  color: #4e73df;
+  padding: 10px;
+  flex: 0 0 66.66667%;
+  max-width: 66.66667%;
+}

@@ -1,6 +1,7 @@
-<p>budget works!</p>
 <mat-grid-list cols="2" rowHeight="1:1" rowWidth="3:1">
 	<mat-grid-tile>
+		<div class="card-header">
+			<h2>Budget Overview</h2>
 		<div>
 			<div>
 			  <div style="display: block">
@@ -15,6 +16,7 @@
 			  <button mat-button mat-raised-button color="primary" (click)="update()">Update</button>
 			</div>
 		  </div>
+		</div>
 	</mat-grid-tile>
 	<mat-grid-tile>
 
@@ -24,6 +26,8 @@
 </mat-grid-list>
 <mat-grid-list cols="2" rowHeight="1:1" rowWidth="3:1">
 	<mat-grid-tile>
+		<div class="card-header">
+			<h2>Budget Breakdown</h2>
 		<div>
 			<div>
 			  <div class="chart">
@@ -38,9 +42,13 @@
 			  </div>
 			</div>
 		  </div>
+		</div>
 	</mat-grid-tile>
 	<mat-grid-tile>
+		<div class="card-header">
+			<h2>Financial Goals</h2>
 		<financial-goals></financial-goals>
+	</div>
 	</mat-grid-tile>
 </mat-grid-list>
 
