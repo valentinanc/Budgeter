@@ -34,6 +34,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatToolbarModule} from '@angular/material/toolbar'; 
+import {MatRadioModule} from '@angular/material/radio';
 // For MDB Angular Free
 
 const routes: Routes = [
@@ -48,6 +49,10 @@ const routes: Routes = [
   {
     path: 'user/:uid',
     component: DashboardComponent
+  },
+  {
+    path: 'user/:uid/settings',
+    component: UserSettingsComponent
   }
 ];
 
@@ -91,7 +96,8 @@ const routes: Routes = [
     MatInputModule,
     MatGridListModule,
     MatCheckboxModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent],

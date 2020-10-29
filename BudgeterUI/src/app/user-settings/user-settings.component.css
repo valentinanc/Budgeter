@@ -1,0 +1,11 @@
+h2.headercen {
+    text-align: center;
+}
+h2.headerleft {
+  text-align: left;
+  margin-top: 2%;
+}
+.vertical-radio-group {
+  display: flex; flex-direction: column;
+  margin: 15px 0;
+}

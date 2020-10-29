@@ -1,1 +1,97 @@
-<p>user-settings works!</p>
+            <mat-tab-group mat-align-tabs="center">   
+                <mat-tab label="User Settings"> 
+                    <body>
+                        <div class="container">
+                        <div class="row">
+                            <div class="col-lg-10 col-xl-9 mx-auto">
+                            <div class="card card-signin flex-row my-5">
+                                <div class="card-img-left d-none d-md-flex">
+                                <!-- Background image for card set in CSS! -->
+                                </div>
+                                <div class="card-body">
+                                <h2 class="headercen">Settings</h2>
+                                <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="form-signin">
+                    
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                    <input type="text" class="form-control" id="inputFname" placeholder="Kyrie" readonly>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                    <input type="text" class="form-control" id="inputLname" placeholder="Irving" readonly>
+                                    </div>
+                                    <hr>
+                                </div>
+                            
+                                <div class="form-group">
+                                    <input type="email" class="form-control" id="inputEmail" placeholder="kyrieirving@gmail.com" readonly>
+                                </div>
+                    
+                                <hr>
+                                <div class="form-row">              
+                                    <div class="form-group col-md-6">
+                                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                                    </div>
+                    
+                                    <div class="form-group col-md-6">
+                                    <input type="password" id="inputConfirmPassword" class="form-control" placeholder="Confirm Password" required>
+                                    </div>    
+                                </div>
+
+                                <div>
+                                    <h2 class="headerleft">Notifications</h2>
+                                    <mat-radio-group class="vertical-radio-group">
+                                        <mat-radio-button value="1">Receive daily updates on your budget</mat-radio-button>
+                                        <mat-radio-button value="2">Receive weekly updates on your budget</mat-radio-button>
+                                        <mat-radio-button value="3">Receive monthly updates on your budget</mat-radio-button>
+                                        <mat-radio-button value="4">Receive no updates on your budget</mat-radio-button>
+                                    </mat-radio-group>
+                                </div>
+                    
+                                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Save Changes</button>
+                                </form>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    </body>
+                </mat-tab>
+                <mat-tab label="About You"> 
+                    <mat-vertical-stepper [linear]="isLinear" #stepper>
+                        <mat-step [stepControl]="firstFormGroup">
+                        <form [formGroup]="firstFormGroup">
+                            <ng-template matStepLabel>Fill out your name</ng-template>
+                            <mat-form-field>
+                            <mat-label>Name</mat-label>
+                            <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+                            </mat-form-field>
+                            <div>
+                            <button mat-button matStepperNext>Next</button>
+                            </div>
+                        </form>
+                        </mat-step>
+                        <mat-step [stepControl]="secondFormGroup">
+                        <form [formGroup]="secondFormGroup">
+                            <ng-template matStepLabel>Fill out your address</ng-template>
+                            <mat-form-field>
+                            <mat-label>Address</mat-label>
+                            <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
+                                    required>
+                            </mat-form-field>
+                            <div>
+                            <button mat-button matStepperPrevious>Back</button>
+                            <button mat-button matStepperNext>Next</button>
+                            </div>
+                        </form>
+                        </mat-step>
+                        <mat-step>
+                        <ng-template matStepLabel>Done</ng-template>
+                        <p>You are now done.</p>
+                        <div>
+                            <button mat-button matStepperPrevious>Back</button>
+                            <button mat-button (click)="stepper.reset()">Reset</button>
+                        </div>
+                        </mat-step>
+                    </mat-vertical-stepper>
+                </mat-tab>
+            </mat-tab-group>
