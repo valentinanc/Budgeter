@@ -115,6 +115,12 @@
     /* Link to your background image using in the property below! */
     background: scroll center url('login.png');
     background-size: cover;
+  }
+  .temp{
+    width: 60%;
+    /* Link to your background image using in the property below! */
+    background: scroll center url('login150.png');
+    background-size: cover;
     height: 40rem;
   }
   .card-signin {
@@ -125,8 +131,8 @@
     
   }
   .card-signin .card-body {
-    padding: 2rem;
-    margin-top: 10rem;
+    padding: 4rem;
+    margin-top: 6rem;
   }
   /* Fallback for Edge
   -------------------------------------------------- */
