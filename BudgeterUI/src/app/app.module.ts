@@ -35,6 +35,9 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatToolbarModule} from '@angular/material/toolbar'; 
 import {MatRadioModule} from '@angular/material/radio';
+import {NavbarModule, WavesModule, ButtonsModule} from 'angular-bootstrap-md';
+
+
 // For MDB Angular Free
 
 const routes: Routes = [
@@ -72,6 +75,7 @@ const routes: Routes = [
     FooterComponent,
     HeaderComponent,
     AboutYouComponent,
+
   ],
   imports: [
     // AngularFontAwesomeModule,
@@ -97,7 +101,10 @@ const routes: Routes = [
     MatGridListModule,
     MatCheckboxModule,
     MatToolbarModule,
-    MatRadioModule
+    MatRadioModule,
+    NavbarModule,
+    WavesModule.forRoot(), 
+    ButtonsModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],

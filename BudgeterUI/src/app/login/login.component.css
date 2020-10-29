@@ -22,7 +22,7 @@
   }
   
   .card-signin .card-body {
-    padding: 2rem;
+    padding: 4rem;
   }
   
   .form-signin {
@@ -109,7 +109,25 @@
     color: white;
     background-color: #3b5998;
   }
-  
+
+  .card-signin .card-img-left {
+    width: 60%;
+    /* Link to your background image using in the property below! */
+    background: scroll center url('login.png');
+    background-size: cover;
+    height: 40rem;
+  }
+  .card-signin {
+    border: 0;
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    
+  }
+  .card-signin .card-body {
+    padding: 2rem;
+    margin-top: 10rem;
+  }
   /* Fallback for Edge
   -------------------------------------------------- */
   
@@ -121,6 +139,54 @@
       color: #777;
     }
   }
+
+  .mat-toolbar.mat-primary {
+    background: #3f51b5;
+    color: #fff;
+    position: relative;
+}
+
+
+.companyName{
+  font-size: 150%;
+}
+
+.mat-toolbar{
+height: 7vh;
+}
+
+div {
+  overflow: inherit;
+}
+
+.mat-sidenav-container{
+background-color: lightskyblue;
+min-height: 93vh !important;
+}
+
+a{
+  text-decoration: none;
+  font-size: 110%;
+  white-space: normal;
+}
+
+button{
+  font-size: 110%;
+  min-width: min-content;
+}
+
+.example-icon {
+  padding: 0 14px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.mat-sidenav-content{
+    font-size: 200%;
+    text-align: center;
+}
   
   /* Fallback for IE
   -------------------------------------------------- */
@@ -134,4 +200,16 @@
       color: #777;
     }
   }
+
+  @media (max-width: 767px) {
+    .card-signin .card-body {
+      padding: 2rem;
+      margin-top: 0rem;
+    }
+
+    .col-lg-10 {
+      margin-top: 30%;
+    }
+    
+}
   
