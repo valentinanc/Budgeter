@@ -1,7 +1,8 @@
+<header></header>
 <div class="main-content">
-	<header></header>
+	
 	<div class="container-fluid">
-		<h2>Dashboard</h2>
+		<h2 style="color: #5A5C69;">Dashboard</h2>
 		<div class="row">
 			<div class="col-lg-3 col-md-6 col-sm-6">
 				<div class="card card-stats">
@@ -39,30 +40,37 @@
 				</div>
 			</div>
 		</div>
+		<br>
+		<br>
 	</div>
 </div>
-<mat-tab-group mat-align-tabs="center">
-	<mat-tab>
+<mat-tab-group mat-align-tabs="center" class="plotting">
+	<mat-tab style="background-color: white;">
   <!-- #docregion label-directive -->
-	  <ng-template mat-tab-label>
+	  <ng-template mat-tab-label class="label">
 		Budget
 	  </ng-template>
+	  <br>
+		<br>
   <!-- #enddocregion label-directive -->
 	  <budget></budget>
 	</mat-tab>    
   
 	<mat-tab>
-	  <ng-template mat-tab-label>
+	  <ng-template mat-tab-label class="label">
 		Expenses
 	  </ng-template>
+	  <br>
+		<br>
 	  <expense></expense>
 	</mat-tab>
   
 	<mat-tab>
-	  <ng-template mat-tab-label>
+	  <ng-template mat-tab-label class="label">
 		Savings
 	  </ng-template>
-  
+	  <br>
+		<br>
 	  <savings></savings>
 	</mat-tab>
 </mat-tab-group>
