@@ -171,7 +171,12 @@
                                                         <mat-checkbox class="example-margin">Travel</mat-checkbox>
                                                         <mat-checkbox class="example-margin">Start a business</mat-checkbox>
                                                         <mat-checkbox class="example-margin">Buy a car</mat-checkbox>
-                                                        <mat-checkbox class="example-margin">Other</mat-checkbox>
+                                                        <mat-checkbox class="example-margin" (change)="optionSelected()">Other</mat-checkbox>
+                                                        <div *ngIf=checked>
+                                                            <div class="form-group col-md-6">
+                                                                <input type="text" class="form-control" id="inputFname" placeholder="Type Here">
+                                                            </div>
+                                                        </div>
                                                     </section>
                                                     <hr>
                                                     <h2 class="headerleft2">Question #5</h2>

@@ -17,6 +17,7 @@ export class UserSettingsComponent implements OnInit {
   isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+  checked = false;
   
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router)
   {
@@ -36,7 +37,15 @@ export class UserSettingsComponent implements OnInit {
   {
   	return (this.submitted && (this.serviceErrors.password != null || this.userForm.controls.password.errors != null));
   }
-
+  optionSelected()
+  {
+    if(this.checked){
+      this.checked=false;
+    }
+    else{
+      this.checked=true;
+    }
+  }
   ngOnInit()
   {
   	this.userForm = this.formBuilder.group({
