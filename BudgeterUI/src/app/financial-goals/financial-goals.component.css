@@ -2,6 +2,9 @@
 .example-container {
     position: relative;
     min-height: 200px;
+    overflow: auto;
+    max-height: 320px;
+    
   }
   
   .example-table-container {
@@ -9,7 +12,7 @@
     max-height: 400px;
     overflow: auto;
   }
-  
+
   table {
     width: 100%;
   }
