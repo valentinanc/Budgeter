@@ -57,23 +57,23 @@
 
 		<!-- Position Column -->
 		<ng-container matColumnDef="position">
-			<mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+			<mat-header-cell *matHeaderCellDef id="header"> No. </mat-header-cell>
 			<mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
 		</ng-container>
 
 		<!-- Name Column -->
-		<ng-container matColumnDef="name">
-			<mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+		<ng-container matColumnDef="name" >
+			<mat-header-cell *matHeaderCellDef id="header"> Name </mat-header-cell>
 			<mat-cell *matCellDef="let element">
 				<mat-form-field floatLabel="never">
-					<input matInput placeholder="Name" [value]="element.name" [(ngModel)]="element.name">
+					<input  matInput placeholder="Name" [value]="element.name" [(ngModel)]="element.name">
 				</mat-form-field>
 			</mat-cell>
 		</ng-container>
 
 		<!-- Weight Column -->
-		<ng-container matColumnDef="weight">
-			<mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
+		<ng-container matColumnDef="weight" >
+			<mat-header-cell *matHeaderCellDef id="header"> Weight </mat-header-cell>
 			<mat-cell *matCellDef="let element">
 				<mat-form-field floatLabel="never">
 					<input matInput placeholder="weight" [value]="element.weight" [(ngModel)]="element.weight">
@@ -82,8 +82,8 @@
 		</ng-container>
 
 		<!-- Symbol Column -->
-		<ng-container matColumnDef="symbol">
-			<mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
+		<ng-container matColumnDef="symbol" >
+			<mat-header-cell *matHeaderCellDef id="header"> Symbol </mat-header-cell>
 			<mat-cell *matCellDef="let element">
 				<mat-form-field floatLabel="never">
 					<input matInput placeholder="Symbol" [value]="element.symbol" [(ngModel)]="element.symbol">

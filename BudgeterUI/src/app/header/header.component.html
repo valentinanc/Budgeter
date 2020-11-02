@@ -18,30 +18,29 @@
 <mdb-navbar SideClass="navbar navbar-expand-lg fixed navbar-light lighten-1" [containerInside]="false">
 
   <!-- Navbar brand -->
-   <mdb-navbar-brand><a class="navbar-brand" href="#">
+   <mdb-navbar-brand><a style="color:#14BD14 ;"class="navbar-brand" [routerLink]="'/user/:uid'">
      &nbsp;<strong>Budgeter</strong><img src="login150.png" alt=""></a></mdb-navbar-brand>
   <!-- Collapsible content -->
   <links>
 
     <!-- Links -->
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link waves-light" mat-button [routerLink]="'/user/:uid/expenses'" mdbWavesEffect><h4>Expenses</h4> </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link waves-light" mat-button [routerLink]="'/user/:uid/savings'" mdbWavesEffect> <h4>Savings</h4> </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link waves-light" mat-button [routerLink]="'/user/:uid/settings'" mdbWavesEffect> <h4>Settings</h4> </a>
-      </li>
-    </ul>
       
-      <ul class="navbar-nav ml-auto center">
+      <ul class="navbar-nav ml-auto">
         
         <li class="nav-item">
           <button class="btn btn-outline-primary my-2 my-sm-0" type="link">+ Add to Budget</button>
         </li>
 
+        <li class="nav-item avatar dropdown" dropdown>
+          <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+            <img src="login150.png" alt="" class="img-fluid rounded-circle z-depth-0"></a>
+          <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+            <a class="dropdown-item waves-light" mat-button [routerLink]="'/user/:uid/settings'"  mdbWavesEffect href="#">Settings</a>
+            <a class="dropdown-item waves-light" mat-button [routerLink]="'/'" mdbWavesEffect href="#">Log out</a>
+          </div>
+        </li>
+  
+        
       </ul>
     <!-- Links -->
 

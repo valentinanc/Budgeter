@@ -30,3 +30,13 @@
   background-color: white;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
 }
+
+#header{
+  color: #858796;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+#input_table{
+  color: #858796;
+}
