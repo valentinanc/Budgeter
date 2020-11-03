@@ -3,6 +3,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { AboutYouComponent } from '../about-you/about-you.component';
+import { FooterComponent } from '../footer/footer.component';
 import { UserInfoModel } from '../models/userInfo';
 
 import { MatDialogModule } from '@angular/material/dialog';

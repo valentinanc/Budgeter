@@ -1,102 +1,95 @@
-<mat-grid-list cols="2" rowHeight="59%">
-	<mat-grid-tile>
-		<div class="card-header">
-			<h2>Budget Overview</h2>
-		<div>
-			<div>
-			  <div style="display: block">
-				<canvas baseChart
-				  [datasets]="barChartData"
-				  [labels]="barChartLabels"
-				  [options]="barChartOptions"
-				  [legend]="barChartLegend"
-				  [chartType]="barChartType">
-				</canvas>
-			  </div>
-			  <button mat-button mat-raised-button color="primary" (click)="update()">Update</button>
-			</div>
-		  </div>
-		</div>
-	</mat-grid-tile>
-	<mat-grid-tile>
 
-		Budget Writing Stuff
-		
-	</mat-grid-tile>
-	<mat-grid-tile>
-		<div class="card-header" style="padding-top: 15%">
-			<h2>Budget Breakdown</h2>
-		<div>
-			<div>
-			  <div class="chart">
-				<canvas baseChart
-				  [data]="pieChartData"
-				  [labels]="pieChartLabels"
-				  [chartType]="pieChartType"
-				  [options]="pieChartOptions"
-				  [colors]="pieChartColors"
-				  [legend]="pieChartLegend">
-				</canvas>
-			  </div>
-			</div>
-		  </div>
-		</div>
-	</mat-grid-tile>
-	<mat-grid-tile>
-		<div class="card-header">
-			<h2>Financial Goals</h2>
-		<financial-goals></financial-goals>
+ <div style="overflow: hidden; padding-bottom: 5%;">
+	<div style="padding-bottom: 2%;">
+		<div class="alert alert-primary" *ngIf="false" role="alert">This is a primary alert—check it out!</div>
+		<div class="alert alert-secondary" *ngIf="false" role="alert">This is a secondary alert—check it out!</div>
+		<div class="alert alert-success" *ngIf="false" role="alert">This is a success alert—check it out!</div>
+		<div class="alert alert-danger" *ngIf="false" role="alert">This is a danger alert—check it out!</div>
+		<div class="alert alert-warning" *ngIf="false" role="alert">This is a warning alert—check it out!</div>
+		<div class="alert alert-info" *ngIf="true" role="alert">On average, you fullfilled 80% of your budget per month.</div>
+		<div class="alert alert-light" *ngIf="false" role="alert">This is a light alert—check it out!</div>
+		<div class="alert alert-dark" *ngIf="false" role="alert">This is a dark alert—check it out!</div>
 	</div>
-	</mat-grid-tile>
-</mat-grid-list>
 
-<mat-grid-list cols="1" rowHeight="2:1">
-	<mat-grid-tile>
-		<div class="card-header">
-			<h2>Budget Table</h2>
-			<!-- <div class="example-container mat-elevation-z8"> -->
-				<mat-table #table [dataSource]="dataSource">
-			
-					<!-- Position Column -->
-					<ng-container matColumnDef="position">
-						<mat-header-cell *matHeaderCellDef></mat-header-cell>
-						<mat-cell *matCellDef="let element"></mat-cell>
-					</ng-container>
-			
-					<!-- Name Column -->
-					<ng-container matColumnDef="name">
-						<mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-						<mat-cell *matCellDef="let element">
-							<mat-form-field floatLabel="never">
-								<input matInput placeholder="Name" [value]="element.name" [(ngModel)]="element.name">
-							</mat-form-field>
-						</mat-cell>
-					</ng-container>
-			
-					<!-- Weight Column -->
-					<ng-container matColumnDef="weight">
-						<mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
-						<mat-cell *matCellDef="let element">
-							<mat-form-field floatLabel="never">
-								<input matInput placeholder="weight" [value]="element.weight" [(ngModel)]="element.weight">
-							</mat-form-field>
-						</mat-cell>
-					</ng-container>
-			
-					
-					<ng-container matColumnDef="symbol">
-						<mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
-						<mat-cell *matCellDef="let element">
-							<mat-form-field floatLabel="never">
-								<input matInput placeholder="Symbol" [value]="element.symbol" [(ngModel)]="element.symbol">
-							</mat-form-field>
-						</mat-cell>
-					</ng-container>
-			
-					<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-					<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-				</mat-table>
-			<!-- </div> -->
-		</div>
-	</mat-grid-tile>
-</mat-grid-list>
+	<mat-grid-list cols="2" rowHeight="2:1" [gutterSize]="'5%'">
+		<mat-grid-tile>
+			<div class="card-header">
+				<h2>Budget Overview</h2>
+				<div style="display: block">
+					<canvas baseChart
+					[datasets]="barChartData"
+					[labels]="barChartLabels"
+					[options]="barChartOptions"
+					[legend]="barChartLegend"
+					[chartType]="barChartType">
+					</canvas>
+				</div>
+				<button mat-button mat-raised-button color="primary" (click)="update()">Update</button>
+			</div>
+		</mat-grid-tile>
+		<mat-grid-tile>
+			<mat-card class="card-header">
+				<h2>Financial Goals</h2>
+				<financial-goals></financial-goals>
+			</mat-card>
+		</mat-grid-tile>
+		<mat-grid-tile>
+			<mat-card class="card-header">
+				<h2>Budget Breakdown</h2>
+					<div class="chart">
+						<canvas baseChart style="max-width: 100%; max-height: 100%; height: 100%; width: 100%;"
+						[data]="pieChartData"
+						[labels]="pieChartLabels"
+						[chartType]="pieChartType"
+						[options]="pieChartOptions"
+						[colors]="pieChartColors"
+						[legend]="pieChartLegend">
+						</canvas>
+					</div>
+			</mat-card>
+		</mat-grid-tile>
+		<mat-grid-tile>
+			<mat-card class="card-header">
+				<h2>Budget Table</h2>
+					<mat-table #table [dataSource]="dataSource">
+				
+						<ng-container matColumnDef="position">
+							<mat-header-cell *matHeaderCellDef></mat-header-cell>
+							<mat-cell *matCellDef="let element"></mat-cell>
+						</ng-container>
+				
+						<ng-container matColumnDef="name">
+							<mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+							<mat-cell *matCellDef="let element">
+								<mat-form-field floatLabel="never">
+									<input matInput placeholder="Name" [value]="element.name" [(ngModel)]="element.name">
+								</mat-form-field>
+							</mat-cell>
+						</ng-container>
+				
+						<ng-container matColumnDef="weight">
+							<mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
+							<mat-cell *matCellDef="let element">
+								<mat-form-field floatLabel="never">
+									<input matInput placeholder="weight" [value]="element.weight" [(ngModel)]="element.weight">
+								</mat-form-field>
+							</mat-cell>
+						</ng-container>
+				
+						
+						<ng-container matColumnDef="symbol">
+							<mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
+							<mat-cell *matCellDef="let element">
+								<mat-form-field floatLabel="never">
+									<input matInput placeholder="Symbol" [value]="element.symbol" [(ngModel)]="element.symbol">
+								</mat-form-field>
+							</mat-cell>
+						</ng-container>
+				
+						<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+						<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+					</mat-table>
+			</mat-card>
+		</mat-grid-tile>
+	  </mat-grid-list>
+</div>

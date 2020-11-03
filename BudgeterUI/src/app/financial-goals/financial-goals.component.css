@@ -1,7 +1,8 @@
 /* Structure */
 .example-container {
-    position: relative;
-    min-height: 200px;
+    overflow: auto;
+    height: 400px;
+    width: 100%;
   }
   
   .example-table-container {
@@ -9,8 +10,12 @@
     max-height: 400px;
     overflow: auto;
   }
-  
+
   table {
+    position: relative;
+    min-height: 200px;
+    overflow: auto;
+    max-height: 320px;
     width: 100%;
   }
   

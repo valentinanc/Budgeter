@@ -1,0 +1,57 @@
+<h2 mat-dialog-title>Add Items to Budget</h2>
+<mat-dialog-content class="mat-typography">
+  <mat-vertical-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Enter the item name</ng-template>
+        <mat-form-field>
+          <mat-label>Item Name</mat-label>
+          <input matInput placeholder="coffee" formControlName="firstCtrl" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>What category does the item belong to?</ng-template>
+            <mat-form-field>
+                <mat-label>What category does the item belong to?</mat-label>
+                <mat-select>
+                  <mat-option *ngFor="let category of categories" [value]="category.value">
+                    {{category.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+        </form>
+      </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>How much was the item?</ng-template>
+        <mat-form-field>
+          <mat-label>Item Price</mat-label>
+          <input matInput formControlName="secondCtrl" placeholder="$5"
+                 required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-vertical-stepper>
+</mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Skip</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Submit</button>
+  </mat-dialog-actions>
+  

@@ -1,11 +1,12 @@
+<h2 mat-dialog-title>About You</h2>
 <mat-dialog-content class="mat-typography">
     <mat-vertical-stepper [linear]="isLinear" #stepper>
         <mat-step [stepControl]="firstFormGroup">
           <form [formGroup]="firstFormGroup">
-            <ng-template matStepLabel>Fill out your name</ng-template>
+            <ng-template matStepLabel>What is your name?</ng-template>
             <mat-form-field>
               <mat-label>Name</mat-label>
-              <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+              <input matInput placeholder="Last name, First name" formControlName="firstCtrl">
             </mat-form-field>
             <div>
               <button mat-button matStepperNext>Next</button>
@@ -14,11 +15,10 @@
         </mat-step>
         <mat-step [stepControl]="secondFormGroup">
           <form [formGroup]="secondFormGroup">
-            <ng-template matStepLabel>Fill out your address</ng-template>
+            <ng-template matStepLabel>How much do you typically spend in a month?</ng-template>
             <mat-form-field>
-              <mat-label>Address</mat-label>
-              <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-                     required>
+              <mat-label>Monthly Spending</mat-label>
+              <input matInput formControlName="secondCtrl" placeholder="$500">
             </mat-form-field>
             <div>
               <button mat-button matStepperPrevious>Back</button>
@@ -26,9 +26,55 @@
             </div>
           </form>
         </mat-step>
+        <mat-step [stepControl]="secondFormGroup">
+          <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>What categories do you spend your money on?</ng-template>
+            <section class="example-section">
+              <mat-checkbox class="example-margin">Housing</mat-checkbox>
+              <mat-checkbox class="example-margin">Transportation</mat-checkbox>
+              <mat-checkbox class="example-margin">Food</mat-checkbox>
+              <mat-checkbox class="example-margin">Savings</mat-checkbox>
+              <mat-checkbox class="example-margin">Other</mat-checkbox>
+          </section>
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup">
+          <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>What do you want your monthly budget to be?</ng-template>
+            <mat-form-field>
+              <mat-label>Monthly Budget</mat-label>
+              <input matInput formControlName="secondCtrl" placeholder="$1000">
+            </mat-form-field>
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup">
+          <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>What are your future goals?</ng-template>
+            <section class="example-section">
+              <mat-checkbox class="example-margin">Pay off loans</mat-checkbox>
+              <mat-checkbox class="example-margin">Buy Property</mat-checkbox>
+              <mat-checkbox class="example-margin">Travel</mat-checkbox>
+              <mat-checkbox class="example-margin">Start a business</mat-checkbox>
+              <mat-checkbox class="example-margin">Buy a car</mat-checkbox>
+              <mat-checkbox class="example-margin">Other</mat-checkbox>
+          </section>
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
         <mat-step>
-          <ng-template matStepLabel>Done</ng-template>
-          <p>You are now done.</p>
+          <ng-template matStepLabel>You are complete!</ng-template>
+          <p>Welcome to Budgeter :)</p>
           <div>
             <button mat-button matStepperPrevious>Back</button>
             <button mat-button (click)="stepper.reset()">Reset</button>

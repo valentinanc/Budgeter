@@ -1,3 +1,4 @@
+
 .card-header {
     border-bottom: none;
 }
@@ -45,5 +46,20 @@ h2 {
 }
 
 .card-category{
-    font-size: 17px;
+    font-size: 12px;
+}
+
+h3.card-title{
+    font-size: 1.25rem;
+}
+
+.card-body{
+    padding: 0.5rem;
+}
+#header{
+    font-size: 13px;
+}
+
+#number{
+    color: #5a5c69!important;
 }

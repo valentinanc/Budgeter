@@ -34,7 +34,7 @@
     border-radius: 5rem;
     letter-spacing: .1rem;
     font-weight: bold;
-    padding: 1rem;
+    padding: .3rem;
     transition: all 0.2s;
   }
   
@@ -132,7 +132,6 @@
   }
   .card-signin .card-body {
     padding: 4rem;
-    margin-top: 6rem;
   }
   /* Fallback for Edge
   -------------------------------------------------- */
@@ -172,12 +171,12 @@ min-height: 93vh !important;
 
 a{
   text-decoration: none;
-  font-size: 110%;
+  
   white-space: normal;
 }
 
 button{
-  font-size: 110%;
+  font-size: 100%;
   min-width: min-content;
 }
 

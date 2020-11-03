@@ -38,7 +38,8 @@ import {MatRadioModule} from '@angular/material/radio';
 import {NavbarModule, WavesModule, ButtonsModule} from 'angular-bootstrap-md';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import {ScrollingModule} from '@angular/cdk/scrolling';
-
+import {MatSelectModule} from '@angular/material/select';
+import { AddItemsComponent } from './add-items/add-items.component';
 // For MDB Angular Free
 
 const routes: Routes = [
@@ -76,6 +77,7 @@ const routes: Routes = [
     FooterComponent,
     HeaderComponent,
     AboutYouComponent,
+    AddItemsComponent,
 
   ],
   imports: [
@@ -107,7 +109,8 @@ const routes: Routes = [
     WavesModule.forRoot(), 
     ButtonsModule.forRoot(),
     MDBBootstrapModule.forRoot(),
-    ScrollingModule
+    ScrollingModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent],

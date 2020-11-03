@@ -17,6 +17,10 @@ export class UserSettingsComponent implements OnInit {
   isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+  checked = false;
+  public imagePath;
+  imgURL: any;
+  public message: string;
   
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router)
   {
@@ -36,7 +40,34 @@ export class UserSettingsComponent implements OnInit {
   {
   	return (this.submitted && (this.serviceErrors.password != null || this.userForm.controls.password.errors != null));
   }
+  optionSelected()
+  {
+    if(this.checked){
+      this.checked=false;
+    }
+    else{
+      this.checked=true;
+    }
+  }
 
+  //used from https://www.talkingdotnet.com/show-image-preview-before-uploading-using-angular-7/
+  preview(files) {
+    if (files.length === 0)
+      return;
+ 
+    var mimeType = files[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      this.message = "Only images are supported.";
+      return;
+    }
+ 
+    var reader = new FileReader();
+    this.imagePath = files;
+    reader.readAsDataURL(files[0]); 
+    reader.onload = (_event) => { 
+      this.imgURL = reader.result; 
+    }
+  }
   ngOnInit()
   {
   	this.userForm = this.formBuilder.group({
