@@ -10,6 +10,7 @@ import {MatIconModule} from '@angular/material/icon';
   templateUrl: './about-you.component.html',
   styleUrls: ['./about-you.component.css']
 })
+
 export class AboutYouComponent implements OnInit {
   isLinear = false;
   firstFormGroup: FormGroup;
@@ -18,10 +19,10 @@ export class AboutYouComponent implements OnInit {
 
   ngOnInit(): void {
     this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required]
+      firstCtrl: ['']
     });
     this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required]
+      secondCtrl: ['']
     });
   }
 
