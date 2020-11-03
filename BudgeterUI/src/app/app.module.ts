@@ -38,6 +38,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import {NavbarModule, WavesModule, ButtonsModule} from 'angular-bootstrap-md';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import {MatSelectModule} from '@angular/material/select';
+import { AddItemsComponent } from './add-items/add-items.component';
 
 // For MDB Angular Free
 
@@ -76,6 +77,7 @@ const routes: Routes = [
     FooterComponent,
     HeaderComponent,
     AboutYouComponent,
+    AddItemsComponent,
 
   ],
   imports: [

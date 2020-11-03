@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { AddItemsComponent } from '../add-items/add-items.component';
 
 @Component({
   selector: 'header',
@@ -6,8 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  checked = true;
+  constructor(private dialog: MatDialog) { }
 
-  constructor() { }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AddItemsComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
 
   ngOnInit(): void {
   }
