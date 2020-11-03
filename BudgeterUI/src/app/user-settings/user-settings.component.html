@@ -101,36 +101,24 @@
                                                 <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="form-signin">
                                     
                                                 <div class="form-group">
-                                                    <h2 class="headerleft2">Question #1</h2>
-                                                    <!-- <div class="form-group">
-                                                    <input type="text" class="form-control" id="inputFname" placeholder="Answer">
-                                                    </div> -->
-                                                    <mat-form-field appearance="fill">
-                                                        <select matNativeControl required>
-                                                        <option value="volvo">Option 1</option>
-                                                        <option value="saab">Option 2</option>
-                                                        <option value="mercedes">Option 3</option>
-                                                        <option value="audi">Option 4</option>
-                                                        </select>
-                                                    </mat-form-field>
-                                                    <h2 class="headerleft2">Question #2</h2>
-                                                    <mat-form-field appearance="fill">
-                                                        <select matNativeControl required>
-                                                        <option value="volvo">Option 1</option>
-                                                        <option value="saab">Option 2</option>
-                                                        <option value="mercedes">Option 3</option>
-                                                        <option value="audi">Option 4</option>
-                                                        </select>
-                                                    </mat-form-field>
-                                                    <h2 class="headerleft2">Question #3</h2>
-                                                    <mat-form-field appearance="fill">
-                                                        <select matNativeControl required>
-                                                        <option value="volvo">Option 1</option>
-                                                        <option value="saab">Option 2</option>
-                                                        <option value="mercedes">Option 3</option>
-                                                        <option value="audi">Option 4</option>
-                                                        </select>
-                                                    </mat-form-field>
+                                                    <h2 class="headerleft2">How much do you typically spend in a month?</h2>
+                                                    <mat-form-field>
+                                                        <mat-label>Monthly Spending</mat-label>
+                                                        <input matInput class="form-control" placeholder="$500">
+                                                      </mat-form-field>
+                                                    <h2 class="headerleft2">What categories do you spend your money on?</h2>
+                                                    <section class="example-section">
+                                                        <mat-checkbox class="example-margin">Housing</mat-checkbox>
+                                                        <mat-checkbox class="example-margin">Transportation</mat-checkbox>
+                                                        <mat-checkbox class="example-margin">Food</mat-checkbox>
+                                                        <mat-checkbox class="example-margin">Savings</mat-checkbox>
+                                                        <mat-checkbox class="example-margin">Other</mat-checkbox>
+                                                    </section>
+                                                    <h2 class="headerleft2">What do you want your monthly budget to be?</h2>
+                                                    <mat-form-field>
+                                                        <mat-label>Monthly Budget</mat-label>
+                                                        <input matInput class="form-control" placeholder="$1000">
+                                                      </mat-form-field>
                                                     <hr>
                                                     <h2 class="headerleft2">What are your future goals?</h2>
                                                     <section class="example-section">
@@ -146,34 +134,6 @@
                                                             </div>
                                                         </div>
                                                     </section>
-                                                    <hr>
-                                                    <h2 class="headerleft2">Question #5</h2>
-                                                    <mat-form-field appearance="fill">
-                                                        <select matNativeControl required>
-                                                        <option value="volvo">Option 1</option>
-                                                        <option value="saab">Option 2</option>
-                                                        <option value="mercedes">Option 3</option>
-                                                        <option value="audi">Option 4</option>
-                                                        </select>
-                                                    </mat-form-field>
-                                                    <h2 class="headerleft2">Question #6</h2>
-                                                    <mat-form-field appearance="fill">
-                                                        <select matNativeControl required>
-                                                        <option value="volvo">Option 1</option>
-                                                        <option value="saab">Option 2</option>
-                                                        <option value="mercedes">Option 3</option>
-                                                        <option value="audi">Option 4</option>
-                                                        </select>
-                                                    </mat-form-field>
-                                                    <h2 class="headerleft2">Question #7</h2>
-                                                    <mat-form-field appearance="fill">
-                                                        <select matNativeControl required>
-                                                        <option value="volvo">Option 1</option>
-                                                        <option value="saab">Option 2</option>
-                                                        <option value="mercedes">Option 3</option>
-                                                        <option value="audi">Option 4</option>
-                                                        </select>
-                                                    </mat-form-field>
                                                 </div>
                                     
                                                 <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Save Changes</button>
