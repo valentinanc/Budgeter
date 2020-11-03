@@ -22,6 +22,7 @@ export class BudgetComponent implements OnInit {
   displayedColumns = ['position', 'name', 'weight', 'symbol'];
   dataSource = new MatTableDataSource();
 
+
   public barChartOptions: ChartOptions = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
@@ -97,4 +98,5 @@ export class BudgetComponent implements OnInit {
   update(){
 
   }
+
 }
