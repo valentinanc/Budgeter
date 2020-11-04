@@ -14,7 +14,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { SelectionModel } from '@angular/cdk/collections';
-
+import { Observable } from 'rxjs';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 export interface UsersData {
   name: string;
@@ -37,12 +38,11 @@ export class FinancialGoalsComponent implements OnInit {
   dataSource = ELEMENT_DATA;
   @ViewChild(MatTable) table: MatTable<any>;
   
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {}
 
   addRowData(row_obj){
-    console.log("testing")
     var d = new Date();
     this.dataSource.push({
       id:d.getTime(),
@@ -64,4 +64,5 @@ export class FinancialGoalsComponent implements OnInit {
       return value.id != row_obj.id;
     });
   }
+
 }

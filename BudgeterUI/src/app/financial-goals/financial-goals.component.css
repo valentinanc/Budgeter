@@ -1,6 +1,5 @@
-/* Structure */
 .example-container {
-    overflow: auto;
+    overflow: hidden;
     height: 400px;
     width: 100%;
   }
@@ -38,7 +37,6 @@
     text-align: center;
   }
   
-  /* Column Widths */
   .mat-column-number,
   .mat-column-state {
     max-width: 64px;
@@ -47,4 +45,3 @@
   .mat-column-created {
     max-width: 124px;
   }
-  

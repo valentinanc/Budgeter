@@ -40,6 +40,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {MatSelectModule} from '@angular/material/select';
 import { AddItemsComponent } from './add-items/add-items.component';
+import {ChartModule} from 'primeng/chart';
 // For MDB Angular Free
 
 const routes: Routes = [
@@ -110,7 +111,8 @@ const routes: Routes = [
     ButtonsModule.forRoot(),
     MDBBootstrapModule.forRoot(),
     ScrollingModule,
-    MatSelectModule
+    MatSelectModule,
+    ChartModule, 
   ],
   providers: [],
   bootstrap: [AppComponent],
