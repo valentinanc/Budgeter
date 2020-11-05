@@ -17,7 +17,8 @@ export class UserSettingsComponent implements OnInit {
   isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
-  checked = false;
+  checked1 = false;
+  checked2 = false;
   public imagePath;
   imgURL: any;
   public message: string;
@@ -40,13 +41,23 @@ export class UserSettingsComponent implements OnInit {
   {
   	return (this.submitted && (this.serviceErrors.password != null || this.userForm.controls.password.errors != null));
   }
-  optionSelected()
+  optionSelected(num)
   {
-    if(this.checked){
-      this.checked=false;
-    }
-    else{
-      this.checked=true;
+    //need to change method here (hardcoded)
+    if(num == 1){
+      if(this.checked1){
+        this.checked1=false;
+      }
+      else{
+        this.checked1=true;
+      }
+    } else{
+      if(this.checked2){
+        this.checked2=false;
+      }
+      else{
+        this.checked2=true;
+      }
     }
   }
 
