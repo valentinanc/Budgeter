@@ -11,6 +11,8 @@
   h2.headerleft2 {
     text-align: left;
     color:#4e73df;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
     margin-top: 2%;
   }
   .bspace{
@@ -30,6 +32,8 @@
   }
   .vertical-radio-group {
     display: flex; flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
     margin: 15px 0;
   }
   .example-section {
