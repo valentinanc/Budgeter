@@ -75,7 +75,7 @@
 
                                                         <input #file hidden="true" type="file" accept='image/*' (change)="preview(file.files)"/> 
                                                         <button class="btn btn-lg btn-primary btn-block text-uppercase bspace" (click)="file.click()">Update</button>
-                                                        <div class="alert alert-info text-center" *ngIf="true" role="alert">Profile Picture Updated.</div>
+                                                        <div class="alert alert-info text-center" *ngIf="newPP" role="alert">Profile Picture Updated.</div>
                                                         </div>
                                                     </div>
                                                     </div>

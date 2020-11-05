@@ -17,6 +17,7 @@ export class UserSettingsComponent implements OnInit {
   isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+  newPP= false;
   checked1 = false;
   checked2 = false;
   public imagePath;
@@ -78,6 +79,7 @@ export class UserSettingsComponent implements OnInit {
     reader.onload = (_event) => { 
       this.imgURL = reader.result; 
     }
+    this.newPP = true;
   }
   ngOnInit()
   {
@@ -112,7 +114,7 @@ export class UserSettingsComponent implements OnInit {
 	    	this.serviceErrors = error.error.error;
         });
 
-  		this.registered = true;
+      this.registered = true;
 
   	// }
   }
