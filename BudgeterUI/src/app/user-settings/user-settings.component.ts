@@ -42,25 +42,6 @@ export class UserSettingsComponent implements OnInit {
   {
   	return (this.submitted && (this.serviceErrors.password != null || this.userForm.controls.password.errors != null));
   }
-  optionSelected(num)
-  {
-    //need to change method here (hardcoded)
-    if(num == 1){
-      if(this.checked1){
-        this.checked1=false;
-      }
-      else{
-        this.checked1=true;
-      }
-    } else{
-      if(this.checked2){
-        this.checked2=false;
-      }
-      else{
-        this.checked2=true;
-      }
-    }
-  }
 
   //used from https://www.talkingdotnet.com/show-image-preview-before-uploading-using-angular-7/
   preview(files) {
