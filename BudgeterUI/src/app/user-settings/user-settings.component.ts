@@ -22,7 +22,7 @@ export class UserSettingsComponent implements OnInit {
   public imagePath;
   imgURL: any;
   public message: string;
-  
+
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router)
   {
   }

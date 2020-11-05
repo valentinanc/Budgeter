@@ -18,14 +18,15 @@
   .bspace{
     margin-bottom: 2%;
   }
-  .image{
+
+  .ppimage{
     width: 300px;
     height: 300px;
     border-radius: 50%;
     display: block;
     margin-left: auto;
     margin-right: auto;
-    background-image: url("https://www.biography.com/.image/t_share/MTE4MDAzNDEwNzQzMTY2NDc4/will-smith-9542165-1-402.jpg");
+    background-image: url();
     background-position: center center;
     background-size: cover;
     margin-bottom: 5%;
@@ -42,4 +43,4 @@
   }
   mat-form-field {
     width: 100%;
-    }
+  }

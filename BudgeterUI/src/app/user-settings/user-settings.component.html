@@ -71,14 +71,11 @@
                                                         </div>
                                                         <div class="card-body">
                                                         <h2 class="headercen">Profile Picture</h2>
-                                                        <div class="image"></div>
+                                                        <div class="ppimage" style="background-image: url({{imgURL}});"></div>
 
-                                                        <input #file hidden="true" type="file" accept='image/*' (click)="preview(file.files)"/> 
-                                                        <button class="btn btn-lg btn-primary btn-block text-uppercase bspace" (click)="file.click()">Change</button>
-
-                                                        <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="form-signin">
-                                                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Save</button>
-                                                        </form>
+                                                        <input #file hidden="true" type="file" accept='image/*' (change)="preview(file.files)"/> 
+                                                        <button class="btn btn-lg btn-primary btn-block text-uppercase bspace" (click)="file.click()">Update</button>
+                                                        <div class="alert alert-info text-center" *ngIf="true" role="alert">Profile Picture Updated.</div>
                                                         </div>
                                                     </div>
                                                     </div>
@@ -123,7 +120,7 @@
                                                     <mat-form-field>
                                                         <mat-label>Monthly Budget</mat-label>
                                                         <input matInput class="form-control" placeholder="$1000">
-                                                      </mat-form-field>
+                                                    </mat-form-field>
                                                     <hr>
                                                     <h2 class="headerleft2">What are your future goals?</h2>
                                                     <section class="example-section">
