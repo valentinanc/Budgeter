@@ -19,11 +19,9 @@ import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
   styleUrls: ['./budget.component.css']
 })
 export class BudgetComponent implements OnInit {
-  displayedColumns = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource();
 
-  //bootstarap
-  editField: string;
+  // budget table
+  editField = ""
   personList: Array<any> = [
     { id: 1, date: 'Aurelia Vega', name: 30, price: 'Deepends'},
     { id: 2, date: 'Guerra Cortez', name: 45, price: 'Insectus'},
@@ -31,6 +29,9 @@ export class BudgetComponent implements OnInit {
     { id: 4, date: 'Aurelia Vega', name: 30, price: 'Deepends'},
     { id: 5, date: 'Elisa Gallagher', name: 31, price: 'Portica'},
   ];
+  // end budget table
+
+  // budget overview
   data = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
     datasets: [
@@ -47,18 +48,20 @@ export class BudgetComponent implements OnInit {
             data: [28, 48, 40, 19, 86, 27, 90]
         }
     ]
-}
+  }
+  options = {
+    responsive: true,
+    maintainAspectRatio: true
+  };
+  // end budget overview
 
-  //doughnut
-
+  
+  // budget breakdown
   public chartType: string = 'doughnut';
-
   public chartDatasets: Array<any> = [
     { data: [300, 50, 100, 40, 120], label: 'My First dataset' }
   ];
-
   public chartLabels: Array<any> = ['Red', 'Green', 'Yellow', 'Grey', 'Dark Grey'];
-
   public chartColors: Array<any> = [
     {
       backgroundColor: ['#F7464A', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'],
@@ -66,92 +69,19 @@ export class BudgetComponent implements OnInit {
       borderWidth: 2,
     }
   ];
-
-
   public chartOptions: any = {
     responsive: true
   };
   public chartClicked(e: any): void { }
   public chartHovered(e: any): void { }
-  //end bootstrap
-
-  public barChartOptions: ChartOptions = {
-    responsive: true,
-    // We use these empty structures as placeholders for dynamic theming.
-    scales: { xAxes: [{}], yAxes: [{}] },
-    plugins: {
-      datalabels: {
-        anchor: 'end',
-        align: 'end',
-      }
-    }
-  };
-  public barChartLabels: Label[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-  public barChartType: ChartType = 'bar';
-  public barChartLegend = true;
-
-  public barChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
-  ];
-
-  // Pie
-  public pieChartOptions: ChartOptions = {
-    responsive: true,
-    legend: {
-      position: 'top',
-    },
-    plugins: {
-      datalabels: {
-        formatter: (value, ctx) => {
-          const label = ctx.chart.data.labels[ctx.dataIndex];
-          return label;
-        },
-      },
-    }
-  };
-  public pieChartLabels: Label[] = ['Download', 'Store', 'Mail Sales'];
-  public pieChartData: number[] = [300, 500, 100];
-  public pieChartType: ChartType = 'pie';
-  public pieChartLegend = true;
-  public pieChartColors = [
-    {
-      backgroundColor: ['rgba(255,0,0,0.3)', 'rgba(0,255,0,0.3)', 'rgba(0,0,255,0.3)'],
-    },
-  ];
-
+  // end budget breakdown
 
   constructor() { }
 
   ngOnInit(): void {
-    const ELEMENT_DATA: any[] = [
-      { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-      { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-      { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-      { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-      { position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-      { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-      { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-      { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-      { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-      { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-      { position: 11, name: 'Sodium', weight: 22.9897, symbol: 'Na'},
-      { position: 12, name: 'Magnesium', weight: 24.305, symbol: 'Mg'},
-      { position: 13, name: 'Aluminum', weight: 26.9815, symbol: 'Al'},
-    ];
-    this.dataSource = new MatTableDataSource(ELEMENT_DATA);
-  }
-
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    this.dataSource.filter = filterValue;
-  }
-  update(){
 
   }
 
-  // bootstrap
   updateList(id: number, property: string, event: any) {
     const editField = event.target.textContent;
     this.personList[id][property] = editField;

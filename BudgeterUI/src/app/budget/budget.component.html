@@ -15,17 +15,7 @@
 		<mat-grid-tile>
 			<div class="card-header">
 				<h2>Budget Overview</h2>
-				<!-- <div style="display: block">
-					<canvas baseChart
-					[datasets]="barChartData"
-					[labels]="barChartLabels"
-					[options]="barChartOptions"
-					[legend]="barChartLegend"
-					[chartType]="barChartType">
-					</canvas>
-				</div>
-				<button mat-button mat-raised-button color="primary" (click)="update()">Update</button> -->
-				<p-chart type="bar" [data]="data"></p-chart>
+				<p-chart type="bar" [data]="data" width="31vw" height="17vw" [options]="options"></p-chart>
 			</div>
 		</mat-grid-tile>
 		<mat-grid-tile>
@@ -36,10 +26,21 @@
 		</mat-grid-tile>
 		<mat-grid-tile>
 			<mat-card class="card-header">
-				<h2>Budget Breakdown</h2>
+				<div class="row">
+					<div class="col-sm-7">
+						<h2>Budget Breakdown</h2>
+					</div>
+					<div class="col-sm-5">
+						<span class="table-add float-right mb-3 mr-2">
+							<a style="font-size: 17px; color: primary" (click)="add()">
+							<mdb-icon fas icon="fas fa-edit" size="2x"></mdb-icon>
+							</a>
+						</span>
+					</div>
+				</div>
 					<div class="d-flex justify-content-center">
-						<div style="display: block">
-							<canvas mdbChart
+						<div style="display: block;" >
+							<canvas mdbChart id="budgetCanvas"
 								[chartType]="chartType"
 								[datasets]="chartDatasets"
 								[labels]="chartLabels"
@@ -56,44 +57,6 @@
 		<mat-grid-tile>
 			<mat-card class="card-header">
 				<h2>Budget Table</h2>
-					<!-- <mat-table #table [dataSource]="dataSource">
-				
-						<ng-container matColumnDef="position">
-							<mat-header-cell *matHeaderCellDef></mat-header-cell>
-							<mat-cell *matCellDef="let element"></mat-cell>
-						</ng-container>
-				
-						<ng-container matColumnDef="name">
-							<mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-							<mat-cell *matCellDef="let element">
-								<mat-form-field floatLabel="never">
-									<input matInput placeholder="Name" [value]="element.name" [(ngModel)]="element.name">
-								</mat-form-field>
-							</mat-cell>
-						</ng-container>
-				
-						<ng-container matColumnDef="weight">
-							<mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
-							<mat-cell *matCellDef="let element">
-								<mat-form-field floatLabel="never">
-									<input matInput placeholder="weight" [value]="element.weight" [(ngModel)]="element.weight">
-								</mat-form-field>
-							</mat-cell>
-						</ng-container>
-				
-						
-						<ng-container matColumnDef="symbol">
-							<mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
-							<mat-cell *matCellDef="let element">
-								<mat-form-field floatLabel="never">
-									<input matInput placeholder="Symbol" [value]="element.symbol" [(ngModel)]="element.symbol">
-								</mat-form-field>
-							</mat-cell>
-						</ng-container>
-				
-						<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-						<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-					</mat-table> -->
 					<div id="table" class="table-editable">
 						<table class="table table-striped table-responsive-md btn-table">
 							<tr>
@@ -101,8 +64,8 @@
 								<th class="text-center">Name</th>
 								<th class="text-center">Price</th>
 								<span class="table-add float-right mb-3 mr-2">
-									<a class="text-success" (click)="add()">
-									  <mdb-icon fas icon="plus" size="2x"></mdb-icon>
+									<a style="font-size: 20px; color: Dodgerblue;" (click)="add()">
+									  <mdb-icon fas icon="plus-square" size="2x"></mdb-icon>
 									</a>
 								</span>
 							</tr>
@@ -118,59 +81,11 @@
 								</td>
 								<td>
 								  <span class="table-remove">
-									<button type="button" mdbBtn color="danger" rounded="true" size="sm" class="my-0" (click)="remove(id)">Remove</button>
+									<button class="btn btn-danger btn-sm fa fa-trash-o" (click)="remove(id)" title="Remove the item"></button>
 								  </span>
 								</td>
 							  </tr>
-							
 						  </table>
-						<!-- <table class="table table-bordered table-responsive-md table-striped text-center">
-							<thead>
-								<tr>
-									<th>Person Name</th>
-									<th>Age</th>
-									<th>Company Name</th>
-									<th>Country</th>
-									<th>City</th>
-									<th>Sort</th>
-									<th>Remove</th>
-								</tr>
-							</thead>
-						  <tr *ngFor="let person of personList; let id = index">
-							<td>
-							  <span (keyup)="changeValue(id, 'name', $event)" (blur)="updateList(id, 'name', $event)" contenteditable="true">{{person.name}}</span>
-							</td>
-							<td>
-							  <span contenteditable="true" (keyup)="changeValue(id, 'age', $event)" (blur)="updateList(id, 'age', $event)">{{person.age}}</span>
-							</td>
-							<td>
-							  <span contenteditable="true" (keyup)="changeValue(id, 'companyName', $event)" (blur)="updateList(id, 'companyName', $event)">{{person.companyName}}</span>
-							</td>
-							<td>
-							  <span contenteditable="true" (keyup)="changeValue(id, 'country', $event)" (blur)="updateList(id, 'country', $event)">{{person.country}}</span>
-							</td>
-							<td>
-							  <span contenteditable="true" (keyup)="changeValue(id, 'city', $event)" (blur)="updateList(id, 'city', $event)">{{person.city}}</span>
-							</td>
-							<td>
-							  <span class="table-up">
-								<a class="indigo-text">
-								  <mdb-icon fas icon="long-arrow-alt-up"></mdb-icon>
-								</a>
-							  </span>
-							  <span class="table-down">
-								<a class="indigo-text">
-								  <mdb-icon fas icon="long-arrow-alt-down"></mdb-icon>
-								</a>
-							  </span>
-							</td>
-							<td>
-							  <span class="table-remove">
-								<button type="button" mdbBtn color="danger" rounded="true" size="sm" class="my-0" (click)="remove(id)">Remove</button>
-							  </span>
-							</td>
-						  </tr>
-						</table> -->
 					</div>
 			</mat-card>
 		</mat-grid-tile>

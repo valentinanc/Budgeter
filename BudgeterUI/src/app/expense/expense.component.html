@@ -1,1 +1,93 @@
-<p>expense works!</p>
+
+ <div style="overflow: hidden; padding-bottom: 5%;">
+	<div style="padding-bottom: 2%;">
+		<div class="alert alert-primary" *ngIf="false" role="alert">This is a primary alert—check it out!</div>
+		<div class="alert alert-secondary" *ngIf="false" role="alert">This is a secondary alert—check it out!</div>
+		<div class="alert alert-success" *ngIf="false" role="alert">This is a success alert—check it out!</div>
+		<div class="alert alert-danger" *ngIf="false" role="alert">This is a danger alert—check it out!</div>
+		<div class="alert alert-warning" *ngIf="false" role="alert">This is a warning alert—check it out!</div>
+		<div class="alert alert-info" *ngIf="true" role="alert">On average, you fullfilled 80% of your budget per month.</div>
+		<div class="alert alert-light" *ngIf="false" role="alert">This is a light alert—check it out!</div>
+		<div class="alert alert-dark" *ngIf="false" role="alert">This is a dark alert—check it out!</div>
+	</div>
+
+	<mat-grid-list cols="2" rowHeight="2:1" [gutterSize]="'5%'">
+		<mat-grid-tile>
+			<div class="card-header">
+				<h2>Expense Overview</h2>
+				<p-chart type="bar" [data]="data" width="31vw" height="17vw" [options]="options"></p-chart>
+			</div>
+		</mat-grid-tile>
+		<mat-grid-tile>
+			<mat-card class="card-header">
+				<h2>Financial Goals</h2>
+				<financial-goals></financial-goals>
+			</mat-card>
+		</mat-grid-tile>
+		<mat-grid-tile>
+			<mat-card class="card-header">
+				<div class="row">
+					<div class="col-sm-7">
+						<h2>Expense Breakdown</h2>
+					</div>
+					<div class="col-sm-5">
+						<span class="table-add float-right mb-3 mr-2">
+							<a style="font-size: 17px; color: primary" (click)="add()">
+							<mdb-icon fas icon="fas fa-edit" size="2x"></mdb-icon>
+							</a>
+						</span>
+					</div>
+				</div>
+					<div id="canvas-holder2" class="d-flex justify-content-center">
+						<div id="canvas-holder" style="display: block; height: 50%; width: 50%;" >
+							<canvas mdbChart id="expenseCanvas"
+								[chartType]="chartType"
+								[datasets]="chartDatasets"
+								[labels]="chartLabels"
+								[colors]="chartColors"
+								[options]="chartOptions"
+								[legend]="true"
+								(chartHover)="chartHovered($event)"
+								(chartClick)="chartClicked($event)">
+							</canvas>
+						</div>
+				  	</div>
+			</mat-card>
+		</mat-grid-tile>
+		<mat-grid-tile>
+			<mat-card class="card-header">
+				<h2>Expense Table</h2>
+					<div id="table" class="table-editable">
+						<table class="table table-striped table-responsive-md btn-table">
+							<tr>
+								<th class="text-center">Date</th>
+								<th class="text-center">Name</th>
+								<th class="text-center">Price</th>
+								<span class="table-add float-right mb-3 mr-2">
+									<a style="font-size: 20px; color: Dodgerblue;" (click)="add()">
+									  <mdb-icon fas icon="plus-square" size="2x"></mdb-icon>
+									</a>
+								</span>
+							</tr>
+							<tr *ngFor="let person of personList; let id = index">
+								<td>
+								  <span (keyup)="changeValue(id, 'date', $event)" (blur)="updateList(id, 'date', $event)" contenteditable="true">{{person.date}}</span>
+								</td>
+								<td>
+								  <span contenteditable="true" (keyup)="changeValue(id, 'name', $event)" (blur)="updateList(id, 'name', $event)">{{person.name}}</span>
+								</td>
+								<td>
+								  <span contenteditable="true" (keyup)="changeValue(id, 'price', $event)" (blur)="updateList(id, 'price', $event)">{{person.price}}</span>
+								</td>
+								<td>
+								  <span class="table-remove">
+									<button class="btn btn-danger btn-sm fa fa-trash-o" (click)="remove(id)" title="Remove the item"></button>
+								  </span>
+								</td>
+							  </tr>
+						  </table>
+					</div>
+			</mat-card>
+		</mat-grid-tile>
+	  </mat-grid-list>
+</div>

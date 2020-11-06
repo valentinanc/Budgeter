@@ -45,3 +45,47 @@
   .mat-column-created {
     max-width: 124px;
   }
+
+  .list-group-item span{
+    margin-right: 2em;
+  }
+
+
+  /* The container */
+.capitalize {
+  text-transform: capitalize;
+}
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  .todos-complete {
+    text-decoration: line-through;
+  }
+
+  .example-section {
+    margin: 12px 0;
+  }
+  
+  .example-margin {
+    margin: 0 12px;
+  }
+  
+  ul {
+    list-style-type: none;
+    margin-top: 4px;
+  }
+
+  .padding-0{
+    padding-right:0;
+    padding-left:0;
+}

@@ -73,19 +73,19 @@
 		<br>
 	</div>
 </div>
+
 <mat-tab-group mat-align-tabs="center" class="plotting">
+	
 	<mat-tab style="background-color: white;">
-  <!-- #docregion label-directive -->
 	  <ng-template mat-tab-label class="label">
 		Budget
 	  </ng-template>
 	  <br>
 		<br>
-  <!-- #enddocregion label-directive -->
 	  <budget></budget>
 	</mat-tab>    
   
-	<mat-tab>
+	<mat-tab style="background-color: white;">
 	  <ng-template mat-tab-label class="label">
 		Expenses
 	  </ng-template>
@@ -94,7 +94,7 @@
 	  <expense></expense>
 	</mat-tab>
   
-	<mat-tab>
+	<mat-tab style="background-color: white;">
 	  <ng-template mat-tab-label class="label">
 		Savings
 	  </ng-template>
@@ -103,4 +103,5 @@
 	  <savings></savings>
 	</mat-tab>
 </mat-tab-group>
+
 <Footer></Footer>

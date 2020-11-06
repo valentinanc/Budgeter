@@ -22,6 +22,12 @@ export interface UsersData {
   id: number;
 }
 
+export class ToDo{
+  id:number;
+  workTodo:string = '';
+  isCompleted: boolean = false;
+}
+
 const ELEMENT_DATA: UsersData[] = [
   {id: 1560608769632, name: 'Artificial Intelligence'},
   {id: 1560608796014, name: 'Machine Learning'},
@@ -38,9 +44,19 @@ export class FinancialGoalsComponent implements OnInit {
   dataSource = ELEMENT_DATA;
   @ViewChild(MatTable) table: MatTable<any>;
   
+  items : [];
+  workTodo: string;
+  todos:  ToDo[] = [];
+  inEditMode: boolean = false;
+  currentTodoId: number;
+  currentTodoStateWorkTodo: string;
+  currentTodoStateisCompleted : boolean;
+
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.workTodo = '';
+  }
 
   addRowData(row_obj){
     var d = new Date();
@@ -64,5 +80,85 @@ export class FinancialGoalsComponent implements OnInit {
       return value.id != row_obj.id;
     });
   }
+
+ // Cancel Edit Mode
+ cancelEdit() {
+  if(this.inEditMode)
+  {
+    this.inEditMode = false;
+    this.workTodo = '';
+  }
+
+}
+
+// Add A ToDo
+
+addEditTodo(): void {
+  
+  if(this.workTodo.trim() === "") {  
+    document.getElementById('workTodo').focus();
+    return;
+  }
+
+  if(this.workTodo !== "" && this.inEditMode !== true)
+  { 
+    const payload = {
+      id: 1,
+      workTodo: this.workTodo,
+      isCompleted: this.currentTodoStateisCompleted
+    };
+    this.todos.push(payload);
+    
+    this.workTodo = '';
+  }
+
+  if(this.workTodo !== "" && this.inEditMode === true && this.currentTodoStateWorkTodo !== this.workTodo)
+  {
+    const payload = {
+        workTodo: this.workTodo,
+        isCompleted: this.currentTodoStateisCompleted,
+    };
+
+    this.cancelEdit();
+    
+  }
+
+}
+
+// Edit A ToDo
+
+editTodo(todo: any) {
+
+  console.log(todo);
+
+  this.inEditMode = true;
+  this.currentTodoId = todo.id;
+  this.currentTodoStateWorkTodo = todo.workTodo;
+  this.currentTodoStateisCompleted = todo.isCompleted;
+  
+  this.workTodo = todo.workTodo;
+  document.getElementById('workTodo').focus();
+  this.todos[todo.id].workTodo = todo.workTodo;
+}
+
+// Delete A ToDo
+
+deleteTodo(todo:any, index): void {
+   console.log(todo);
+   console.log(index);
+  
+  this.todos.splice(index,1)
+  // this._todoService.deleteTodo(todo, index);
+}
+
+// Mark A Todo As Completed
+
+markAsCompleted(todo: any, e): void {
+  // console.log(todo.id +" " + todo.isCompleted);
+  if(todo != null)
+  {
+    // this._todoService.markAsCompleted(todo, e.target.checked);
+  }
+}
 
 }
