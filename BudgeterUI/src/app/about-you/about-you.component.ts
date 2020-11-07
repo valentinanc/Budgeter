@@ -15,6 +15,8 @@ export class AboutYouComponent implements OnInit {
   isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+  checked1 = false;
+  checked2 = false;
   constructor(public dialogRef: MatDialogRef<AboutYouComponent>, private _formBuilder: FormBuilder) { }
 
   ngOnInit(): void {

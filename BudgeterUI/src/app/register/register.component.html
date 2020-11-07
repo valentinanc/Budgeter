@@ -1,4 +1,4 @@
-<!-- This snippet uses Font Awesome 5 Free as a dependency. You can download it at fontawesome.io! -->
+
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-light lighten-1" [containerInside]="false">
 
   <!-- Navbar brand -->
@@ -32,7 +32,7 @@
             <!-- Background image for card set in CSS! -->
           </div>
           <div class="card-body">
-            <h5 class="card-title text-center">Register</h5>
+            <h5 class="card-title text-center animate__animated animate__bounce"><strong>Register</strong></h5>
             <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="form-signin">
 
             <div class="form-row">
@@ -63,7 +63,7 @@
               
             </div>
 
-              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Register</button>
+              <button class="btn btn-lg btn-primary btn-block text-uppercase hvr-forward" type="submit">Register</button>
               <a class="d-block text-center mt-2 small" href="" (click)="signIn()">Sign In</a>
             </form>
           </div>

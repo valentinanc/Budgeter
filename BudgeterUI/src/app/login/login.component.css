@@ -24,6 +24,18 @@
   .card-signin .card-body {
     padding: 4rem;
   }
+  .card-signin .card-img-left {
+    width: 60%;
+    /* Link to your background image using in the property below! */
+    background: scroll center url('login50.png');
+    background-size: cover;
+  }
+  .temp {
+    width: 60%;
+    /* Link to your background image using in the property below! */
+    background: scroll center url('login150.png');
+    background-size: cover;
+  }
   
   .form-signin {
     width: 100%;
@@ -110,19 +122,7 @@
     background-color: #3b5998;
   }
 
-  .card-signin .card-img-left {
-    width: 60%;
-    /* Link to your background image using in the property below! */
-    background: scroll center url('login.png');
-    background-size: cover;
-  }
-  .temp{
-    width: 60%;
-    /* Link to your background image using in the property below! */
-    background: scroll center url('login150.png');
-    background-size: cover;
-    height: 40rem;
-  }
+
   .card-signin {
     border: 0;
     border-radius: 1rem;
@@ -193,6 +193,23 @@ button{
     text-align: center;
 }
   
+
+.hvr-forward {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+}
+.hvr-forward:hover, .hvr-forward:focus, .hvr-forward:active {
+  -webkit-transform: translateX(8px);
+  transform: translateX(8px);
+}
+
   /* Fallback for IE
   -------------------------------------------------- */
   
@@ -212,8 +229,8 @@ button{
       margin-top: 0rem;
     }
 
-    .col-lg-10 {
-      margin-top: 30%;
+    .col-lg-12 {
+      margin-top: 20%;
     }
     
 }

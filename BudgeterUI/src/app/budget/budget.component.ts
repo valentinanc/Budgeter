@@ -66,8 +66,8 @@ export class BudgetComponent implements OnInit {
   public chartLabels: Array<any> = ['Food', 'Housing', 'Transportation', 'Savings', 'Remaining'];
   public chartColors: Array<any> = [
     {
-      backgroundColor: ['#F7464A', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'],
-      hoverBackgroundColor: ['#FF5A5E', '#5AD3D1', '#FFC870', '#A8B3C5', '#616774'],
+      backgroundColor: ['#F7464A', '#46BFBD', '#4D5360', '#949FB1', '#ffc107'],
+      hoverBackgroundColor: ['#FF5A5E', '#5AD3D1', '#616774', '#A8B3C5', '#ffc107'],
       borderWidth: 2,
     }
   ];
