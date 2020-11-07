@@ -1,0 +1,46 @@
+.jumbotron {
+    background: #007bff;
+    background: linear-gradient(to right, #0062E6, #33AEFF);
+    color: #ffffff;
+}
+
+.bg-grey {
+    background-color: #f6f6f6;
+  }
+
+.container-fluid {
+    padding: 60px 50px;
+  }
+
+  .logo {
+    font-size: 200px;
+  }
+
+  .image1{
+    width: 300px;
+    height: 300px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background-image: url(https://image.flaticon.com/icons/png/512/1211/1211547.png);
+    background-position: center center;
+    background-size: cover;
+  }
+
+  .image2{
+    width: 300px;
+    height: 300px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background-image: url(https://checkstateplans.org/wp-content/uploads/2017/05/CSS-Index-icons_FINAL-01-300x300.png);
+    background-position: center center;
+    background-size: cover;
+  }
+
+  @media screen and (max-width: 768px) {
+    .col-sm-4 {
+      text-align: center;
+      margin: 25px 0;
+    }
+  }
