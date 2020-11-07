@@ -103,4 +103,7 @@ export class BudgetComponent implements OnInit {
     this.editField = event.target.textContent;
   }
 
+  dostuff(){
+    
+  }
 }

@@ -103,4 +103,8 @@ export class ExpenseComponent implements OnInit {
     this.editField = event.target.textContent;
   }
 
+  dostuff(){
+    
+  }
+
 }
