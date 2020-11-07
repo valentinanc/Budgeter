@@ -13,35 +13,33 @@ export class SavingsComponent implements OnInit {
   // savings table
   editField = ""
   personList: Array<any> = [
-    { id: 1, date: 'Aurelia Vega', name: 30, price: 'Deepends'},
-    { id: 2, date: 'Guerra Cortez', name: 45, price: 'Insectus'},
-    { id: 3, date: 'Guadalupe House', name: 26, price: 'Isotronic'},
-    { id: 4, date: 'Aurelia Vega', name: 30, price: 'Deepends'},
-    { id: 5, date: 'Elisa Gallagher', name: 31, price: 'Portica'},
+    { id: 4, date: '11/04/2020', name: "Tesla Stonks", price: '500'},
   ];
   // end savings table
 
   // savings overview
   data = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November'],
     datasets: [
         {
-            label: 'My First dataset',
-            backgroundColor: '#42A5F5',
-            borderColor: '#1E88E5',
-            data: [65, 59, 80, 81, 56, 55, 40]
-        },
-        {
-            label: 'My Second dataset',
-            backgroundColor: '#9CCC65',
-            borderColor: '#7CB342',
-            data: [28, 48, 40, 19, 86, 27, 90]
+            label: 'Total Monthly Savings',
+            backgroundColor: '#51C767',
+            borderColor: '#51A767',
+            data: [2603, 3180, 3001, 2750, 3499, 3700, 3400, 3800, 2800, 3400, 500]
         }
     ]
   }
   options = {
     responsive: true,
-    maintainAspectRatio: true
+    maintainAspectRatio: true,
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true,
+          max: 7000
+        }
+      }]
+    }
   };
   // end savings overview
 
@@ -49,18 +47,19 @@ export class SavingsComponent implements OnInit {
   // savings breakdown
   public chartType: string = 'doughnut';
   public chartDatasets: Array<any> = [
-    { data: [300, 50, 100, 40, 120], label: 'My First dataset' }
+    { data: [500], label: 'My First dataset' }
   ];
-  public chartLabels: Array<any> = ['Red', 'Green', 'Yellow', 'Grey', 'Dark Grey'];
+  public chartLabels: Array<any> = ['Tesla Stonks'];
   public chartColors: Array<any> = [
     {
-      backgroundColor: ['#F7464A', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'],
-      hoverBackgroundColor: ['#FF5A5E', '#5AD3D1', '#FFC870', '#A8B3C5', '#616774'],
+      backgroundColor: ['#51C767'],
+      hoverBackgroundColor: ['#50B367'],
       borderWidth: 2,
     }
   ];
   public chartOptions: any = {
-    responsive: true
+    responsive: true,
+    cutoutPercentage: 75
   };
   public chartClicked(e: any): void { }
   public chartHovered(e: any): void { }
@@ -82,7 +81,7 @@ export class SavingsComponent implements OnInit {
   }
 
   add() {
-      const person = { id: 6, date: 'Elisa Gallagher', name: 31, price: 'Portica'}
+      const person = { id: 6, date: '2020/11/09', name: '', price: ''}
       this.personList.push(person);
   }
 

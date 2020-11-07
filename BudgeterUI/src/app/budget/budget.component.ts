@@ -23,35 +23,37 @@ export class BudgetComponent implements OnInit {
   // budget table
   editField = ""
   personList: Array<any> = [
-    { id: 1, date: 'Aurelia Vega', name: 30, price: 'Deepends'},
-    { id: 2, date: 'Guerra Cortez', name: 45, price: 'Insectus'},
-    { id: 3, date: 'Guadalupe House', name: 26, price: 'Isotronic'},
-    { id: 4, date: 'Aurelia Vega', name: 30, price: 'Deepends'},
-    { id: 5, date: 'Elisa Gallagher', name: 31, price: 'Portica'},
+    { id: 1, date: '11/01/2020', name: "Rent", price: '1500'},
+    { id: 2, date: '11/03/2020', name: 'Grocery', price: '125'},
+    { id: 3, date: '11/03/2020', name: 'Tim Hortons Party', price: '25'},
+    { id: 4, date: '11/04/2020', name: "Tesla Stonks", price: '500'},
+    { id: 5, date: '11/05/2020', name: "TTC (Take The Car)", price: '50'},
   ];
   // end budget table
 
   // budget overview
   data = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November'],
     datasets: [
         {
-            label: 'My First dataset',
+            label: 'Total Monthly Budget',
             backgroundColor: '#42A5F5',
             borderColor: '#1E88E5',
-            data: [65, 59, 80, 81, 56, 55, 40]
-        },
-        {
-            label: 'My Second dataset',
-            backgroundColor: '#9CCC65',
-            borderColor: '#7CB342',
-            data: [28, 48, 40, 19, 86, 27, 90]
+            data: [4023, 4500, 4201, 4300, 5000, 4700, 4500, 5000, 4200, 4700, 5000]
         }
     ]
   }
   options = {
     responsive: true,
-    maintainAspectRatio: true
+    maintainAspectRatio: true,
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true,
+          max: 7000
+        }
+      }]
+    }
   };
   // end budget overview
 
@@ -59,9 +61,9 @@ export class BudgetComponent implements OnInit {
   // budget breakdown
   public chartType: string = 'doughnut';
   public chartDatasets: Array<any> = [
-    { data: [300, 50, 100, 40, 120], label: 'My First dataset' }
+    { data: [150, 1250, 50, 500, 3000], label: 'My First dataset' }
   ];
-  public chartLabels: Array<any> = ['Red', 'Green', 'Yellow', 'Grey', 'Dark Grey'];
+  public chartLabels: Array<any> = ['Food', 'Housing', 'Transportation', 'Savings', 'Remaining'];
   public chartColors: Array<any> = [
     {
       backgroundColor: ['#F7464A', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'],
@@ -70,7 +72,8 @@ export class BudgetComponent implements OnInit {
     }
   ];
   public chartOptions: any = {
-    responsive: true
+    responsive: true,
+    cutoutPercentage: 75
   };
   public chartClicked(e: any): void { }
   public chartHovered(e: any): void { }
@@ -92,7 +95,7 @@ export class BudgetComponent implements OnInit {
   }
 
   add() {
-      const person = { id: 6, date: 'Elisa Gallagher', name: 31, price: 'Portica'}
+      const person = { id: 6, date: '2020/11/09', name: '', price: ''}
       this.personList.push(person);
   }
 
