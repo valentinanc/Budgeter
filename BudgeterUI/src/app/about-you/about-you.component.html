@@ -34,7 +34,13 @@
               <mat-checkbox class="example-margin">Transportation</mat-checkbox>
               <mat-checkbox class="example-margin">Food</mat-checkbox>
               <mat-checkbox class="example-margin">Savings</mat-checkbox>
-              <mat-checkbox class="example-margin">Other</mat-checkbox>
+              <mat-checkbox class="example-margin" (change)="checked1=!checked1">Other</mat-checkbox>
+              <div *ngIf=checked1>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="other1" placeholder="Type Here">
+                </div>
+              </div>
+              
           </section>
             <div>
               <button mat-button matStepperPrevious>Back</button>
@@ -64,7 +70,12 @@
               <mat-checkbox class="example-margin">Travel</mat-checkbox>
               <mat-checkbox class="example-margin">Start a business</mat-checkbox>
               <mat-checkbox class="example-margin">Buy a car</mat-checkbox>
-              <mat-checkbox class="example-margin">Other</mat-checkbox>
+              <mat-checkbox class="example-margin" (change)="checked2=!checked2">Other</mat-checkbox>
+              <div *ngIf=checked2>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="other1" placeholder="Type Here">
+                </div>
+              </div>
           </section>
             <div>
               <button mat-button matStepperPrevious>Back</button>
