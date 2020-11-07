@@ -6,7 +6,12 @@
 		<div class="alert alert-success" *ngIf="false" role="alert">This is a success alert—check it out!</div>
 		<div class="alert alert-danger" *ngIf="false" role="alert">This is a danger alert—check it out!</div>
 		<div class="alert alert-warning" *ngIf="false" role="alert">This is a warning alert—check it out!</div>
-		<div class="alert alert-info" *ngIf="true" role="alert">On average, you fullfilled 80% of your budget per month.</div>
+		<div class="alert alert-info alert-dismissible fade show" *ngIf="true" role="alert">
+			<strong>Good Job!</strong> On average, you fullfilled 80% of your budget per month.
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+		  </div>
 		<div class="alert alert-light" *ngIf="false" role="alert">This is a light alert—check it out!</div>
 		<div class="alert alert-dark" *ngIf="false" role="alert">This is a dark alert—check it out!</div>
 	</div>
@@ -14,13 +19,14 @@
 	<mat-grid-list cols="2" rowHeight="2:1" [gutterSize]="'5%'">
 		<mat-grid-tile>
 			<div class="card-header">
-				<h2>Budget Overview</h2>
+				<h4>Budget Overview</h4>
 				<p-chart type="bar" [data]="data" width="31vw" height="17vw" [options]="options"></p-chart>
 			</div>
 		</mat-grid-tile>
 		<mat-grid-tile>
 			<mat-card class="card-header">
-				<h2>Financial Goals</h2>
+				<h4>Financial Goals</h4>
+				<br>
 				<financial-goals></financial-goals>
 			</mat-card>
 		</mat-grid-tile>
@@ -28,12 +34,12 @@
 			<mat-card class="card-header">
 				<div class="row">
 					<div class="col-sm-7">
-						<h2>Budget Breakdown</h2>
+						<h4>Budget Breakdown</h4>
 					</div>
 					<div class="col-sm-5">
 						<span class="table-add float-right mb-3 mr-2">
 							<a style="font-size: 17px; color: primary" (click)="add()">
-							<mdb-icon fas icon="fas fa-edit" size="2x"></mdb-icon>
+							<mdb-icon fas icon="fas fa-edit" size="1.5x"></mdb-icon>
 							</a>
 						</span>
 					</div>
@@ -56,7 +62,7 @@
 		</mat-grid-tile>
 		<mat-grid-tile>
 			<mat-card class="card-header">
-				<h2>Budget Table</h2>
+				<h4>Budget Table</h4>
 					<div id="table" class="table-editable">
 						<table class="table table-striped table-responsive-md btn-table">
 							<tr>
@@ -64,8 +70,8 @@
 								<th class="text-center">Name</th>
 								<th class="text-center">Price</th>
 								<span class="table-add float-right mb-3 mr-2">
-									<a style="font-size: 20px; color: Dodgerblue;" (click)="add()">
-									  <mdb-icon fas icon="plus-square" size="2x"></mdb-icon>
+									<a style="font-size: 1.5rem; color: Dodgerblue;" (click)="add()">
+									  <mdb-icon fas icon="plus-square" size="1x"></mdb-icon>
 									</a>
 								</span>
 							</tr>

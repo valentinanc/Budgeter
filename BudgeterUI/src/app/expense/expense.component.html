@@ -14,13 +14,13 @@
 	<mat-grid-list cols="2" rowHeight="2:1" [gutterSize]="'5%'">
 		<mat-grid-tile>
 			<div class="card-header">
-				<h2>Expense Overview</h2>
+				<h4>Expense Overview</h4>
 				<p-chart type="bar" [data]="data" width="31vw" height="17vw" [options]="options"></p-chart>
 			</div>
 		</mat-grid-tile>
 		<mat-grid-tile>
 			<mat-card class="card-header">
-				<h2>Financial Goals</h2>
+				<h4>Financial Goals</h4>
 				<financial-goals></financial-goals>
 			</mat-card>
 		</mat-grid-tile>
@@ -28,7 +28,7 @@
 			<mat-card class="card-header">
 				<div class="row">
 					<div class="col-sm-7">
-						<h2>Expense Breakdown</h2>
+						<h4>Expense Breakdown</h4>
 					</div>
 					<div class="col-sm-5">
 						<span class="table-add float-right mb-3 mr-2">
@@ -56,7 +56,7 @@
 		</mat-grid-tile>
 		<mat-grid-tile>
 			<mat-card class="card-header">
-				<h2>Expense Table</h2>
+				<h4>Expense Table</h4>
 					<div id="table" class="table-editable">
 						<table class="table table-striped table-responsive-md btn-table">
 							<tr>
@@ -64,8 +64,8 @@
 								<th class="text-center">Name</th>
 								<th class="text-center">Price</th>
 								<span class="table-add float-right mb-3 mr-2">
-									<a style="font-size: 20px; color: Dodgerblue;" (click)="add()">
-									  <mdb-icon fas icon="plus-square" size="2x"></mdb-icon>
+									<a style="font-size: 1.5rem; color: Dodgerblue;" (click)="add()">
+										<mdb-icon fas icon="plus-square" size="1x"></mdb-icon>
 									</a>
 								</span>
 							</tr>

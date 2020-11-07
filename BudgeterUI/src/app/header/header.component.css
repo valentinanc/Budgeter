@@ -24,7 +24,10 @@ nav{
     margin-left: 35%;
 }
 
-
+.profile{
+    background: scroll center url('profile.png');
+    background-size: cover;
+}
 
 @media (max-width: 767px) {
 
