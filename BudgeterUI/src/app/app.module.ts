@@ -59,6 +59,10 @@ const routes: Routes = [
   {
     path: 'user/:uid/settings',
     component: UserSettingsComponent
+  },
+  {
+    path: 'about-us',
+    component: AboutUsComponent
   }
 ];
 
