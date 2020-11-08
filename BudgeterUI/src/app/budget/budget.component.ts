@@ -23,11 +23,11 @@ export class BudgetComponent implements OnInit {
   // budget table
   editField = ""
   personList: Array<any> = [
-    { id: 1, date: '11/01/2020', name: "Rent", price: '1500'},
-    { id: 2, date: '11/03/2020', name: 'Grocery', price: '125'},
-    { id: 3, date: '11/03/2020', name: 'Tim Hortons Party', price: '25'},
-    { id: 4, date: '11/04/2020', name: "Tesla Stonks", price: '500'},
     { id: 5, date: '11/05/2020', name: "TTC (Take The Car)", price: '50'},
+    { id: 4, date: '11/04/2020', name: "Tesla Stonks", price: '500'},
+    { id: 3, date: '11/03/2020', name: 'Tim Hortons Party', price: '25'},
+    { id: 2, date: '11/03/2020', name: 'Grocery', price: '125'},
+    { id: 1, date: '11/01/2020', name: "Rent", price: '1500'},
   ];
   // end budget table
 
@@ -95,8 +95,8 @@ export class BudgetComponent implements OnInit {
   }
 
   add() {
-      const person = { id: 6, date: '2020/11/09', name: '', price: ''}
-      this.personList.push(person);
+      const person = { id: 6, date: '11/09/2020', name: '', price: ''}
+      this.personList.unshift(person);
   }
 
   changeValue(id: number, property: string, event: any) {

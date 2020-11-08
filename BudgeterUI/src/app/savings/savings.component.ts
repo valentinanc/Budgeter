@@ -82,7 +82,7 @@ export class SavingsComponent implements OnInit {
 
   add() {
       const person = { id: 6, date: '2020/11/09', name: '', price: ''}
-      this.personList.push(person);
+      this.personList.unshift(person);
   }
 
   changeValue(id: number, property: string, event: any) {

@@ -43,10 +43,10 @@ export class FinancialGoalsComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'action'];
   dataSource = ELEMENT_DATA;
   @ViewChild(MatTable) table: MatTable<any>;
-  
+
   items : [];
   workTodo: string;
-  todos:  ToDo[] = [];
+  todos:  ToDo[] = [{id:1,workTodo: "Pay off loans", isCompleted: false},{id:2,workTodo: "Buy a car", isCompleted: false},{id:3,workTodo: "Buy a PC", isCompleted: false}];
   inEditMode: boolean = false;
   currentTodoId: number;
   currentTodoStateWorkTodo: string;
