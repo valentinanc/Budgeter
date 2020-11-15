@@ -1,11 +1,15 @@
 <h1 mat-dialog-title>Add Items to Budget</h1>
+<div [formGroup]="firstFormGroup">
 <div mat-dialog-content>
   Enter the item name<br>
   <mat-form-field appearance="outline">
     <mat-label>Enter the item name</mat-label>
     <input matInput placeholder="coffee" formControlName="firstCtrl" required>
   </mat-form-field>
-  <p></p>
+</div>
+</div>
+<br>
+  <div [formGroup]="secondFormGroup">
   What category does the item belong to?<br>
   <mat-form-field>
     <mat-select>
@@ -14,8 +18,9 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-
-  <p></p>
+</div>
+<br>
+<div [formGroup]="secondFormGroup">
   How much was the item?<br>
   <mat-form-field appearance="outline">
     <mat-label>Item Price</mat-label>
