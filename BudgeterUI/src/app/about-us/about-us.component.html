@@ -24,11 +24,11 @@
   </mdb-navbar>
     
     <body>
-      <div class="jumbotron text-center">
-        <h1>Budgeter</h1>
+      <div class="jumbotron text-center" style="padding:7rem;">
+        <h1 class=" animate__animated animate__rubberBand">Budgeter</h1>
       </div>
       <div class="container-fluid">
-        <div class="row">
+        <div class="row" id="jumbo" >
           <div class="col-sm-8">
             <h2>About Us</h2>
             <p>
@@ -41,7 +41,7 @@
             </p>
           </div>
           <div class="col-sm-4">
-            <span class="image1"></span>
+            <span class="image1 animate__animated animate__fadeInRight" ></span>
           </div>
         </div>
       </div>
@@ -49,9 +49,9 @@
       <div class="container-fluid bg-grey">
         <div class="row">
           <div class="col-sm-4">
-            <span class="image2"></span>
+            <span class="image2 animate__animated animate__fadeInLeft"></span>
           </div>
-          <div class="col-sm-8">
+          <div class="col-sm-8" >
             <h2>Our Goals</h2>
             <p>
                 We hope that by using Budgeter, users will be more aware of their spending habits, and 
@@ -66,26 +66,106 @@
           </div>
         </div>
       </div>
-      <div class="container-fluid text-center">
+      <div class="container-fluid text-center animate__animated animate__zoomIn">
         <h2>Key Features</h2>
         <br>
-        <div class="row">
+        <br>
+        <br>
+        <div class="row" style="padding:5rem">
           <div class="col-sm-4">
-            <span class="glyphicon glyphicon-off"></span>
+            <i class="fas fa-bullseye fa-9x" style="color:#1DB794"></i>
             <h4>Financial Goals</h4>
             <p>Budgeter lets users add financial goals, motivating them to keep up with their budget.</p>
           </div>
           <div class="col-sm-4">
-            <span class="glyphicon glyphicon-heart"></span>
+            <i class="fas fa-cogs fa-9x" style="color:#FD7777"></i>
             <h4>Budget Customization</h4>
             <p>Budgeter provides users with the ability to add niche categories that fit their spending habits.</p>
           </div>
           <div class="col-sm-4">
-            <span class="glyphicon glyphicon-lock"></span>
+            <i class="far fa-eye fa-9x" style="color:#FFA733"></i>
             <h4>Dashboard Visualizations</h4>
             <p>Budgeter provides detailed graphs to help users visualize how they are spending their money.</p>
           </div>
           </div>
           <br><br>
       </div>
+      <!-- Footer -->
+<footer class="page-footer font-small indigo">
+
+  <!-- Footer Links -->
+  <div class="container">
+
+    <!-- Grid row-->
+    <div class="row text-center d-flex justify-content-center pt-5 mb-3">
+
+      <!-- Grid column -->
+      <div class="col-md-2 mb-3">
+        <h6 class="text-uppercase font-weight-bold">
+          <a href="#" routerLink="/about-us" routerLinkActive="active">About us</a>
+        </h6>
+      </div>
+      <!-- Grid column -->
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-2 mb-3">
+        <h6 class="text-uppercase font-weight-bold">
+          <a href="#!">Contact</a>
+        </h6>
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row-->
+    <hr class="rgba-white-light" style="margin: 0 15%;">
+
+   
+    <!-- Grid row-->
+    <hr class="clearfix d-md-none rgba-white-light" style="margin: 10% 15% 5%;">
+
+    <!-- Grid row-->
+    <div class="row pb-3">
+
+      <!-- Grid column -->
+      <div class="col-md-12">
+
+        <div class="mb-5 flex-center">
+
+          <!-- Facebook -->
+          <a class="fb-ic">
+            <i class="fab fa-facebook-f fa-lg white-text mr-4"> </i>
+          </a>
+          <!-- Twitter -->
+
+
+          <!--Linkedin -->
+   
+          <!--Instagram-->
+          <a class="ins-ic">
+            <i class="fab fa-instagram fa-lg white-text mr-4"> </i>
+          </a>
+          <!--Pinterest-->
+         
+        </div>
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row-->
+
+  </div>
+  <!-- Footer Links -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2020 Copyright:
+    <a href=""> Budgeter</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
     </body>
+
+    
