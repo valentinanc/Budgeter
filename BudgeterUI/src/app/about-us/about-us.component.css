@@ -4,6 +4,9 @@
     color: #ffffff;
 }
 
+#jummbo{
+  padding:7rem
+}
 .bg-grey {
     background-color: #f6f6f6;
   }
@@ -42,5 +45,9 @@
     .col-sm-4 {
       text-align: center;
       margin: 25px 0;
+    }
+    
+    #jummbo{
+      padding:0rem
     }
   }

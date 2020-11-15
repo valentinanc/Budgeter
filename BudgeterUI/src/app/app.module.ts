@@ -41,6 +41,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 import {MatSelectModule} from '@angular/material/select';
 import { AddItemsComponent } from './add-items/add-items.component';
 import {ChartModule} from 'primeng/chart';
+import { EditBudgetComponent } from './edit-budget/edit-budget.component';
 // For MDB Angular Free
 
 const routes: Routes = [
@@ -83,6 +84,7 @@ const routes: Routes = [
     HeaderComponent,
     AboutYouComponent,
     AddItemsComponent,
+    EditBudgetComponent,
 
   ],
   imports: [
