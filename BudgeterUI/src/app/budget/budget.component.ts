@@ -11,6 +11,8 @@ import {MatCardModule} from '@angular/material/card';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { EditBudgetComponent } from '../edit-budget/edit-budget.component';
 
 
 @Component({
@@ -79,7 +81,7 @@ export class BudgetComponent implements OnInit {
   public chartHovered(e: any): void { }
   // end budget breakdown
 
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -103,7 +105,12 @@ export class BudgetComponent implements OnInit {
     this.editField = event.target.textContent;
   }
 
-  dostuff(){
-    
+  openDialog(): void {
+    const dialogRef = this.dialog.open(EditBudgetComponent, {
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 }
