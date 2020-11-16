@@ -21,13 +21,13 @@
 	<mat-grid-list cols="2" rowHeight="2:1" [gutterSize]="'5%'">
 		<mat-grid-tile>
 			<div class="card-header">
-				<h4>Expense Overview</h4>
+				<h5>Expense Overview</h5>
 				<p-chart type="bar" [data]="data" width="31vw" height="17vw" [options]="options"></p-chart>
 			</div>
 		</mat-grid-tile>
 		<mat-grid-tile>
 			<mat-card class="card-header">
-				<h4>Financial Goals</h4>
+				<h5>Financial Goals</h5>
 				<financial-goals></financial-goals>
 			</mat-card>
 		</mat-grid-tile>
@@ -35,7 +35,7 @@
 			<mat-card class="card-header">
 				<div class="row">
 					<div class="col-sm-7">
-						<h4>Expense Breakdown</h4>
+						<h5>Expense Breakdown</h5>
 					</div>
 					<div class="col-sm-5">
 						<span class="table-add float-right mb-3 mr-2">
@@ -63,7 +63,7 @@
 		</mat-grid-tile>
 		<mat-grid-tile>
 			<mat-card class="card-header">
-				<h4>Expense Table</h4>
+				<h5>Expense Table</h5>
 					<div id="table" class="table-editable">
 						<table class="table table-striped table-responsive-md btn-table">
 							<tr>
@@ -76,7 +76,7 @@
 									</a>
 								</span>
 							</tr>
-							<tr *ngFor="let person of personList; let id = index">
+							<tr style="font-size: 0.8rem;" *ngFor="let person of personList; let id = index">
 								<td>
 								  <span (keyup)="changeValue(id, 'date', $event)" (blur)="updateList(id, 'date', $event)" contenteditable="true">{{person.date}}</span>
 								</td>

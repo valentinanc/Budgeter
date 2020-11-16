@@ -19,7 +19,7 @@
                 <ul class="list-group list-group-flush" *ngIf="todos.length > 0" >
                     <li class="list-group-item" *ngFor="let todo of todos; let i=index" [class.completed]="todo.isCompleted">
                             <div class="pull-left">
-                                <label class="container capitalize"  [ngClass]="{'todos-complete': todo.isCompleted}">
+                                <label class="container capitalize" style="font-size: 0.9rem;" [ngClass]="{'todos-complete': todo.isCompleted}">
                                    <mat-checkbox class="example-margin" (change)="markAsCompleted(todo, $event)" [checked]="todo.isCompleted" [(ngModel)]="todo.isCompleted">
                                      &nbsp;{{todo.workTodo}}
                                     </mat-checkbox>
