@@ -45,4 +45,10 @@ app.use(function(req, res, next) {
 app.use('/api/v1/customer', customer);
 app.use('/api/v1/generate_uid', generate_uid);
 
+const db = require("./config/db.initialize.js");
+db.sequelize.sync({ force: true }).then(() => {
+	console.log("Drop and re-sync db.");
+  });
+// db.sequelize.sync();
+
 module.exports = app;

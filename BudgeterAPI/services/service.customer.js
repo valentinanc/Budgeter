@@ -1,7 +1,10 @@
 const CustomerModel = require("../models/model.customer");
 let Validator = require('fastest-validator');
-
-
+const db = require("../config/db.initialize.js");
+const Tutorial = db.tutorials;
+const User = db.user;
+const UserProfile = db.userProfile;
+const Op = db.Sequelize.Op;
 let customers = {};
 let counter = 0;
 
@@ -45,10 +48,40 @@ class CustomerService
 		// 	    message: errors
 		// 	};
 		// }
+		// Retrieve all Tutorials from the database.
+		console.log("data given: ", data)
+		const user =  User.create(
+			{
+				FName: data["first_name"],
+				LName: data["last_name"],
+				Email: data["email"],
+				Password: data["password"]
+			});
+		const userProfile =  UserProfile.create(
+			{
+				MBudget: 0,
+				MExpenses: 0,
+				MSavings: 0,
+				userId: user.id
+			});
+		let temp2 = "test";
+		// Tutorial.findAll({ where: { published: true } })
+		// .then(data => {
+		// 	json = JSON.stringify(data)
+		// 	console.log("json: ", json)
+		// 	temp2 = json["title"]
+		// })
+		// .catch(err => {
+		// 	// res.status(500).send({
+		// 	// message:
+		// 	// 	err.message || "Some error occurred while retrieving tutorials."
+		// 	// });
+		// });
+	
 
-		let customer = new CustomerModel(data.first_name, data.last_name, data.email, data.password);
+		let customer = new CustomerModel(user.FName, user.LName, user.Email, user.Password);
 
-		customer.uid = 'c' + counter++;
+		customer.uid = temp2 + counter++;
 
 		customers[customer.uid] = customer;
 
