@@ -48,8 +48,8 @@ export class RegisterComponent implements OnInit {
   ngOnInit()
   {
   	this.userForm = this.formBuilder.group({
-  		first_name: ['', [Validators.required, Validators.maxLength(50)]],
-  		last_name: ['', [Validators.required, Validators.maxLength(50)]],
+  		firstName: ['', [Validators.required, Validators.maxLength(50)]],
+  		lastName: ['', [Validators.required, Validators.maxLength(50)]],
   		email: ['', [Validators.required, Validators.email, Validators.maxLength(75)]],
   		password: ['', [Validators.required, Validators.minLength(5)]]
   	});
@@ -67,6 +67,7 @@ export class RegisterComponent implements OnInit {
   	// else
   	// {
 		  console.log('working')
+		  console.log("user form: ", this.userForm)
   		let data: any = Object.assign({guid: this.guid}, this.userForm.value);
 
   		this.http.post('/api/v1/customer', data).subscribe((data:any) => {

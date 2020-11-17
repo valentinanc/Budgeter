@@ -50,20 +50,36 @@ class CustomerService
 		// }
 		// Retrieve all Tutorials from the database.
 		console.log("data given: ", data)
+		let userId = -1
+		let json = null
+		let jsonParse = null
 		const user =  User.create(
 			{
-				FName: data["first_name"],
-				LName: data["last_name"],
+				FName: data["firstName"],
+				LName: data["lastName"],
 				Email: data["email"],
 				Password: data["password"]
+			}).then(result => {
+				json = JSON.stringify(result)
+				jsonParse = JSON.parse(json)
+				userId = jsonParse["id"]
+				console.log("json: ", jsonParse)
+				console.log("userId", userId)
+				UserProfile.create(
+					{
+						MBudget: 0,
+						MExpenses: 0,
+						MSavings: 0,
+						userId: userId
+					});
 			});
-		const userProfile =  UserProfile.create(
-			{
-				MBudget: 0,
-				MExpenses: 0,
-				MSavings: 0,
-				userId: user.id
-			});
+		// const userProfile =  UserProfile.create(
+		// 	{
+		// 		MBudget: 0,
+		// 		MExpenses: 0,
+		// 		MSavings: 0,
+		// 		userId: userId
+		// 	});
 		let temp2 = "test";
 		// Tutorial.findAll({ where: { published: true } })
 		// .then(data => {

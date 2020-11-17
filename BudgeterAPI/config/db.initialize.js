@@ -33,7 +33,7 @@ db.user  = require("../db-models/user.model.js")(sequelize, Sequelize);
 
 // Build Relationships
 
-db.user.hasOne(db.userProfile);
+db.userProfile.belongsTo(db.user, {onDelete: 'SET NULL', onUpdate: 'CASCADE'});
 db.userProfile.hasOne(db.financialGoals);
 db.userProfile.hasOne(db.budget);
 db.budget.hasMany(db.expense);

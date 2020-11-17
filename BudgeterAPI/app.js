@@ -46,9 +46,18 @@ app.use('/api/v1/customer', customer);
 app.use('/api/v1/generate_uid', generate_uid);
 
 const db = require("./config/db.initialize.js");
-db.sequelize.sync({ force: true }).then(() => {
-	console.log("Drop and re-sync db.");
-  });
-// db.sequelize.sync();
+// db.sequelize.query('SET FOREIGN_KEY_CHECKS = 0')
+// .then(function(){
+//     return db.sequelize.sync({ force: true });
+// })
+// .then(function(){
+//     return db.sequelize.query('SET FOREIGN_KEY_CHECKS = 1')
+// })
+// .then(function(){
+//     console.log('Database synchronised.');
+// }, function(err){
+//     console.log(err);
+// });
+db.sequelize.sync();
 
 module.exports = app;
