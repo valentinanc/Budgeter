@@ -46,6 +46,8 @@ app.use('/api/customer', customer);
 app.use('/api/generate_uid', generate_uid);
 
 const db = require("./config/db.initialize.js");
+
+// DROPS ALL TABLE RECORDS & RECREATES TABLES
 // db.sequelize.query('SET FOREIGN_KEY_CHECKS = 0')
 // .then(function(){
 //     return db.sequelize.sync({ force: true });
@@ -58,6 +60,8 @@ const db = require("./config/db.initialize.js");
 // }, function(err){
 //     console.log(err);
 // });
+
+// keeps tables 
 db.sequelize.sync();
 
 module.exports = app;

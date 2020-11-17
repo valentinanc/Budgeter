@@ -1,9 +1,10 @@
+const { v4: uuidv4 } = require('uuid');
 module.exports = (sequelize, Sequelize) => {
     const UserProfile = sequelize.define("user_profile", {
       id:{
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         primaryKey: true,
-        autoIncrement: true
+        // autoIncrement: true
       },
       MBudget: {
         type: Sequelize.INTEGER
@@ -21,6 +22,7 @@ module.exports = (sequelize, Sequelize) => {
       //      key: 'id', // 'id' refers to column name in persons table
       //   }
       // }
-    });
+    }, {});
+    UserProfile.beforeCreate(user_profile => user_profile.id = uuidv4());
     return UserProfile;
 };

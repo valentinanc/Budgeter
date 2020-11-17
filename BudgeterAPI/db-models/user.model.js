@@ -1,9 +1,10 @@
+const { v4: uuidv4 } = require('uuid');
 module.exports = (sequelize, Sequelize) => {
     const User = sequelize.define("user", {
       id:{
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         primaryKey: true,
-        autoIncrement: true
+        // autoIncrement: true
       },
       FName: {
         type: Sequelize.STRING
@@ -18,6 +19,7 @@ module.exports = (sequelize, Sequelize) => {
       Password: {
         type: Sequelize.STRING
       }
-    });
+    }, {});
+    User.beforeCreate(user => user.id = uuidv4());
     return User;
 };
