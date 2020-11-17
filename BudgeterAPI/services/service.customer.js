@@ -4,6 +4,23 @@ const db = require("../config/db.initialize.js");
 const User = db.user;
 const UserProfile = db.userProfile;
 let counter = 0;
+var sha1 = require('sha1');
+/* create an instance of the validator */
+let customerValidator = new Validator();
+
+/* use the same patterns as on the client to validate the request */
+let namePattern = /([A-Za-z\-\’])*/;
+
+/* customer validator shema */
+const customerVSchema = {
+		guid: {type: "string", min: 3},
+		
+		first_name: { type: "string", min: 1, max: 50, pattern: namePattern},
+		last_name: { type: "string", min: 1, max: 50, pattern: namePattern},
+		email: { type: "email", max: 75 },
+		password: { type: "string", min: 2, max: 50}
+	};
+
 
 /* static customer service class */
 class CustomerService
@@ -20,12 +37,10 @@ class CustomerService
 				FName: data["firstName"],
 				LName: data["lastName"],
 				Email: data["email"],
-				Password: data["password"]
-			})
-			.catch(err => {
+				Password: sha1(data["password"])
+			}).catch(err => {
 				console.log("error creating user")
-			})
-			.then(result => {
+			}).then(result => {
 				json = JSON.stringify(result)
 				jsonParse = JSON.parse(json)
 				userId = jsonParse["id"]

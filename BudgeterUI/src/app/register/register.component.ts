@@ -45,33 +45,44 @@ export class RegisterComponent implements OnInit {
   	return (this.submitted && (this.serviceErrors.password != null || this.userForm.controls.password.errors != null));
   }
 
+  invalidConfirmPassword()
+  {
+  	return (this.submitted && (this.serviceErrors.password_confirm != null || this.userForm.controls.password_confirm.errors != null));
+  }
+  passwordCheck()
+  {
+	return (this.userForm.value.password_confirm == this.userForm.value.password)
+  }
   ngOnInit()
   {
   	this.userForm = this.formBuilder.group({
   		firstName: ['', [Validators.required, Validators.maxLength(50)]],
   		lastName: ['', [Validators.required, Validators.maxLength(50)]],
   		email: ['', [Validators.required, Validators.email, Validators.maxLength(75)]],
-  		password: ['', [Validators.required, Validators.minLength(5)]]
-  	})
+		password: ['', [Validators.required, Validators.minLength(5)]],
+		password_confirm: ['', [Validators.required, Validators.minLength(5)]]
+	  });
   }
 
   onSubmit()
   {
-  	this.submitted = true;
-	console.log("user form: ", this.userForm)
-	let data: any = Object.assign({guid: this.guid}, this.userForm.value);
-
-	this.http.post('/api/customer/register/', data).subscribe((data:any) => {
-    
-    if (data != null){
-      let path = '/user/' + data.customer.uid;
-      this.router.navigate([path]);
-    }
-	}, error =>
-	{
-		this.serviceErrors = error.error.error;
-	});
 	this.registered = true;
+  	this.submitted = true;
+	  
+	if(this.userForm.status == "VALID" && this.passwordCheck())
+  	{
+		let data: any = Object.assign({guid: this.guid}, this.userForm.value);
+		this.http.post('/api/v1/customer', data).subscribe((data:any) => {
+		if (data != null){
+			let path = '/user/' + data.customer.uid;	
+			this.router.navigate([path]);
+		}	
+	  	}, error =>
+		{
+			this.serviceErrors = error.error.error;
+		});
+		this.registered = true; 
+  	}		
   }
 
   signIn(){
