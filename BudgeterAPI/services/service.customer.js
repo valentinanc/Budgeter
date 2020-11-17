@@ -7,7 +7,7 @@ const UserProfile = db.userProfile;
 const Op = db.Sequelize.Op;
 let customers = {};
 let counter = 0;
-
+var sha1 = require('sha1');
 /* create an instance of the validator */
 let customerValidator = new Validator();
 
@@ -23,6 +23,7 @@ const customerVSchema = {
 		email: { type: "email", max: 75 },
 		password: { type: "string", min: 2, max: 50}
 	};
+
 
 /* static customer service class */
 class CustomerService
@@ -58,7 +59,7 @@ class CustomerService
 				FName: data["firstName"],
 				LName: data["lastName"],
 				Email: data["email"],
-				Password: data["password"]
+				Password: sha1(data["password"])
 			}).then(result => {
 				json = JSON.stringify(result)
 				jsonParse = JSON.parse(json)

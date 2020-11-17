@@ -34,7 +34,7 @@
         <div class="card card-signin flex-row my-5">
           <div class="card-body">
             <h5 class="card-title text-center animate__animated animate__bounce"><strong>Login</strong></h5>
-            <form class="form-signin" [formGroup]="userForm" (ngSubmit)="login()">
+            <form class="form-signin" [formGroup]="userForm" (ngSubmit)="login()" ngNativeValidate>
       
 
               <div class="form-group">
