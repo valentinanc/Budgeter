@@ -85,15 +85,15 @@ export class UserSettingsComponent implements OnInit {
 		  console.log('working')
   		let data: any = Object.assign({guid: this.guid}, this.userForm.value);
 
-  		this.http.post('/api/v1/customer', data).subscribe((data:any) => {
+  		// this.http.post('/api/customer', data).subscribe((data:any) => {
 	      
-	      let path = '/user/' + data.customer.uid;
+	    //   let path = '/user/' + data.customer.uid;
 
-	      this.router.navigate([path]);
-	    }, error =>
-	    {
-	    	this.serviceErrors = error.error.error;
-        });
+	    //   this.router.navigate([path]);
+	    // }, error =>
+	    // {
+	    // 	this.serviceErrors = error.error.error;
+      //   });
 
       this.registered = true;
 

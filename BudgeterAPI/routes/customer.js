@@ -8,8 +8,8 @@ router.get('/', async function(req, res, next)
 	res.json({error: "Invalid Customer UID."});
 });
 
-/* adds a new customer to the list */
-router.post('/', async (req, res, next) =>
+/* user register */
+router.post('/register/', async (req, res, next) =>
 {
 	const body = req.body;
 
@@ -17,12 +17,12 @@ router.post('/', async (req, res, next) =>
 	{
 		const customer = await CustomerService.create(body);
 
-		if(body.guid != null)
-		{
-			customer.guid = body.guid;
-		}
+		// if(body.guid != null)
+		// {
+		// 	customer.guid = body.guid;
+		// }
 
-		res.cookie('guid', customer.guid, { maxAge: 900000, httpOnly: true });
+		// res.cookie('guid', customer.guid, { maxAge: 900000, httpOnly: true });
 
 		// created the customer! 
 		return res.status(201).json({ customer: customer });
@@ -38,6 +38,41 @@ router.post('/', async (req, res, next) =>
 		return next(err);
 	}
 });
+
+
+/* user login */
+router.post('/login/', async (req, res, next) =>
+{
+	const body = req.body;
+
+	try
+	{
+		const customer = await CustomerService.login(body);
+
+		// if(body.guid != null)
+		// {
+		// 	customer.guid = body.guid;
+		// }
+
+		// res.cookie('guid', customer.guid, { maxAge: 900000, httpOnly: true });
+
+		// login the customer! 
+		return res.status(201).json({ customer: customer });
+	}
+	catch(err)
+	{
+		if (err.name === 'ValidationError')
+		{
+        	return res.status(400).json({ error: err.message });
+		}
+
+		// unexpected error
+		return next(err);
+	}
+});
+
+
+
 
 /* retrieves a customer by uid */
 router.get('/:id', async (req, res, next) =>

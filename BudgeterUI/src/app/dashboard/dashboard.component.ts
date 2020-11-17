@@ -43,14 +43,14 @@ export class DashboardComponent implements OnInit {
 	{
 		this.subscriber = this.route.params.subscribe(params => {
 	       
-	       this.http.get('/api/v1/customer/' + params.uid).subscribe((data:any) => {
+	    //    this.http.get('/api/customer/' + params.uid).subscribe((data:any) => {
 
-				this.user = new UserInfoModel(data.customer);
-				this.checker=true;
-				if (this.checker){
-					this.openDialog();	
-				}
-		    });
+		// 		this.user = new UserInfoModel(data.customer);
+		// 		this.checker=true;
+		// 		if (this.checker){
+		// 			this.openDialog();	
+		// 		}
+		//     });
 	    });
 	}
 	

@@ -13,18 +13,16 @@ export class LoginComponent implements OnInit {
   guid: string;
   userForm: FormGroup;
   constructor(private formBuilder: FormBuilder, private http: HttpClient,private router: Router) {
-    this.http.get('/api/v1/generate_uid').subscribe((data:any) => {
-      this.guid = data.guid;
-    }, error => {
-        console.log("There was an error generating the proper GUID on the server", error);
-    });
+    // this.http.get('/api/generate_uid').subscribe((data:any) => {
+    //   this.guid = data.guid;
+    // }, error => {
+    //     console.log("There was an error generating the proper GUID on the server", error);
+    // });
 
    }
 
   ngOnInit(): void {
     this.userForm = this.formBuilder.group({
-  		first_name: ['', [Validators.required, Validators.maxLength(50)]],
-  		last_name: ['', [Validators.required, Validators.maxLength(50)]],
   		email: ['', [Validators.required, Validators.email, Validators.maxLength(75)]],
   		password: ['', [Validators.required, Validators.minLength(5)]]
   	});
@@ -33,9 +31,12 @@ export class LoginComponent implements OnInit {
   login(){
     let data: any = Object.assign({guid: this.guid}, this.userForm.value);
 
-    this.http.post('/api/v1/customer', data).subscribe((data:any) => {
-	      
-      let path = '/user/' + data.customer.uid;
+    this.http.post('/api/customer/login/', data).subscribe((data:any) => {
+        
+      if (data.customer == null){
+        alert("too bad too sad")
+      }
+      let path = '/user/' + data.customer.id;
 
       this.router.navigate([path]);
     });

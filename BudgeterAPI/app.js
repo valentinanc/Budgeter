@@ -42,8 +42,8 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use('/api/v1/customer', customer);
-app.use('/api/v1/generate_uid', generate_uid);
+app.use('/api/customer', customer);
+app.use('/api/generate_uid', generate_uid);
 
 const db = require("./config/db.initialize.js");
 // db.sequelize.query('SET FOREIGN_KEY_CHECKS = 0')
