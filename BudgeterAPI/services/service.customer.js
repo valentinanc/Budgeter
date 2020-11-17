@@ -67,13 +67,13 @@ class CustomerService
 
 	}
 
-	static login(data)
+	static async login(data)
 	{
 		console.log("data: ", data);
-		let customer = User.findOne({
+		let customer = await User.findOne({
 			where: {
 				email: data["email"],
-				password: data["password"]
+				password: sha1(data["password"])
 			}
 		})
 		console.log("test: ", customer);

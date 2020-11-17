@@ -72,7 +72,7 @@ export class RegisterComponent implements OnInit {
 	if(this.userForm.status == "VALID" && this.passwordCheck())
   	{
 		let data: any = Object.assign({guid: this.guid}, this.userForm.value);
-		this.http.post('/api/v1/customer', data).subscribe((data:any) => {
+		this.http.post('/api/customer/register', data).subscribe((data:any) => {
 		if (data != null){
 			let path = '/user/' + data.customer.uid;	
 			this.router.navigate([path]);
