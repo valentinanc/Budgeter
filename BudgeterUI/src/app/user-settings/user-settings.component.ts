@@ -10,7 +10,8 @@ import { Router } from "@angular/router";
 })
 export class UserSettingsComponent implements OnInit {
   registered = false;
-	submitted = false;
+  submitted = false;
+  passchange = false;
 	userForm: FormGroup;
 	guid: string;
   serviceErrors:any = {};
@@ -28,19 +29,18 @@ export class UserSettingsComponent implements OnInit {
   {
   }
 
-  invalidFirstName()
-  {
-  	return (this.submitted && (this.serviceErrors.first_name != null || this.userForm.controls.first_name.errors != null));
-  }
-
-  invalidLastName()
-  {
-  	return (this.submitted && (this.serviceErrors.last_name != null || this.userForm.controls.last_name.errors != null));
-  }
-
   invalidPassword()
   {
   	return (this.submitted && (this.serviceErrors.password != null || this.userForm.controls.password.errors != null));
+  }
+
+  invalidConfirmPassword()
+  {
+  	return (this.submitted && (this.serviceErrors.password_confirm != null || this.userForm.controls.password_confirm.errors != null));
+  }
+  passwordCheck()
+  {
+	return (this.userForm.value.password_confirm == this.userForm.value.password)
   }
 
   //used from https://www.talkingdotnet.com/show-image-preview-before-uploading-using-angular-7/
@@ -65,9 +65,11 @@ export class UserSettingsComponent implements OnInit {
   ngOnInit()
   {
   	this.userForm = this.formBuilder.group({
-  		first_name: ['', [Validators.required, Validators.maxLength(50)]],
-  		last_name: ['', [Validators.required, Validators.maxLength(50)]],
-  		password: ['', [Validators.required, Validators.minLength(5)]]
+  		first_name: ['Kyrie', [Validators.required, Validators.maxLength(50)]],
+      last_name: ['Irving', [Validators.required, Validators.maxLength(50)]],
+      email: ['kyrieirving@gmail.com', [Validators.required, Validators.email, Validators.maxLength(75)]],
+      password: ['', [Validators.required, Validators.minLength(5)]],
+      password_confirm: ['', [Validators.required, Validators.minLength(5)]]   
     });
 
     this.firstFormGroup = this.formBuilder.group({
@@ -76,6 +78,26 @@ export class UserSettingsComponent implements OnInit {
     this.secondFormGroup = this.formBuilder.group({
       secondCtrl: ['', Validators.required]
     });
+  }
+
+  updatePassword(){
+    this.submitted = true;
+    if(this.userForm.status == "VALID" && this.passwordCheck())
+  	{
+      let data: any = Object.assign({guid: this.guid}, this.userForm.value);
+
+      this.http.post('/api/customer/settings/', data).subscribe((data:any) => {
+          
+        if (data.customer == null){
+          alert("Something went wrong.")
+        } else{
+          this.passchange = true;
+        }
+        let path = '/user/' + data.customer.id + '/settings/';
+
+        this.router.navigate([path]);
+      });
+    }
   }
 
   onSubmit()

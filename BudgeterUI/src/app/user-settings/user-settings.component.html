@@ -14,45 +14,56 @@
                                                 <!-- Background image for card set in CSS! -->
                                                 </div>
                                                 <div class="card-body">
-                                                <h2 class="headercen">Settings</h2>
-                                                <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="form-signin">
-                                    
-                                                <div class="form-row">
-                                                    <div class="form-group col-md-6">
-                                                    <input type="text" class="form-control" id="inputFname" placeholder="Kyrie" readonly>
-                                                    </div>
-                                                    <div class="form-group col-md-6">
-                                                    <input type="text" class="form-control" id="inputLname" placeholder="Irving" readonly>
-                                                    </div>
-                                                    <hr>
-                                                </div>
                                             
-                                                <div class="form-group">
-                                                    <input type="email" class="form-control" id="inputEmail" placeholder="kyrieirving@gmail.com" readonly>
-                                                </div>
+                                                <h2 class="headercen">Settings</h2>
+                                                <form [formGroup]="userForm" (ngSubmit)="updatePassword()" class="form-signin" ngNativeValidate>
                                     
-                                                <hr>
-                                                <div class="form-row">              
-                                                    <div class="form-group col-md-6">
-                                                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-6">
+                                                        <input type="text" class="form-control" formControlName="first_name" id="first_name" readonly>
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                        <input type="text" class="form-control" formControlName="last_name" id="last_name" readonly>
+                                                        </div>
+                                                        <hr>
                                                     </div>
-                                    
-                                                    <div class="form-group col-md-6">
-                                                    <input type="password" id="inputConfirmPassword" class="form-control" placeholder="Confirm Password" required>
-                                                    </div>    
-                                                </div>
+                                                
+                                                    <div class="form-group">
+                                                        <input type="email" class="form-control" formControlName="email" id="email" readonly>
+                                                    </div>
+                                        
+                                                    <hr>
+                                                    <div class="form-row">              
+                                                        <div class="form-group col-md-6">
+                                                        <input type="password" id="password" class="form-control" formControlName="password" placeholder="New Password" required>
+                                                        </div>
+                                        
+                                                        <div class="form-group col-md-6">
+                                                        <input type="password" id="password_confirm" class="form-control" formControlName="password_confirm" placeholder="Confirm Password" required>
+                                                        </div>    
+                                                    </div>
+                                                    
+                                                    <div class="alert alert-info text-center" *ngIf="passchange" role="alert">Password Updated.</div>
+                                                    <div class="alert alert-danger alert-dismissible fade show"  *ngIf="!passwordCheck()&&submitted" role="alert">
+                                                        <div class="row">
+                                                          Passwords do not match
+                                                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                          <span aria-hidden="true">&times;</span>
+                                                          </button>
+                                                        </div>
+                                                      </div>
 
-                                                <div>
-                                                    <h2 class="headerleft1">Notifications</h2>
-                                                    <mat-radio-group class="vertical-radio-group">
-                                                        <mat-radio-button value="1">Receive daily updates on your budget</mat-radio-button>
-                                                        <mat-radio-button value="2">Receive weekly updates on your budget</mat-radio-button>
-                                                        <mat-radio-button value="3">Receive monthly updates on your budget</mat-radio-button>
-                                                        <mat-radio-button value="4">Receive no updates on your budget</mat-radio-button>
-                                                    </mat-radio-group>
-                                                </div>
-                                    
-                                                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Save Changes</button>
+                                                    <div>
+                                                        <h2 class="headerleft1">Notifications</h2>
+                                                        <mat-radio-group class="vertical-radio-group">
+                                                            <mat-radio-button value="1">Receive daily updates on your budget</mat-radio-button>
+                                                            <mat-radio-button value="2">Receive weekly updates on your budget</mat-radio-button>
+                                                            <mat-radio-button value="3">Receive monthly updates on your budget</mat-radio-button>
+                                                            <mat-radio-button value="4">Receive no updates on your budget</mat-radio-button>
+                                                        </mat-radio-group>
+                                                    </div>
+                                        
+                                                    <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Save Changes</button>
                                                 </form>
                                                 </div>
                                             </div>

@@ -79,6 +79,19 @@ class CustomerService
 		console.log("test: ", customer);
 		return customer;
 	}
+
+	static async updatePassword(data)
+	{
+		console.log("data: ", data);
+		let customer = await User.findOne({
+			where: {
+				email: data["email"],
+			}
+		})
+		customer.update({Password: sha1(data["password"])})
+		console.log("test: ", customer);
+		return customer;
+	}
 	
 	// static retrieve(uid)
 	// {
