@@ -18,7 +18,7 @@
 <mdb-navbar id="navbarfixed" SideClass="navbar navbar-expand-lg fixed navbar-dark indigo" [containerInside]="false">
 
   <!-- Navbar brand -->
-   <mdb-navbar-brand><a style="color:white ;"class="navbar-brand" [routerLink]="'/user/:uid'">
+   <mdb-navbar-brand><a style="color:white ;"class="navbar-brand" [routerLink]="['/user', uid]" href="#">
      &nbsp;<strong>Budgeter</strong><img src="login150.png" alt=""></a></mdb-navbar-brand>
   <!-- Collapsible content -->
   <links>
@@ -48,7 +48,7 @@
           <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
             <i class="fas fa-user-alt fa-2x" style="color: whitesmoke;"></i></a>
           <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
-            <a class="dropdown-item waves-light" mat-button [routerLink]="'/user/:uid/settings'"  mdbWavesEffect href="#">Settings</a>
+            <a class="dropdown-item waves-light" mat-button [routerLink]="['settings']"  mdbWavesEffect>Settings</a>
             <a class="dropdown-item waves-light" mat-button [routerLink]="'/'" mdbWavesEffect href="#">Log out</a>
           </div>
         </li>
