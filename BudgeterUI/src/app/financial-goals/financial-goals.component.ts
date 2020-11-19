@@ -18,6 +18,9 @@ import { Observable } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from "@angular/common/http";
 import { ActivatedRoute } from '@angular/router';
+import { map, catchError } from 'rxjs/operators';
+import { from, throwError } from 'rxjs';
+import { JsonPipe } from '@angular/common';
 
 export interface UsersData {
   name: string;
@@ -54,6 +57,7 @@ export class FinancialGoalsComponent implements OnInit {
   currentTodoStateWorkTodo: string;
   currentTodoStateisCompleted : boolean;
   uid: string;
+  userProfileId: string;
 	serviceErrors:any = {};
 
   constructor(private http: HttpClient, private route: ActivatedRoute) {
@@ -63,6 +67,12 @@ export class FinancialGoalsComponent implements OnInit {
 
   ngOnInit(): void {
     this.workTodo = '';
+    this.http.get('/api/user-profile/' + this.uid).subscribe((data:any) => {
+        this.userProfileId = data.userProfileId;
+        console.log(this.userProfileId);
+      }, error => {
+          console.log("There was an error generating the proper GUID on the server", error);
+      });
   }
 
   addRowData(row_obj){
@@ -115,7 +125,8 @@ addEditTodo(): void {
       isCompleted: this.currentTodoStateisCompleted
     };
     this.todos.push(payload);
-    let data: any = Object.assign({name:payload.workTodo}, {isCompleted: false});
+
+    let data: any = Object.assign({name:payload.workTodo}, {isCompleted: false}, {userProfileId: this.userProfileId});
     console.log(data);
 		this.http.post('/api/financial-goals/', data).subscribe((data:any) => {
       console.log("good fin goal");
@@ -175,5 +186,16 @@ markAsCompleted(todo: any, e): void {
     // this._todoService.markAsCompleted(todo, e.target.checked);
   }
 }
+
+// getUserProfileId(userId:string) {
+//   this.http.get('/api/user-profile/' + userId).
+//     // this.http.get('/api/user-profile/' + userId).subscribe((data:any) => {
+//     //   this.userProfileId = data.userProfileId;
+//     //   console.log(this.userProfileId);
+//     //   return this.userProfileId;
+//     // }, error => {
+//     //     console.log("There was an error generating the proper GUID on the server", error);
+//     // });
+// }
 
 }

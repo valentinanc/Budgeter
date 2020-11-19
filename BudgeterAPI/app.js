@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var generate_uid = require('./routes/generate_uid');
 var customer = require('./routes/customer');
 var financialGoals = require('./routes/financial-goals');
+var userProfile = require('./routes/user-profile');
 
 let reporter = function (type, ...rest)
 {
@@ -46,6 +47,7 @@ app.use(function(req, res, next) {
 app.use('/api/customer', customer);
 app.use('/api/generate_uid', generate_uid);
 app.use('/api/financial-goals', financialGoals);
+app.use('/api/user-profile', userProfile);
 
 const db = require("./config/db.initialize.js");
 
