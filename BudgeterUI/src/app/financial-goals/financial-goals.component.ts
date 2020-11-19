@@ -52,14 +52,13 @@ export class FinancialGoalsComponent implements OnInit {
   inEditMode: boolean = false;
   currentTodoId: number;
   currentTodoStateWorkTodo: string;
-  currentTodoStateisCompleted : boolean;
+  currentTodoStateisCompleted : boolean = false;
   uid: string;
   userProfileId: string;
 	serviceErrors:any = {};
 
   constructor(private http: HttpClient, private route: ActivatedRoute) {
     this.uid = this.route.url["value"][1]["path"];
-    console.log(this.uid);
   }
 
   ngOnInit(): void {
@@ -69,13 +68,13 @@ export class FinancialGoalsComponent implements OnInit {
         this.http.get('/api/financial-goals/' + this.userProfileId).subscribe((data:any) => {
           for(var i = 0; i < data.length; i++) {
             var obj = data[i];
-            this.todos.push({id: obj.id, workTodo: obj.Name, isCompleted: obj.isCompleted});
+            this.todos.push({id: obj.id, workTodo: obj.Name, isCompleted: obj.IsCompleted});
         }
         }, error => {
-            console.log("There was an error generating the proper GUID on the server", error);
+            console.log("There was an error displaying the financial goals", error);
         });
       }, error => {
-          console.log("There was an error generating the proper GUID on the server", error);
+          console.log("There was an error retrieving the user profile id", error);
       });
   }
 
@@ -89,7 +88,6 @@ export class FinancialGoalsComponent implements OnInit {
     
   }
   updateRowData(row_obj){
-    console.log(this.todos);
     this.todos = this.todos.filter((value,key)=>{
       if(value.id == row_obj.id){
         value.workTodo = row_obj.workTodo;
@@ -131,7 +129,7 @@ addEditTodo(): void {
     };
     this.todos.push(payload);
 
-    let data: any = Object.assign({name:payload.workTodo}, {isCompleted: false}, {userProfileId: this.userProfileId});
+    let data: any = Object.assign({name:payload.workTodo}, {isCompleted: this.currentTodoStateisCompleted}, {userProfileId: this.userProfileId});
 		this.http.post('/api/financial-goals/', data).subscribe((data:any) => {
       console.log("good fin goal");
 	  	}, error =>
@@ -151,8 +149,6 @@ addEditTodo(): void {
     };
     this.updateRowData(payload);
 
-    console.log(payload);
-
     let data: any = Object.assign({name:payload.workTodo}, {isCompleted:payload.isCompleted}, {id: payload.id});
     this.http.put('/api/financial-goals/', data).subscribe((data:any) => {
       console.log("good edit fin goal");
@@ -170,9 +166,6 @@ addEditTodo(): void {
 // Edit A ToDo
 
 editTodo(todo: any) {
-
-  console.log(todo);
-
   this.inEditMode = true;
   this.currentTodoId = todo.id;
   this.currentTodoStateWorkTodo = todo.workTodo;
@@ -208,10 +201,13 @@ deleteTodo(todo:any, index): void {
 
 markAsCompleted(todo: any, e): void {
   // console.log(todo.id +" " + todo.isCompleted);
-  if(todo != null)
+  let data: any = Object.assign({name:todo.workTodo}, {isCompleted:todo.isCompleted}, {id: todo.id});
+  this.http.put('/api/financial-goals/', data).subscribe((data:any) => {
+    console.log("good isCompleted fin goal");
+    }, error =>
   {
-    // this._todoService.markAsCompleted(todo, e.target.checked);
-  }
+    this.serviceErrors = error.error.error;
+  });
 }
 
 }
