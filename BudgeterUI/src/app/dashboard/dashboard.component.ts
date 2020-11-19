@@ -41,7 +41,11 @@ export class DashboardComponent implements OnInit {
 
 	ngOnInit()
 	{
-		this.subscriber = this.route.params.subscribe(params => {
+		this.checker=true;
+		if (this.checker) {
+			this.openDialog();	
+		}
+		// this.subscriber = this.route.params.subscribe(params => {
 	       
 	    //    this.http.get('/api/customer/' + params.uid).subscribe((data:any) => {
 
@@ -51,7 +55,7 @@ export class DashboardComponent implements OnInit {
 		// 			this.openDialog();	
 		// 		}
 		//     });
-	    });
+	    // });
 	}
 	
 	openDialog() {

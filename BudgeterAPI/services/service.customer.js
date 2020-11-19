@@ -2,6 +2,7 @@ const CustomerModel = require("../models/model.customer");
 const db = require("../config/db.initialize.js");
 const User = db.user;
 const UserProfile = db.userProfile;
+const Budget = db.budget;
 var sha1 = require('sha1');
 
 
@@ -14,6 +15,9 @@ class CustomerService
 		let userId = -1
 		let json = null
 		let jsonParse = null
+		let jsonProfile = null
+		let jsonParseProfile = null
+		let profileId = -1
 		const user =  await User.create(
 			{
 				FName: data["firstName"],
@@ -32,6 +36,14 @@ class CustomerService
 						MExpenses: 0,
 						MSavings: 0,
 						userId: userId
+					}).then(profile => {
+						console.log("user profile: ", profile)
+						jsonProfile = JSON.stringify(profile)
+						jsonParseProfile = JSON.parse(jsonProfile)
+						profileId = jsonParseProfile["id"]
+						Budget.create({
+							userProfileId: profileId
+						})	
 					});
 				return result
 			}).catch(err => {

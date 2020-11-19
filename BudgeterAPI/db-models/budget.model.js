@@ -4,9 +4,6 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true
-      },
-      Total: {
-        type: Sequelize.INTEGER
       }
     });
     return Budget;

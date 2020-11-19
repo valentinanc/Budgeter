@@ -78,6 +78,10 @@ export class FinancialGoalsComponent implements OnInit {
       });
   }
 
+  ngOnChanges(){
+    console.log("testing changes")
+  }
+
   addRowData(row_obj){
     var d = new Date();
     this.dataSource.push({

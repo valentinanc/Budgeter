@@ -7,7 +7,7 @@ var generate_uid = require('./routes/generate_uid');
 var customer = require('./routes/customer');
 var financialGoals = require('./routes/financial-goals');
 var userProfile = require('./routes/user-profile');
-
+var budget = require('./routes/budget');
 let reporter = function (type, ...rest)
 {
 	// remote reporter logic goes here
@@ -48,6 +48,7 @@ app.use('/api/customer', customer);
 app.use('/api/generate_uid', generate_uid);
 app.use('/api/financial-goals', financialGoals);
 app.use('/api/user-profile', userProfile);
+app.use('/api/budget', budget);
 
 const db = require("./config/db.initialize.js");
 
