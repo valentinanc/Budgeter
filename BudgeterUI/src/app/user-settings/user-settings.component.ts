@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'user-settings',
@@ -24,9 +25,15 @@ export class UserSettingsComponent implements OnInit {
   public imagePath;
   imgURL: any;
   public message: string;
+  uid: string;
+  firstName: string;
+  lastName: string;
+  cemail: string;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router)
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router, private route: ActivatedRoute)
   {
+    this.uid = this.route.url["value"][1]["path"];
+    console.log(this.uid);
   }
 
   invalidPassword()
@@ -64,19 +71,25 @@ export class UserSettingsComponent implements OnInit {
   }
   ngOnInit()
   {
-  	this.userForm = this.formBuilder.group({
-  		first_name: ['Kyrie', [Validators.required, Validators.maxLength(50)]],
-      last_name: ['Irving', [Validators.required, Validators.maxLength(50)]],
-      email: ['kyrieirving@gmail.com', [Validators.required, Validators.email, Validators.maxLength(75)]],
-      password: ['', [Validators.required, Validators.minLength(5)]],
-      password_confirm: ['', [Validators.required, Validators.minLength(5)]]   
-    });
+    this.http.get('/api/customer/' + this.uid).subscribe((data:any) => {
+      this.firstName = data.customer.FName;
+      this.lastName = data.customer.LName;
+      this.cemail = data.customer.Email;
+      
+      this.userForm = this.formBuilder.group({
+        first_name: [this.firstName, [Validators.required, Validators.maxLength(50)]],
+        last_name: [this.lastName, [Validators.required, Validators.maxLength(50)]],
+        email: [this.cemail, [Validators.required, Validators.email, Validators.maxLength(75)]],
+        password: ['', [Validators.required, Validators.minLength(5)]],
+        password_confirm: ['', [Validators.required, Validators.minLength(5)]]   
+      });
 
-    this.firstFormGroup = this.formBuilder.group({
-      firstCtrl: ['', Validators.required]
-    });
-    this.secondFormGroup = this.formBuilder.group({
-      secondCtrl: ['', Validators.required]
+      this.firstFormGroup = this.formBuilder.group({
+        firstCtrl: ['', Validators.required]
+      });
+      this.secondFormGroup = this.formBuilder.group({
+        secondCtrl: ['', Validators.required]
+      });
     });
   }
 

@@ -93,17 +93,26 @@ class CustomerService
 		return customer;
 	}
 	
-	// static retrieve(uid)
-	// {
-	// 	if(customers[uid] != null)
-	// 	{
-	// 		return customers[uid];
-	// 	}
-	// 	else
-	// 	{
-	// 		throw new Error('Unable to retrieve a customer by (uid:'+ uid +')');
-	// 	}
-	// }
+	static async retrieve(data)
+	{
+		// if(customers[uid] != null)
+		// {
+		// 	return customers[uid];
+		// }
+		// else
+		// {
+		// 	throw new Error('Unable to retrieve a customer by (uid:'+ uid +')');
+		// }
+
+		console.log("data: ", data);
+		let customer = await User.findOne({
+			where: {
+				id: data,
+			}
+		})
+		console.log("test: ", customer);
+		return customer;
+	}
 
 	// static update(uid, data)
 	// {
