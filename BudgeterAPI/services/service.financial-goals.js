@@ -2,16 +2,6 @@ const FinancialGoalsModel = require("../models/model.financial-goals");
 const db = require("../config/db.initialize.js");
 const FinancialGoals = db.financialGoals;
 
-/* use the same patterns as on the client to validate the request */
-let namePattern = /([A-Za-z\-\’])*/;
-
-/* financial goal validator shema */
-const financialGoalVSchema = {
-		id: {type: "string", min: 3},
-		name: { type: "string", min: 1, max: 100, pattern: namePattern},
-		is_completed: { type: "Number"},
-        user_profile_id: { type: "string", min: 2, max: 50}
-	};
 
 /* static financial goals service class */
 class FinancialGoalsService
@@ -19,7 +9,6 @@ class FinancialGoalsService
 	static async create(data)
 	{
 		// Retrieve all Tutorials from the database.
-		console.log("data given: ", data)
 		const goal =  await FinancialGoals.create(
 			{
 				Name: data["name"],
@@ -28,7 +17,6 @@ class FinancialGoalsService
 			}).catch(err => {
 				console.log("error creating financial goal")
 			});
-		console.log("financial goal: ", goal)
 		if (goal == undefined){
 			return null;
 		}
@@ -39,38 +27,32 @@ class FinancialGoalsService
     
     static async getFinancialGoals(data)
 	{
-		console.log("data: ", data);
 		let financialGoals = await FinancialGoals.findAll({
 			where: {
 				userProfileId: data,
 			}
 		})
-		console.log("test: ", financialGoals);
 		return financialGoals;
     }
     
     static async deleteFinancialGoal(data)
 	{
-		console.log("data: ", data);
 		let financialGoal = await FinancialGoals.destroy({
 			where: {
 				id: data,
 			}
 		})
-		console.log("test: ", financialGoal);
 		return financialGoal;
     }
     
     static async editFinancialGoal(data)
 	{
-		console.log("data: ", data);
 		let financialGoal = await FinancialGoals.update(
             { Name: data["name"],  IsCompleted: data["isCompleted"]}, {
 			where: {
                 id: data["id"]
 			}
 		})
-		console.log("test: ", financialGoal);
 		return financialGoal;
 	}
 }
