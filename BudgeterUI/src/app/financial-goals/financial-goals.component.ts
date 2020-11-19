@@ -67,10 +67,9 @@ export class FinancialGoalsComponent implements OnInit {
     this.http.get('/api/user-profile/' + this.uid).subscribe((data:any) => {
         this.userProfileId = data.userProfileId;
         this.http.get('/api/financial-goals/' + this.userProfileId).subscribe((data:any) => {
-          console.log(data);
           for(var i = 0; i < data.length; i++) {
             var obj = data[i];
-            this.todos.push({id: i+1, workTodo: obj.Name, isCompleted: obj.isCompleted});
+            this.todos.push({id: obj.id, workTodo: obj.Name, isCompleted: obj.isCompleted});
         }
         }, error => {
             console.log("There was an error generating the proper GUID on the server", error);
@@ -132,7 +131,6 @@ addEditTodo(): void {
     this.todos.push(payload);
 
     let data: any = Object.assign({name:payload.workTodo}, {isCompleted: false}, {userProfileId: this.userProfileId});
-    console.log(data);
 		this.http.post('/api/financial-goals/', data).subscribe((data:any) => {
       console.log("good fin goal");
 	  	}, error =>
@@ -179,6 +177,13 @@ deleteTodo(todo:any, index): void {
    console.log(index);
   
   this.todos.splice(index,1)
+  let data: any = Object.assign({id:todo.id});
+  console.log("good fin goal id: " + data.id);
+  this.http.delete('/api/financial-goals/' + data.id).subscribe((data:any) => {
+    }, error =>
+  {
+    this.serviceErrors = error.error.error;
+  });
   // this._todoService.deleteTodo(todo, index);
 }
 

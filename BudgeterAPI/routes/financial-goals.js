@@ -40,5 +40,21 @@ router.get('/:id', async (req, res, next) =>
 	}
 });
 
+/* delete fin goal for a given financial goal id */
+router.delete('/:id', async (req, res, next) =>
+{
+	try
+	{
+		const financialGoal = await FinancialGoalsService.deleteFinancialGoal(req.params.id);
+        console.log(financialGoal);
+		return res.json(financialGoal);
+	}
+	catch(err)
+	{
+		// unexpected error
+		return next(err);
+	}
+});
+
 
 module.exports = router;

@@ -49,6 +49,18 @@ class FinancialGoalsService
 		})
 		console.log("test: ", financialGoals);
 		return financialGoals;
+    }
+    
+    static async deleteFinancialGoal(data)
+	{
+		console.log("data: ", data);
+		let financialGoal = await FinancialGoals.destroy({
+			where: {
+				id: data,
+			}
+		})
+		console.log("test: ", financialGoal);
+		return financialGoal;
 	}
 }
 
