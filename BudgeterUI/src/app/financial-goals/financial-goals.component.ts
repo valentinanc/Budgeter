@@ -16,6 +16,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Observable } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { HttpClient } from "@angular/common/http";
+import { ActivatedRoute } from '@angular/router';
 
 export interface UsersData {
   name: string;
@@ -51,8 +53,13 @@ export class FinancialGoalsComponent implements OnInit {
   currentTodoId: number;
   currentTodoStateWorkTodo: string;
   currentTodoStateisCompleted : boolean;
+  uid: string;
+	serviceErrors:any = {};
 
-  constructor() {}
+  constructor(private http: HttpClient, private route: ActivatedRoute) {
+    this.uid = this.route.url["value"][1]["path"];
+    console.log(this.uid);
+  }
 
   ngOnInit(): void {
     this.workTodo = '';
@@ -108,8 +115,16 @@ addEditTodo(): void {
       isCompleted: this.currentTodoStateisCompleted
     };
     this.todos.push(payload);
-    
+    let data: any = Object.assign({name:payload.workTodo}, {isCompleted: false});
+    console.log(data);
+		this.http.post('/api/financial-goals/', data).subscribe((data:any) => {
+      console.log("good fin goal");
+	  	}, error =>
+		{
+			this.serviceErrors = error.error.error;
+		});
     this.workTodo = '';
+  
   }
 
   if(this.workTodo !== "" && this.inEditMode === true && this.currentTodoStateWorkTodo !== this.workTodo)
