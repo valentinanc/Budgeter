@@ -15,10 +15,36 @@
         </mat-step>
         <mat-step [stepControl]="secondFormGroup">
           <form [formGroup]="secondFormGroup">
-            <ng-template matStepLabel>How much do you typically spend in a month?</ng-template>
+            <ng-template matStepLabel>What is your monthly budget?</ng-template>
             <mat-form-field>
               <mat-label>Monthly Spending</mat-label>
               <input matInput formControlName="secondCtrl" placeholder="$500">
+            </mat-form-field>
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup">
+          <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>What are your monthly expenses?</ng-template>
+            <mat-form-field>
+              <mat-label>Monthly Expenses</mat-label>
+              <input matInput formControlName="secondCtrl" placeholder="$1000">
+            </mat-form-field>
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup">
+          <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>What are your monthly savings?</ng-template>
+            <mat-form-field>
+              <mat-label>Monthly Savings</mat-label>
+              <input matInput formControlName="secondCtrl" placeholder="$1000">
             </mat-form-field>
             <div>
               <button mat-button matStepperPrevious>Back</button>
@@ -42,19 +68,6 @@
               </div>
               
           </section>
-            <div>
-              <button mat-button matStepperPrevious>Back</button>
-              <button mat-button matStepperNext>Next</button>
-            </div>
-          </form>
-        </mat-step>
-        <mat-step [stepControl]="secondFormGroup">
-          <form [formGroup]="secondFormGroup">
-            <ng-template matStepLabel>What do you want your monthly budget to be?</ng-template>
-            <mat-form-field>
-              <mat-label>Monthly Budget</mat-label>
-              <input matInput formControlName="secondCtrl" placeholder="$1000">
-            </mat-form-field>
             <div>
               <button mat-button matStepperPrevious>Back</button>
               <button mat-button matStepperNext>Next</button>

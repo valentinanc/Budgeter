@@ -14,11 +14,6 @@ router.post('/', async (req, res, next) =>
 	}
 	catch(err)
 	{
-		if (err.name === 'ValidationError')
-		{
-        	return res.status(400).json({ error: err.message });
-		}
-
 		// unexpected error
 		return next(err);
 	}
@@ -48,6 +43,23 @@ router.delete('/:id', async (req, res, next) =>
 		const financialGoal = await FinancialGoalsService.deleteFinancialGoal(req.params.id);
         console.log(financialGoal);
 		return res.json(financialGoal);
+	}
+	catch(err)
+	{
+		// unexpected error
+		return next(err);
+	}
+});
+
+/* edit fin goal */
+router.put('/', async (req, res, next) =>
+{
+	const body = req.body;
+
+	try
+	{
+		const financialGoal = await FinancialGoalsService.editFinancialGoal(body);
+		return res.status(201).json({ financialGoal: financialGoal });
 	}
 	catch(err)
 	{
