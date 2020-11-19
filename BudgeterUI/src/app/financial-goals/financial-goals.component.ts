@@ -18,9 +18,6 @@ import { Observable } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from "@angular/common/http";
 import { ActivatedRoute } from '@angular/router';
-import { map, catchError } from 'rxjs/operators';
-import { from, throwError } from 'rxjs';
-import { JsonPipe } from '@angular/common';
 
 export interface UsersData {
   name: string;
@@ -186,16 +183,5 @@ markAsCompleted(todo: any, e): void {
     // this._todoService.markAsCompleted(todo, e.target.checked);
   }
 }
-
-// getUserProfileId(userId:string) {
-//   this.http.get('/api/user-profile/' + userId).
-//     // this.http.get('/api/user-profile/' + userId).subscribe((data:any) => {
-//     //   this.userProfileId = data.userProfileId;
-//     //   console.log(this.userProfileId);
-//     //   return this.userProfileId;
-//     // }, error => {
-//     //     console.log("There was an error generating the proper GUID on the server", error);
-//     // });
-// }
 
 }
