@@ -48,7 +48,7 @@ export class FinancialGoalsComponent implements OnInit {
 
   items : [];
   workTodo: string;
-  todos:  ToDo[] = [{id:1,workTodo: "Pay off loans", isCompleted: false},{id:2,workTodo: "Buy a car", isCompleted: false},{id:3,workTodo: "Buy a PC", isCompleted: false}];
+  todos:  ToDo[] = [];
   inEditMode: boolean = false;
   currentTodoId: number;
   currentTodoStateWorkTodo: string;
@@ -66,7 +66,15 @@ export class FinancialGoalsComponent implements OnInit {
     this.workTodo = '';
     this.http.get('/api/user-profile/' + this.uid).subscribe((data:any) => {
         this.userProfileId = data.userProfileId;
-        console.log(this.userProfileId);
+        this.http.get('/api/financial-goals/' + this.userProfileId).subscribe((data:any) => {
+          console.log(data);
+          for(var i = 0; i < data.length; i++) {
+            var obj = data[i];
+            this.todos.push({id: i+1, workTodo: obj.Name, isCompleted: obj.isCompleted});
+        }
+        }, error => {
+            console.log("There was an error generating the proper GUID on the server", error);
+        });
       }, error => {
           console.log("There was an error generating the proper GUID on the server", error);
       });

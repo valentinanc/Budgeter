@@ -37,6 +37,18 @@ class FinancialGoalsService
 		let financialGoal = new FinancialGoalsModel(goal.name, goal.isCompleted, goal.createdAt, goal.updatedAt, goal.userProfileId);
 		return financialGoal;
 
+    }
+    
+    static async getFinancialGoals(data)
+	{
+		console.log("data: ", data);
+		let financialGoals = await FinancialGoals.findAll({
+			where: {
+				userProfileId: data,
+			}
+		})
+		console.log("test: ", financialGoals);
+		return financialGoals;
 	}
 }
 

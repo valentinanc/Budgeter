@@ -24,5 +24,21 @@ router.post('/', async (req, res, next) =>
 	}
 });
 
+/* get fin goal for a given user profile id */
+router.get('/:id', async (req, res, next) =>
+{
+	try
+	{
+		const financialGoals = await FinancialGoalsService.getFinancialGoals(req.params.id);
+        console.log(financialGoals);
+		return res.json(financialGoals);
+	}
+	catch(err)
+	{
+		// unexpected error
+		return next(err);
+	}
+});
+
 
 module.exports = router;
