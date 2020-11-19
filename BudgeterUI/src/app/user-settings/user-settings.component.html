@@ -3,7 +3,7 @@
                         <br>
                         <mat-tab-group mat-align-tabs="center">   
                                 <mat-tab label="User Settings"> 
-                                    <div class="row">
+                                    <div class="row animate__animated animate__fadeIn">
                                         <div class="form-group col-md-7">
                                             <body>
                                         <div class="container">
@@ -16,30 +16,31 @@
                                                 <div class="card-body">
                                             
                                                 <h2 class="headercen">Settings</h2>
-                                                <form [formGroup]="userForm" (ngSubmit)="updatePassword()" class="form-signin" ngNativeValidate>
+                                                <div *ngIf="fname!='undefined'">
+                                                    <form [formGroup]="userForm" (ngSubmit)="updatePassword()" class="form-signin" ngNativeValidate>
                                     
                                                     <div class="form-row">
                                                         <div class="form-group col-md-6">
-                                                        <input type="text" class="form-control" formControlName="first_name" id="first_name" readonly>
+                                                        <input type="text" class="form-control" formControlName="first_name" id="first_name" disabled>
                                                         </div>
                                                         <div class="form-group col-md-6">
-                                                        <input type="text" class="form-control" formControlName="last_name" id="last_name" readonly>
+                                                        <input type="text" class="form-control" formControlName="last_name" id="last_name" disabled>
                                                         </div>
                                                         <hr>
                                                     </div>
                                                 
                                                     <div class="form-group">
-                                                        <input type="email" class="form-control" formControlName="email" id="email" readonly>
+                                                        <input type="email" class="form-control" formControlName="email" id="email" disabled>
                                                     </div>
                                         
                                                     <hr>
                                                     <div class="form-row">              
                                                         <div class="form-group col-md-6">
-                                                        <input type="password" id="password" class="form-control" formControlName="password" placeholder="New Password" required>
+                                                        <input type="password" id="password" class="form-control" formControlName="password" placeholder="New Password" >
                                                         </div>
                                         
                                                         <div class="form-group col-md-6">
-                                                        <input type="password" id="password_confirm" class="form-control" formControlName="password_confirm" placeholder="Confirm Password" required>
+                                                        <input type="password" id="password_confirm" class="form-control" formControlName="password_confirm" placeholder="Confirm Password" >
                                                         </div>    
                                                     </div>
                                                     
@@ -64,7 +65,8 @@
                                                     </div>
                                         
                                                     <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Save Changes</button>
-                                                </form>
+                                                    </form>
+                                                </div>
                                                 </div>
                                             </div>
                                             </div>
@@ -98,7 +100,7 @@
                                 <mat-tab label="Profile Information"> 
                                     <body>
                                         <div class="container">
-                                        <div class="row">
+                                        <div class="row animate__animated animate__animated animate__fadeIn" >
                                             <div class="col-lg-10 col-xl-9 mx-auto">
                                             <div class="card card-signin flex-row my-5">
                                                 <div class="card-img-left d-none d-md-flex">

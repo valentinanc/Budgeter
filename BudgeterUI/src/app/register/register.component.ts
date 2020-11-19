@@ -12,6 +12,7 @@ import { Router } from "@angular/router";
 export class RegisterComponent implements OnInit {
 	registered = false;
 	submitted = false;
+	previouselyRegistered = false;
 	userForm: FormGroup;
 	guid: string;
 	serviceErrors:any = {};
@@ -53,6 +54,10 @@ export class RegisterComponent implements OnInit {
   {
 	return (this.userForm.value.password_confirm == this.userForm.value.password)
   }
+
+  registeredUser(){
+	  return this.submitted && this.previouselyRegistered
+  }
   ngOnInit()
   {
   	this.userForm = this.formBuilder.group({
@@ -68,20 +73,26 @@ export class RegisterComponent implements OnInit {
   {
 	this.registered = true;
   	this.submitted = true;
-	  
+
 	if(this.userForm.status == "VALID" && this.passwordCheck())
   	{
 		let data: any = Object.assign({guid: this.guid}, this.userForm.value);
 		this.http.post('/api/customer/register', data).subscribe((data:any) => {
-		if (data != null){
+		console.log(data.customer)
+		if (data.customer != null){
+			this.registered = true; 
 			let path = '/user/' + data.customer.uid;	
 			this.router.navigate([path]);
+		}
+		console.log(data.customer == null)
+		if(data.customer == null){
+			this.previouselyRegistered = true;
 		}	
 	  	}, error =>
 		{
 			this.serviceErrors = error.error.error;
 		});
-		this.registered = true; 
+		
   	}		
   }
 

@@ -6,8 +6,8 @@
                     <mat-label>Financial Goal</mat-label>
                     <input matInput type="text" id="workTodo" name="workTodo" [(ngModel)]="workTodo" (keyup.escape)="cancelEdit()" autofocus>
                   </mat-form-field>
-                  <button mat-raised-button color="primary" style="height: 70%;" (click)="addEditTodo()" (keyup.enter)="addEditTodo()" type="submit">{{inEditMode==false?"ADD":"UPDATE"}} </button>
-                  <button mat-raised-button *ngIf="inEditMode==true" color="warn" style="height: 70%;" (click)="cancelEdit()" type="button">Cancel</button>
+                  <button mat-raised-button color="primary" style="height: 50%;" (click)="addEditTodo()" (keyup.enter)="addEditTodo()" type="submit">{{inEditMode==false?"ADD":"Update&nbsp;"}}</button>
+                  <button mat-raised-button *ngIf="inEditMode==true" color="warn" style="height: 50%;" (click)="cancelEdit()" type="button">Cancel&nbsp;</button>
                 </div>
             </div>
         </form>

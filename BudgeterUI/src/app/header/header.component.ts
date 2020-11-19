@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { AddItemsComponent } from '../add-items/add-items.component';
+import { HttpClient } from "@angular/common/http";
 
 @Component({
   selector: 'header',
@@ -10,22 +11,34 @@ import { AddItemsComponent } from '../add-items/add-items.component';
 })
 export class HeaderComponent implements OnInit {
   checked = true;
-  uid = -1;
-  constructor(private dialog: MatDialog, private route: ActivatedRoute) {
-    console.log(this.route.url)
+  uid: string;
+  userProfileId: string;
+  fname:string;
+  lname:string;
+  constructor(private http: HttpClient,private dialog: MatDialog, private route: ActivatedRoute) {
     this.uid = this.route.url["value"][1]["path"];
-    console.log("uid: ", this.uid)
-   }
+  }
+  
   openDialog(): void {
     const dialogRef = this.dialog.open(AddItemsComponent, {
     });
-
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
   }
 
   ngOnInit(): void {
+    this.fname = '';
+    this.lname = '';
+    this.http.get('/api/customer/' + this.uid).subscribe((data:any) => {
+        this.fname = data.customer.FName;
+        this.lname = data.customer.LName
+        console.log("fname",this.fname)
+        console.log("lname",this.lname)
+        
+      }, error => {
+          console.log("There was an error retrieving the user profile id", error);
+      });
   } 
 
 }

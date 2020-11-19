@@ -52,7 +52,7 @@ app.use('/api/budget', budget);
 
 const db = require("./config/db.initialize.js");
 
-// DROPS ALL TABLE RECORDS & RECREATES TABLES
+//DROPS ALL TABLE RECORDS & RECREATES TABLES
 // db.sequelize.query('SET FOREIGN_KEY_CHECKS = 0')
 // .then(function(){
 //     return db.sequelize.sync({ force: true });

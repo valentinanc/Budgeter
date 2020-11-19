@@ -19,21 +19,47 @@
 	</div>
 
 	<mat-grid-list cols="2" rowHeight="2:1" [gutterSize]="'5%'">
-		<mat-grid-tile>
-			<div class="card-header">
+		<mat-grid-tile >
+			<mat-card class="card-header"  style="left:90px">
+				<div class="row">
+					<div class="col-sm-7">
+						<h5>Budget Overview</h5>
+					</div>
+				</div>
+				<div class="col-sm-5">
+					<p-chart type="bar" [data]="data" width="31vw" height="17vw" [options]="options"></p-chart>
+				</div>
+			<!-- <div class="card-header">
 				<h5>Budget Overview</h5>
-				<p-chart type="bar" [data]="data" width="31vw" height="17vw" [options]="options"></p-chart>
-			</div>
-		</mat-grid-tile>
-		<mat-grid-tile>
-			<mat-card class="card-header">
-				<h5>Financial Goals</h5>
-				<br>
-				<financial-goals></financial-goals>
+				
+			</div> -->
 			</mat-card>
 		</mat-grid-tile>
+
+
+
 		<mat-grid-tile>
-			<mat-card class="card-header">
+			<mat-card class="inline-block card-header"  style="right:90px">
+				<div class="row">
+					<div class="col-sm-7">
+						<h5>Financial Goals</h5>
+					</div>
+				</div>
+				<br>
+
+					<financial-goals></financial-goals>
+				
+			<!-- <div class="card-header">
+				<h5>Budget Overview</h5>
+				
+			</div> -->
+			</mat-card>
+		</mat-grid-tile>
+
+
+
+		<mat-grid-tile>
+			<mat-card class="card-header"  style="left:90px">
 				<div class="row">
 					<div class="col-sm-7">
 						<h5>Budget Breakdown</h5>
@@ -63,7 +89,7 @@
 			</mat-card>
 		</mat-grid-tile>
 		<mat-grid-tile>
-			<mat-card class="card-header">
+			<mat-card class="card-header"  style="right:90px">
 				<h5>Budget Table</h5>
 					<div id="table" class="table-editable">
 						<table class="table table-striped table-responsive-md btn-table">

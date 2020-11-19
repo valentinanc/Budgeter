@@ -82,9 +82,14 @@ export class BudgetComponent implements OnInit {
   // end budget breakdown
 
   constructor(private dialog: MatDialog) { }
-
-  ngOnInit(): void {
-
+  breakpoint: number;
+  
+  ngOnInit() {
+    this.breakpoint = (window.innerWidth <= 600) ? 1 : 2;
+  }
+  
+  onResize(event) {
+    this.breakpoint = (event.target.innerWidth <= 600) ? 1 : 2;
   }
 
   updateList(id: number, property: string, event: any) {

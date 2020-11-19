@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 
 export class LoginComponent implements OnInit {
   guid: string;
+  submitted = false;
+  usernotRegistered = false;
   userForm: FormGroup;
   constructor(private formBuilder: FormBuilder, private http: HttpClient,private router: Router) {
     // this.http.get('/api/generate_uid').subscribe((data:any) => {
@@ -27,18 +29,26 @@ export class LoginComponent implements OnInit {
   		password: ['', [Validators.required, Validators.minLength(5)]]
   	});
   }
+  incorrect(){
+    return this.submitted && this.usernotRegistered
+  }
 
   login(){
+    this.submitted = true
+    
     let data: any = Object.assign({guid: this.guid}, this.userForm.value);
 
     this.http.post('/api/customer/login/', data).subscribe((data:any) => {
         
       if (data.customer == null){
-        alert("too bad too sad")
+        this.usernotRegistered = true
+        this.incorrect()
       }
-      let path = '/user/' + data.customer.id;
-
-      this.router.navigate([path]);
+      else{
+        let path = '/user/' + data.customer.id;
+        this.router.navigate([path]);
+      }
+      
     });
   }
 
