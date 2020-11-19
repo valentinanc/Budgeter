@@ -26,9 +26,6 @@ export class UserSettingsComponent implements OnInit {
   imgURL: any;
   public message: string;
   uid: string;
-  firstName: string;
-  lastName: string;
-  cemail: string;
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router, private route: ActivatedRoute)
   {
@@ -72,14 +69,11 @@ export class UserSettingsComponent implements OnInit {
   ngOnInit()
   {
     this.http.get('/api/customer/' + this.uid).subscribe((data:any) => {
-      this.firstName = data.customer.FName;
-      this.lastName = data.customer.LName;
-      this.cemail = data.customer.Email;
       
       this.userForm = this.formBuilder.group({
-        first_name: [this.firstName, [Validators.required, Validators.maxLength(50)]],
-        last_name: [this.lastName, [Validators.required, Validators.maxLength(50)]],
-        email: [this.cemail, [Validators.required, Validators.email, Validators.maxLength(75)]],
+        first_name: [data.customer.FName],
+        last_name: [data.customer.LName],
+        email: [data.customer.Email],
         password: ['', [Validators.required, Validators.minLength(5)]],
         password_confirm: ['', [Validators.required, Validators.minLength(5)]]   
       });
