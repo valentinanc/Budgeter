@@ -10,8 +10,6 @@ const financialGoalVSchema = {
 		id: {type: "string", min: 3},
 		name: { type: "string", min: 1, max: 100, pattern: namePattern},
 		is_completed: { type: "Number"},
-		// created_at: { type: "string", max: 75 },
-        // updated_at: { type: "string", min: 2, max: 50},
         user_profile_id: { type: "string", min: 2, max: 50}
 	};
 
@@ -57,6 +55,19 @@ class FinancialGoalsService
 		let financialGoal = await FinancialGoals.destroy({
 			where: {
 				id: data,
+			}
+		})
+		console.log("test: ", financialGoal);
+		return financialGoal;
+    }
+    
+    static async editFinancialGoal(data)
+	{
+		console.log("data: ", data);
+		let financialGoal = await FinancialGoals.update(
+            { Name: data["name"],  IsCompleted: data["isCompleted"]}, {
+			where: {
+                id: data["id"]
 			}
 		})
 		console.log("test: ", financialGoal);

@@ -89,9 +89,10 @@ export class FinancialGoalsComponent implements OnInit {
     
   }
   updateRowData(row_obj){
-    this.dataSource = this.dataSource.filter((value,key)=>{
+    console.log(this.todos);
+    this.todos = this.todos.filter((value,key)=>{
       if(value.id == row_obj.id){
-        value.name = row_obj.name;
+        value.workTodo = row_obj.workTodo;
       }
       return true;
     });
@@ -144,9 +145,21 @@ addEditTodo(): void {
   if(this.workTodo !== "" && this.inEditMode === true && this.currentTodoStateWorkTodo !== this.workTodo)
   {
     const payload = {
+        id: this.currentTodoId,
         workTodo: this.workTodo,
         isCompleted: this.currentTodoStateisCompleted,
     };
+    this.updateRowData(payload);
+
+    console.log(payload);
+
+    let data: any = Object.assign({name:payload.workTodo}, {isCompleted:payload.isCompleted}, {id: payload.id});
+    this.http.put('/api/financial-goals/', data).subscribe((data:any) => {
+      console.log("good edit fin goal");
+      }, error =>
+    {
+      this.serviceErrors = error.error.error;
+    });
 
     this.cancelEdit();
     
@@ -166,8 +179,12 @@ editTodo(todo: any) {
   this.currentTodoStateisCompleted = todo.isCompleted;
   
   this.workTodo = todo.workTodo;
+  this.todos.filter(function(element){
+    if (element.id == todo.id){
+      element.workTodo = todo.workTodo;
+    }});
   document.getElementById('workTodo').focus();
-  this.todos[todo.id].workTodo = todo.workTodo;
+  // this.todos[id].workTodo = todo.workTodo;
 }
 
 // Delete A ToDo
