@@ -19,4 +19,19 @@ router.get('/:id', async (req, res, next) =>
 	}
 });
 
+router.get('/:id/info', async (req, res, next) =>
+{
+	try
+	{
+		const userProfile = await UserProfileService.getUserProfile(req.params.id);
+        console.log(userProfile);
+		return res.json({ userProfile: userProfile});
+	}
+	catch(err)
+	{
+		// unexpected error
+		return next(err);
+	}
+});
+
 module.exports = router;

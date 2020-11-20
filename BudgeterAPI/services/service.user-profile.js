@@ -14,6 +14,16 @@ class UserProfileService
 		})
 		return profile.id;
 	}
+
+	static async getUserProfile(data)
+	{
+		let profile = await UserProfile.findOne({
+			where: {
+				userId: data,
+			}
+		})
+		return profile;
+	}
 }
 
 module.exports = UserProfileService;

@@ -13,7 +13,8 @@ export class UserSettingsComponent implements OnInit {
   registered = false;
   submitted = false;
   passchange = false;
-	userForm: FormGroup;
+  userForm: FormGroup;
+  aboutForm: FormGroup;
 	guid: string;
   serviceErrors:any = {};
   isLinear = false;
@@ -27,6 +28,7 @@ export class UserSettingsComponent implements OnInit {
   public message: string;
   uid: string;
   fname: string;
+  mbudget: string;
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router, private route: ActivatedRoute)
   {
@@ -82,9 +84,17 @@ export class UserSettingsComponent implements OnInit {
       });
     }
   });
-  
-      
 
+    this.http.get('/api/user-profile/' + this.uid +'/info').subscribe((data:any) => {
+      this.mbudget = data.userProfile.MBudget;
+      
+      this.aboutForm = this.formBuilder.group({
+        budget: [data.userProfile.MBudget], 
+        expenses: [data.userProfile.MExpenses],
+        savings: [data.userProfile.MSavings] 
+      });
+      
+    });
       this.firstFormGroup = this.formBuilder.group({
         firstCtrl: ['', Validators.required]
       });
