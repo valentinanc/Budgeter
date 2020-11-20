@@ -6,13 +6,13 @@ module.exports = (sequelize, Sequelize) => {
         primaryKey: true,
       },
       MBudget: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DOUBLE
       },
       MExpenses: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DOUBLE
       },
       MSavings: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DOUBLE
       },
     }, {});
     UserProfile.beforeCreate(user_profile => user_profile.id = uuidv4());

@@ -16,21 +16,21 @@
                                                 <div class="card-body">
                                             
                                                 <h2 class="headercen">Settings</h2>
-                                                <div *ngIf="fname!='undefined'">
+                                                <div>
                                                     <form [formGroup]="userForm" (ngSubmit)="updatePassword()" class="form-signin" ngNativeValidate>
                                     
                                                     <div class="form-row">
                                                         <div class="form-group col-md-6">
-                                                        <input type="text" class="form-control" formControlName="first_name" id="first_name" disabled>
+                                                        <input type="text" class="form-control" formControlName="first_name" id="first_name" readonly>
                                                         </div>
                                                         <div class="form-group col-md-6">
-                                                        <input type="text" class="form-control" formControlName="last_name" id="last_name" disabled>
+                                                        <input type="text" class="form-control" formControlName="last_name" id="last_name" readonly>
                                                         </div>
                                                         <hr>
                                                     </div>
                                                 
                                                     <div class="form-group">
-                                                        <input type="email" class="form-control" formControlName="email" id="email" disabled>
+                                                        <input type="email" class="form-control" formControlName="email" id="email" readonly>
                                                     </div>
                                         
                                                     <hr>
@@ -108,23 +108,23 @@
                                                 </div>
                                                 <div class="card-body">
                                                 <h2 class="headercen">About You</h2>
-                                                <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="form-signin">
+                                                <form [formGroup]="aboutForm" (ngSubmit)="updateAboutYou()" class="form-signin">
                                     
                                                 <div class="form-group">
                                                     <h2 class="headerleft2">What is your monthly budget?</h2>
                                                     <mat-form-field>
                                                         <mat-label>Monthly Budget</mat-label>
-                                                        <input matInput class="form-control" placeholder="$500">
+                                                        <input matInput class="form-control" formControlName="budget">
                                                       </mat-form-field>
                                                       <h2 class="headerleft2">What is your monthly expenses?</h2>
                                                       <mat-form-field>
                                                           <mat-label>Monthly Expenses</mat-label>
-                                                          <input matInput class="form-control" placeholder="$500">
+                                                          <input matInput class="form-control" formControlName="expenses">
                                                         </mat-form-field>
                                                         <h2 class="headerleft2">What is your monthly savings?</h2>
                                                         <mat-form-field>
                                                             <mat-label>Monthly Savings</mat-label>
-                                                            <input matInput class="form-control" placeholder="$500">
+                                                            <input matInput class="form-control" formControlName="savings">
                                                           </mat-form-field>
                                                     <h2 class="headerleft2">What categories do you spend your money on?</h2>
                                                     <section class="example-section">

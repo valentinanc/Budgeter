@@ -13,7 +13,8 @@ export class UserSettingsComponent implements OnInit {
   registered = false;
   submitted = false;
   passchange = false;
-	userForm: FormGroup;
+  userForm: FormGroup;
+  aboutForm: FormGroup;
 	guid: string;
   serviceErrors:any = {};
   isLinear = false;
@@ -26,7 +27,7 @@ export class UserSettingsComponent implements OnInit {
   imgURL: any;
   public message: string;
   uid: string;
-  fname: string;
+ 
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router, private route: ActivatedRoute)
   {
@@ -69,31 +70,50 @@ export class UserSettingsComponent implements OnInit {
   }
   ngOnInit()
   {
+    this.userForm = this.formBuilder.group({
+      first_name: [''],
+      last_name: [''],
+      email: [''],
+      password: ['', [Validators.required, Validators.minLength(5)]],
+      password_confirm: ['', [Validators.required, Validators.minLength(5)]]   
+    });
+
+    this.aboutForm = this.formBuilder.group({
+      budget: [''],
+      expenses: [''],
+      savings: [''],
+      id: [this.uid]
+    });
+
     this.http.get('/api/customer/' + this.uid).subscribe((data:any) => {
-    this.fname = data.customer.FName;
-
-    if(data.customer.FName != undefined && data.customer.LName != undefined){
       this.userForm = this.formBuilder.group({
-        first_name: [ data.customer.FName],
-        last_name: [data.customer.LName],
-        email: [data.customer.Email],
-        password: ['', [Validators.required, Validators.minLength(5)]],
-        password_confirm: ['', [Validators.required, Validators.minLength(5)]]   
+        'first_name': [data.customer.FName==undefined?'': data.customer.FName],
+        'last_name': [data.customer.LName==undefined?'': data.customer.LName],
+        'email': [data.customer.Email==undefined?'': data.customer.Email],
+        'password': [''],
+        'password_confirm': ['']
       });
-    }
-  });
-  
-      
+    });
 
-      this.firstFormGroup = this.formBuilder.group({
-        firstCtrl: ['', Validators.required]
+    this.http.get('/api/user-profile/' + this.uid +'/info').subscribe((data:any) => {
+      this.aboutForm = this.formBuilder.group({
+        'budget': [data.userProfile.MBudget==undefined?'': data.userProfile.MBudget.toFixed(2)],
+        'expenses': [data.userProfile.MExpenses==undefined?'': data.userProfile.MExpenses.toFixed(2)],
+        'savings': [data.userProfile.MSavings==undefined?'': data.userProfile.MSavings.toFixed(2)],
+        'id': [this.uid]
       });
-      this.secondFormGroup = this.formBuilder.group({
-        secondCtrl: ['', Validators.required]
-      });
+    });
+
+      // this.firstFormGroup = this.formBuilder.group({
+      //   firstCtrl: ['', Validators.required]
+      // });
+      // this.secondFormGroup = this.formBuilder.group({
+      //   secondCtrl: ['', Validators.required]
+      // });
     
     
   }
+
 
   updatePassword(){
     this.submitted = true;
@@ -113,6 +133,24 @@ export class UserSettingsComponent implements OnInit {
         this.router.navigate([path]);
       });
     }
+  }
+
+  updateAboutYou(){
+    
+      let data: any = Object.assign({guid: this.guid}, this.aboutForm.value);
+
+      this.http.post('/api/user-profile/about-you-settings/', data).subscribe((data:any) => {
+          
+        if (data.userProfile == null){
+          alert("Something went wrong.")
+        } else{
+          this.passchange = true;
+        }
+        let path = '/user/' + data.userProfile.id + '/settings/';
+
+        this.router.navigate([path]);
+      });
+
   }
 
   onSubmit()
