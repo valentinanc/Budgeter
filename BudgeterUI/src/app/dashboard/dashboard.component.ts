@@ -16,6 +16,8 @@ import {MatIconModule} from '@angular/material/icon';
 import { ChartsModule } from 'ng2-charts';
 import {MatCardModule} from '@angular/material/card';
 import {MatTabsModule} from '@angular/material/tabs';
+import { Subscription } from 'rxjs';
+import { SharedService } from '../services/service.component';
 
 
 @Component({
@@ -32,10 +34,27 @@ export class DashboardComponent implements OnInit {
 		last_name: "Doe", 
 		email: "email@email.com", 
 		password: "Idasn2x2#"});
-	checker: boolean;
-	invokeFirstComponentFunction = new EventEmitter();  
-	constructor(private http: HttpClient, private route: ActivatedRoute, private matDialog: MatDialog) {
-		
+	clickEventsubscription:Subscription;  
+	constructor(private http: HttpClient, private route: ActivatedRoute, private matDialog: MatDialog, private sharedService:SharedService) {
+		let id = this.route.url["value"][1]["path"];
+		this.clickEventsubscription = this.sharedService.getClickEvent().subscribe(()=>{
+			this.http.get('/api/user-profile/getProfile/' + id).subscribe((data:any) => {
+				console.log("data dashboard: ", data)
+				this.tBudget = data.MBudget;
+				this.mExpenses = data.MExpenses;
+				this.mSavings = data.MSavings;
+				this.rBudget = this.tBudget-this.mExpenses-this.mSavings;
+			});
+		})
+	}
+
+	private subscriber: any;
+	tBudget = 0;
+	rBudget = 0;
+	mExpenses = 0;
+	mSavings = 0;
+	ngOnInit()
+	{
 		let id = this.route.url["value"][1]["path"];
 		this.http.get('/api/user-profile/getProfile/' + id).subscribe((data:any) => {
 			console.log("data dashboard: ", data)
@@ -43,22 +62,11 @@ export class DashboardComponent implements OnInit {
 			this.mExpenses = data.MExpenses;
 			this.mSavings = data.MSavings;
 			this.rBudget = this.tBudget-this.mExpenses-this.mSavings;
+			if (this.tBudget == 0 && this.mExpenses == 0 && this.mSavings == 0 && this.rBudget == 0) {
+				this.openDialog();	
+			}
 		});
 	}
-
-	private subscriber: any;
-	tBudget: any;
-	rBudget: any;
-	mExpenses: any;
-	mSavings: any;
-	ngOnInit()
-	{
-		this.checker=true;
-		if (this.checker) {
-			this.openDialog();	
-		}
-	}
-	
 	openDialog() {
 		const dialogConfig = new MatDialogConfig();
 		this.matDialog.open(AboutYouComponent, dialogConfig);

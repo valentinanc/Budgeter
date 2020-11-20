@@ -53,7 +53,7 @@ export class AboutYouComponent implements OnInit {
         categoriesSelected.push({name: this.userForm.value["oCategory"], completed: true})
       }
       if (this.userForm.value["ofGoal"] != ''){
-        categoriesSelected.push({name: this.userForm.value["ofGoal"], completed: true})
+        goalsSelected.push({name: this.userForm.value["ofGoal"], completed: true})
       }
       console.log("categories selected: ", categoriesSelected)
       console.log("goals selected: ", goalsSelected)
