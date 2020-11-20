@@ -24,6 +24,17 @@ class UserProfileService
 		})
 		return profile;
 	}
+
+	static async updateAboutYou(data)
+	{
+		let profile = await UserProfile.findOne({
+			where: {
+				userId: data["id"],
+			}
+		})
+		profile.update({MBudget: data["budget"], MExpenses: data["expenses"], MSavings: data["savings"]})
+		return profile;
+	}
 }
 
 module.exports = UserProfileService;

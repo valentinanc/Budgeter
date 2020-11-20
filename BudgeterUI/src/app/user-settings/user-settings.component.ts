@@ -81,7 +81,8 @@ export class UserSettingsComponent implements OnInit {
     this.aboutForm = this.formBuilder.group({
       budget: [''],
       expenses: [''],
-      savings: ['']
+      savings: [''],
+      id: [this.uid]
     });
 
     this.http.get('/api/customer/' + this.uid).subscribe((data:any) => {
@@ -96,9 +97,10 @@ export class UserSettingsComponent implements OnInit {
 
     this.http.get('/api/user-profile/' + this.uid +'/info').subscribe((data:any) => {
       this.aboutForm = this.formBuilder.group({
-        'budget': [data.userProfile.MBudget==undefined?'': data.userProfile.MBudget],
-        'expenses': [data.userProfile.MExpenses==undefined?'': data.userProfile.MExpenses],
-        'savings': [data.userProfile.MSavings==undefined?'': data.userProfile.MSavings]
+        'budget': [data.userProfile.MBudget==undefined?'': data.userProfile.MBudget.toFixed(2)],
+        'expenses': [data.userProfile.MExpenses==undefined?'': data.userProfile.MExpenses.toFixed(2)],
+        'savings': [data.userProfile.MSavings==undefined?'': data.userProfile.MSavings.toFixed(2)],
+        'id': [this.uid]
       });
     });
 
@@ -131,6 +133,24 @@ export class UserSettingsComponent implements OnInit {
         this.router.navigate([path]);
       });
     }
+  }
+
+  updateAboutYou(){
+    
+      let data: any = Object.assign({guid: this.guid}, this.aboutForm.value);
+
+      this.http.post('/api/user-profile/about-you-settings/', data).subscribe((data:any) => {
+          
+        if (data.userProfile == null){
+          alert("Something went wrong.")
+        } else{
+          this.passchange = true;
+        }
+        let path = '/user/' + data.userProfile.id + '/settings/';
+
+        this.router.navigate([path]);
+      });
+
   }
 
   onSubmit()

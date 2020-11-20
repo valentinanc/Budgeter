@@ -34,4 +34,26 @@ router.get('/:id/info', async (req, res, next) =>
 	}
 });
 
+router.post('/about-you-settings/', async (req, res, next) =>
+{
+	const body = req.body;
+
+	try
+	{
+		const userProfile = await UserProfileService.updateAboutYou(body);
+		console.log(userProfile);
+		return res.status(201).json({ userProfile: userProfile });
+	}
+	catch(err)
+	{
+		if (err.name === 'ValidationError')
+		{
+        	return res.status(400).json({ error: err.message });
+		}
+
+		// unexpected error
+		return next(err);
+	}
+});
+
 module.exports = router;
