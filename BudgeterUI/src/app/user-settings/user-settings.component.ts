@@ -27,8 +27,7 @@ export class UserSettingsComponent implements OnInit {
   imgURL: any;
   public message: string;
   uid: string;
-  fname: string;
-  mbudget: string;
+ 
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router, private route: ActivatedRoute)
   {
@@ -71,39 +70,48 @@ export class UserSettingsComponent implements OnInit {
   }
   ngOnInit()
   {
-    this.http.get('/api/customer/' + this.uid).subscribe((data:any) => {
-    this.fname = data.customer.FName;
+    this.userForm = this.formBuilder.group({
+      first_name: [''],
+      last_name: [''],
+      email: [''],
+      password: ['', [Validators.required, Validators.minLength(5)]],
+      password_confirm: ['', [Validators.required, Validators.minLength(5)]]   
+    });
 
-    if(data.customer.FName != undefined && data.customer.LName != undefined){
+    this.aboutForm = this.formBuilder.group({
+      budget: [''],
+      expenses: [''],
+      savings: ['']
+    });
+
+    this.http.get('/api/customer/' + this.uid).subscribe((data:any) => {
       this.userForm = this.formBuilder.group({
-        first_name: [ data.customer.FName],
-        last_name: [data.customer.LName],
-        email: [data.customer.Email],
-        password: ['', [Validators.required, Validators.minLength(5)]],
-        password_confirm: ['', [Validators.required, Validators.minLength(5)]]   
+        'first_name': [data.customer.FName==undefined?'': data.customer.FName],
+        'last_name': [data.customer.LName==undefined?'': data.customer.LName],
+        'email': [data.customer.Email==undefined?'': data.customer.Email],
+        'password': [''],
+        'password_confirm': ['']
       });
-    }
-  });
+    });
 
     this.http.get('/api/user-profile/' + this.uid +'/info').subscribe((data:any) => {
-      this.mbudget = data.userProfile.MBudget;
-      
       this.aboutForm = this.formBuilder.group({
-        budget: [data.userProfile.MBudget], 
-        expenses: [data.userProfile.MExpenses],
-        savings: [data.userProfile.MSavings] 
+        'budget': [data.userProfile.MBudget==undefined?'': data.userProfile.MBudget],
+        'expenses': [data.userProfile.MExpenses==undefined?'': data.userProfile.MExpenses],
+        'savings': [data.userProfile.MSavings==undefined?'': data.userProfile.MSavings]
       });
-      
     });
-      this.firstFormGroup = this.formBuilder.group({
-        firstCtrl: ['', Validators.required]
-      });
-      this.secondFormGroup = this.formBuilder.group({
-        secondCtrl: ['', Validators.required]
-      });
+
+      // this.firstFormGroup = this.formBuilder.group({
+      //   firstCtrl: ['', Validators.required]
+      // });
+      // this.secondFormGroup = this.formBuilder.group({
+      //   secondCtrl: ['', Validators.required]
+      // });
     
     
   }
+
 
   updatePassword(){
     this.submitted = true;

@@ -16,21 +16,21 @@
                                                 <div class="card-body">
                                             
                                                 <h2 class="headercen">Settings</h2>
-                                                <div *ngIf="fname!='undefined'">
+                                                <div>
                                                     <form [formGroup]="userForm" (ngSubmit)="updatePassword()" class="form-signin" ngNativeValidate>
                                     
                                                     <div class="form-row">
                                                         <div class="form-group col-md-6">
-                                                        <input type="text" class="form-control" formControlName="first_name" id="first_name" disabled>
+                                                        <input type="text" class="form-control" formControlName="first_name" id="first_name" readonly>
                                                         </div>
                                                         <div class="form-group col-md-6">
-                                                        <input type="text" class="form-control" formControlName="last_name" id="last_name" disabled>
+                                                        <input type="text" class="form-control" formControlName="last_name" id="last_name" readonly>
                                                         </div>
                                                         <hr>
                                                     </div>
                                                 
                                                     <div class="form-group">
-                                                        <input type="email" class="form-control" formControlName="email" id="email" disabled>
+                                                        <input type="email" class="form-control" formControlName="email" id="email" readonly>
                                                     </div>
                                         
                                                     <hr>
