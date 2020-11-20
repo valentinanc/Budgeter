@@ -1,3 +1,4 @@
+import { SharedService } from './services/service.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -85,7 +86,6 @@ const routes: Routes = [
     AboutYouComponent,
     AddItemsComponent,
     EditBudgetComponent,
-
   ],
   imports: [
     // AngularFontAwesomeModule,
@@ -118,9 +118,9 @@ const routes: Routes = [
     MDBBootstrapModule.forRoot(),
     ScrollingModule,
     MatSelectModule,
-    ChartModule, 
+    ChartModule,
   ],
-  providers: [],
+  providers: [ SharedService ],
   bootstrap: [AppComponent],
   entryComponents: [AboutYouComponent]
 

@@ -7,6 +7,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { SharedService } from '../services/service.component';
 @Component({
   selector: 'about-you',
   templateUrl: './about-you.component.html',
@@ -31,7 +32,7 @@ export class AboutYouComponent implements OnInit {
     {name: 'Start a business', completed: false},
     {name: 'Buy a car', completed: false}
   ]
-  constructor(public dialogRef: MatDialogRef<AboutYouComponent>, private http: HttpClient, private formBuilder: FormBuilder, private router: Router) { }
+  constructor(public dialogRef: MatDialogRef<AboutYouComponent>, private http: HttpClient, private formBuilder: FormBuilder, private router: Router, private sharedService: SharedService) { }
 
   ngOnInit(): void {
     this.userForm = this.formBuilder.group({
@@ -82,7 +83,7 @@ export class AboutYouComponent implements OnInit {
           });
         }
       });
-      
+      this.sharedService.sendClickEvent();
     }
   }
 }

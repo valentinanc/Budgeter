@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { AboutYouComponent } from '../about-you/about-you.component';
@@ -25,7 +25,7 @@ import {MatTabsModule} from '@angular/material/tabs';
   encapsulation: ViewEncapsulation.None
 })
 export class DashboardComponent implements OnInit {
-
+	@Output() myEvent = new EventEmitter();
 	user: UserInfoModel = new UserInfoModel({guid: "D21ds12x", 
 		uid: "cust2dsa12dsa", 
 		first_name: "John", 
@@ -33,29 +33,30 @@ export class DashboardComponent implements OnInit {
 		email: "email@email.com", 
 		password: "Idasn2x2#"});
 	checker: boolean;
+	invokeFirstComponentFunction = new EventEmitter();  
 	constructor(private http: HttpClient, private route: ActivatedRoute, private matDialog: MatDialog) {
-
+		
+		let id = this.route.url["value"][1]["path"];
+		this.http.get('/api/user-profile/getProfile/' + id).subscribe((data:any) => {
+			console.log("data dashboard: ", data)
+			this.tBudget = data.MBudget;
+			this.mExpenses = data.MExpenses;
+			this.mSavings = data.MSavings;
+			this.rBudget = this.tBudget-this.mExpenses-this.mSavings;
+		});
 	}
 
 	private subscriber: any;
-
+	tBudget: any;
+	rBudget: any;
+	mExpenses: any;
+	mSavings: any;
 	ngOnInit()
 	{
 		this.checker=true;
 		if (this.checker) {
 			this.openDialog();	
 		}
-		// this.subscriber = this.route.params.subscribe(params => {
-	       
-	    //    this.http.get('/api/customer/' + params.uid).subscribe((data:any) => {
-
-		// 		this.user = new UserInfoModel(data.customer);
-		// 		this.checker=true;
-		// 		if (this.checker){
-		// 			this.openDialog();	
-		// 		}
-		//     });
-	    // });
 	}
 	
 	openDialog() {

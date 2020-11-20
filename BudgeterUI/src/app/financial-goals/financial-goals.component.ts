@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, IterableDiffers, KeyValueDiffers, OnInit, ViewChild } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSliderModule } from '@angular/material/slider';
@@ -14,10 +14,11 @@ import {MatTableModule} from '@angular/material/table';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { SelectionModel } from '@angular/cdk/collections';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from "@angular/common/http";
 import { ActivatedRoute } from '@angular/router';
+import { SharedService } from '../services/service.component';
 
 export interface UsersData {
   name: string;
@@ -48,22 +49,24 @@ export class FinancialGoalsComponent implements OnInit {
 
   items : [];
   workTodo: string;
-  todos:  ToDo[] = [];
+  todos: ToDo[] = [];
   inEditMode: boolean = false;
   currentTodoId: number;
   currentTodoStateWorkTodo: string;
   currentTodoStateisCompleted : boolean = false;
   uid: string;
   userProfileId: string;
-	serviceErrors:any = {};
-
-  constructor(private http: HttpClient, private route: ActivatedRoute) {
+  serviceErrors:any = {};
+  iterableDiffer: any;
+  differ: any;
+  clickEventsubscription:Subscription;
+  previouslySet = false;
+  constructor(private http: HttpClient, private route: ActivatedRoute, private iterableDiffers: IterableDiffers, private differs: KeyValueDiffers, private sharedService:SharedService) {
+    this.iterableDiffer = iterableDiffers.find([]).create(null);
     this.uid = this.route.url["value"][1]["path"];
-  }
-
-  ngOnInit(): void {
-    this.workTodo = '';
-    this.http.get('/api/user-profile/' + this.uid).subscribe((data:any) => {
+    this.clickEventsubscription = this.sharedService.getClickEvent().subscribe(()=>{
+      this.todos = []
+      this.http.get('/api/user-profile/' + this.uid).subscribe((data:any) => {
         this.userProfileId = data.userProfileId;
         this.http.get('/api/financial-goals/' + this.userProfileId).subscribe((data:any) => {
           for(var i = 0; i < data.length; i++) {
@@ -76,21 +79,29 @@ export class FinancialGoalsComponent implements OnInit {
       }, error => {
           console.log("There was an error retrieving the user profile id", error);
       });
+      this.previouslySet = true;
+    })
+  }
+  
+  ngOnInit(): void {
+    this.workTodo = '';
+    if (!this.previouslySet) {
+      this.http.get('/api/user-profile/' + this.uid).subscribe((data:any) => {
+          this.userProfileId = data.userProfileId;
+          this.http.get('/api/financial-goals/' + this.userProfileId).subscribe((data:any) => {
+            for(var i = 0; i < data.length; i++) {
+              var obj = data[i];
+              this.todos.push({id: obj.id, workTodo: obj.Name, isCompleted: obj.IsCompleted});
+          }
+          }, error => {
+              console.log("There was an error displaying the financial goals", error);
+          });
+        }, error => {
+            console.log("There was an error retrieving the user profile id", error);
+        });
+    }
   }
 
-  ngOnChanges(){
-    console.log("testing changes")
-  }
-
-  addRowData(row_obj){
-    var d = new Date();
-    this.dataSource.push({
-      id:d.getTime(),
-      name:row_obj.name
-    });
-    this.table.renderRows();
-    
-  }
   updateRowData(row_obj){
     this.todos = this.todos.filter((value,key)=>{
       if(value.id == row_obj.id){
@@ -99,12 +110,6 @@ export class FinancialGoalsComponent implements OnInit {
       return true;
     });
   }
-  deleteRowData(row_obj){
-    this.dataSource = this.dataSource.filter((value,key)=>{
-      return value.id != row_obj.id;
-    });
-  }
-
  // Cancel Edit Mode
  cancelEdit() {
   if(this.inEditMode)
@@ -112,9 +117,26 @@ export class FinancialGoalsComponent implements OnInit {
     this.inEditMode = false;
     this.workTodo = '';
   }
-
 }
 
+  ngDoCheck() {
+    // DO NOT RUN THE FOLLOWING CODE; YOU MIGHT BREAK YOUR BROWSER
+    // this.differ = this.differs.find(this.todos).create();
+    // const customerChanges = this.differ.diff(this.todos);
+ 
+    // let changes = this.iterableDiffer.diff(this.todos);
+    // if (changes) {
+    //   var newlist = []
+    //   this.http.get('/api/financial-goals/' + this.userProfileId).subscribe((data:any) => {
+    //     for(var i = 0; i < data.length; i++) {
+    //       var obj = data[i];
+    //       newlist.push({id: obj.id, workTodo: obj.Name, isCompleted: obj.IsCompleted});
+    //     }
+    //     this.todos = newlist;
+    //   });
+    // }
+  }
+  
 // Add A ToDo
 
 addEditTodo(): void {
@@ -162,9 +184,7 @@ addEditTodo(): void {
     });
 
     this.cancelEdit();
-    
   }
-
 }
 
 // Edit A ToDo
@@ -199,6 +219,7 @@ deleteTodo(todo:any, index): void {
     this.serviceErrors = error.error.error;
   });
   // this._todoService.deleteTodo(todo, index);
+  
 }
 
 // Mark A Todo As Completed
