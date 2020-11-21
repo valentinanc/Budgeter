@@ -225,6 +225,7 @@ deleteTodo(todo:any, index): void {
 // Mark A Todo As Completed
 
 markAsCompleted(todo: any, e): void {
+  console.log("helo");
   // console.log(todo.id +" " + todo.isCompleted);
   let data: any = Object.assign({name:todo.workTodo}, {isCompleted:todo.isCompleted}, {id: todo.id});
   this.http.put('/api/financial-goals/', data).subscribe((data:any) => {
