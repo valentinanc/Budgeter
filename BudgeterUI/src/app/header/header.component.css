@@ -22,6 +22,9 @@ nav{
     width: 150px;
 }
 
+#test{
+    background-image: url("amongus.svg");
+}
 #navbarfixed{
     position: fixed !important;
     width: 100%;
