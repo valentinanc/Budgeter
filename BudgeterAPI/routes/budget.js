@@ -10,7 +10,6 @@ router.post('/addCategories/', async (req, res, next) =>
 	try
 	{
 		const categories = await BudgetService.addCategories(body);
-        console.log("categories: ", categories)
 		// created the categories! 
 		return res.status(201).json({ categories: categories });
 	}
@@ -25,6 +24,22 @@ router.post('/addCategories/', async (req, res, next) =>
 		return next(err);
 	}
 });
+
+
+router.get('/getCategories/:id', async (req, res, next) =>
+{
+	try
+	{
+		const categories = await BudgetService.getCategories(req.params.id);
+		return res.json(categories);
+	}
+	catch(err)
+	{
+		// unexpected error
+		return next(err);
+	}
+});
+
 
 
 router.post('/changeBudget/', async (req, res, next) =>

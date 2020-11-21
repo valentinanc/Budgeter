@@ -10,10 +10,8 @@ class BudgetService
 {
 	static async addCategories(data)
 	{
-		console.log("data categories: ", data)
 		let userId = data.userId
 		let userProfileId = await UserProfileService.getUserProfileId(userId)
-		console.log("user profile id: ", userProfileId)
 		let budgetId = await this.getBudgetId(userProfileId)
 		let categories = data.body;
 		let listResult = []
@@ -27,6 +25,18 @@ class BudgetService
 		}
 		return listResult;
 	}
+
+	static async getCategories(data)
+	{
+		let userProfileId = await UserProfileService.getUserProfileId(data)
+		let budgetId = await this.getBudgetId(userProfileId)
+		let categories = await Category.findAll({
+			where: {
+				budgetId: budgetId,
+			}
+		})
+		return categories;
+    }
 
 	static async changeBudget(data)
 	{

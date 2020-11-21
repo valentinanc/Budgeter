@@ -108,7 +108,6 @@ router.get('/:id', async (req, res, next) =>
 	try
 	{
 		const customer = await CustomerService.retrieve(req.params.id);
-		console.log(customer);
 		return res.json({ customer: customer });
 	}
 	catch(err)

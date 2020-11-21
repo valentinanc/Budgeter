@@ -39,7 +39,6 @@ export class DashboardComponent implements OnInit {
 		let id = this.route.url["value"][1]["path"];
 		this.clickEventsubscription = this.sharedService.getClickEvent().subscribe(()=>{
 			this.http.get('/api/user-profile/getProfile/' + id).subscribe((data:any) => {
-				console.log("data dashboard: ", data)
 				this.tBudget = data.MBudget;
 				this.mExpenses = data.MExpenses;
 				this.mSavings = data.MSavings;
@@ -57,7 +56,6 @@ export class DashboardComponent implements OnInit {
 	{
 		let id = this.route.url["value"][1]["path"];
 		this.http.get('/api/user-profile/getProfile/' + id).subscribe((data:any) => {
-			console.log("data dashboard: ", data)
 			this.tBudget = data.MBudget;
 			this.mExpenses = data.MExpenses;
 			this.mSavings = data.MSavings;

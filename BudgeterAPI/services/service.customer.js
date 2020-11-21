@@ -37,7 +37,6 @@ class CustomerService
 						MSavings: 0,
 						userId: userId
 					}).then(profile => {
-						console.log("user profile: ", profile)
 						jsonProfile = JSON.stringify(profile)
 						jsonParseProfile = JSON.parse(jsonProfile)
 						profileId = jsonParseProfile["id"]

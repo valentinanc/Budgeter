@@ -11,7 +11,7 @@ import { SharedService } from '../services/service.component';
 @Component({
   selector: 'about-you',
   templateUrl: './about-you.component.html',
-  styleUrls: ['./about-you.component.css']
+  styleUrls: ['./about-you.component.css']  
 })
 
 export class AboutYouComponent implements OnInit {
@@ -55,9 +55,6 @@ export class AboutYouComponent implements OnInit {
       if (this.userForm.value["ofGoal"] != ''){
         goalsSelected.push({name: this.userForm.value["ofGoal"], completed: true})
       }
-      console.log("categories selected: ", categoriesSelected)
-      console.log("goals selected: ", goalsSelected)
-      console.log("submit form: ", this.userForm.value)
 
       let id = this.router.url.split("/")[2];
       // Add monthly budget/expense/savings
