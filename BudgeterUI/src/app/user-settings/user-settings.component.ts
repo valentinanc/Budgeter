@@ -27,6 +27,7 @@ export class UserSettingsComponent implements OnInit {
   imgURL: any;
   public message: string;
   uid: string;
+  aychange = false;
  
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router, private route: ActivatedRoute)
@@ -128,9 +129,6 @@ export class UserSettingsComponent implements OnInit {
         } else{
           this.passchange = true;
         }
-        let path = '/user/' + data.customer.id + '/settings/';
-
-        this.router.navigate([path]);
       });
     }
   }
@@ -144,11 +142,8 @@ export class UserSettingsComponent implements OnInit {
         if (data.userProfile == null){
           alert("Something went wrong.")
         } else{
-          this.passchange = true;
+          this.aychange = true;
         }
-        let path = '/user/' + data.userProfile.id + '/settings/';
-
-        this.router.navigate([path]);
       });
 
   }

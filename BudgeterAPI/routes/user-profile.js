@@ -9,7 +9,6 @@ router.get('/:id', async (req, res, next) =>
 	try
 	{
 		const userProfile = await UserProfileService.getUserProfileId(req.params.id);
-        console.log(userProfile);
 		return res.json({ userProfileId: userProfile});
 	}
 	catch(err)
@@ -29,7 +28,6 @@ router.get('/getProfile/:id', async (req, res, next) =>
 	}
 	catch(err)
 	{
-        console.log(userProfile);
 		return res.json({ userProfile: userProfile});
 	}
 });
@@ -39,7 +37,6 @@ router.get('/:id/info', async (req, res, next) =>
 	try
 	{
 		const userProfile = await UserProfileService.getUserProfile(req.params.id);
-        console.log(userProfile);
 		return res.json({ userProfile: userProfile});
 	}
 	catch(err)
@@ -56,7 +53,6 @@ router.post('/about-you-settings/', async (req, res, next) =>
 	try
 	{
 		const userProfile = await UserProfileService.updateAboutYou(body);
-		console.log(userProfile);
 		return res.status(201).json({ userProfile: userProfile });
 	}
 	catch(err)

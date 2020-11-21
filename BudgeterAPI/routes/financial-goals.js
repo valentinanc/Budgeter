@@ -25,7 +25,6 @@ router.get('/:id', async (req, res, next) =>
 	try
 	{
 		const financialGoals = await FinancialGoalsService.getFinancialGoals(req.params.id);
-        console.log(financialGoals);
 		return res.json(financialGoals);
 	}
 	catch(err)
@@ -41,7 +40,6 @@ router.delete('/:id', async (req, res, next) =>
 	try
 	{
 		const financialGoal = await FinancialGoalsService.deleteFinancialGoal(req.params.id);
-        console.log(financialGoal);
 		return res.json(financialGoal);
 	}
 	catch(err)
