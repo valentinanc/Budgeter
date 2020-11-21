@@ -52,6 +52,7 @@ export class DashboardComponent implements OnInit {
 	rBudget = 0;
 	mExpenses = 0;
 	mSavings = 0;
+	
 	ngOnInit()
 	{
 		let id = this.route.url["value"][1]["path"];
@@ -65,10 +66,15 @@ export class DashboardComponent implements OnInit {
 			}
 		});
 	}
+	
 	openDialog() {
 		const dialogConfig = new MatDialogConfig();
 		this.matDialog.open(AboutYouComponent, dialogConfig);
-	  }
+	}
+
+	onClickTab() {
+		this.sharedService.sendClickEvent();
+	}
 	
 
 }

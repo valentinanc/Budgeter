@@ -36,17 +36,26 @@ export class AboutYouComponent implements OnInit {
 
   ngOnInit(): void {
     this.userForm = this.formBuilder.group({
-  		mbudget: ['', [Validators.required]],
-  		mexpenses: ['', [Validators.required,]],
-      msavings: ['', [Validators.required]],
+  		mbudget: ['', [Validators.required,Validators.min(1)]],
+  		mexpenses: ['', [Validators.required,Validators.min(1)]],
+      msavings: ['', [Validators.required,Validators.min(1)]],
       oCategory:  [''],
       ofGoal:  ['']
 	  });
   }
 
+  notcomplete(){
+    if (this.userForm.status == "INVALID"){
+        return true;
+    }
+    else{
+      return false;
+    }
+  }
   submit(){
     if(this.userForm.status == "VALID")
   	{
+      
       var categoriesSelected  = this.categories.filter(x=>x.completed)
       var goalsSelected = this.goals.filter(x=>x.completed)
       if (this.userForm.value["oCategory"] != ''){
