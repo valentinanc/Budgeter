@@ -38,6 +38,11 @@ nav{
     background-size: cover;
 }
 
+#img{
+  position: relative;
+  top:-8px;
+  }
+
 /* Bob */
 @-webkit-keyframes hvr-bob {
     0% {

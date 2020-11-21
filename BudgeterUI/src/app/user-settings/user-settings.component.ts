@@ -34,6 +34,7 @@ export class UserSettingsComponent implements OnInit {
   {
     this.uid = this.route.url["value"][1]["path"];
     console.log(this.uid);
+    this.imgURL = "https://avatarfiles.alphacoders.com/117/117626.jpg";
   }
 
   invalidPassword()
