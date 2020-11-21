@@ -6,7 +6,7 @@
             <ng-template matStepLabel>What is your monthly budget?</ng-template>
             <mat-form-field>
               <mat-label>Monthly Spending</mat-label>
-              <input matInput formControlName="mbudget" placeholder="$500" type="number">
+              <input matInput formControlName="mbudget" placeholder="$500" type="number" required>
             </mat-form-field>
             <div>
               <button mat-button matStepperPrevious>Back</button>
@@ -17,7 +17,7 @@
           <ng-template matStepLabel>What are your monthly expenses?</ng-template>
           <mat-form-field>
             <mat-label>Monthly Expenses</mat-label>
-            <input matInput formControlName="mexpenses" placeholder="$1000" type="number">
+            <input matInput formControlName="mexpenses" placeholder="$1000" type="number" required>
           </mat-form-field>
           <div>
             <button mat-button matStepperPrevious>Back</button>
@@ -28,7 +28,7 @@
           <ng-template matStepLabel>What are your monthly savings?</ng-template>
           <mat-form-field>
             <mat-label>Monthly Savings</mat-label>
-            <input matInput formControlName="msavings" placeholder="$1000" type="number">
+            <input matInput formControlName="msavings" placeholder="$1000" type="number" required>
           </mat-form-field>
           <div>
             <button mat-button matStepperPrevious>Back</button>
@@ -64,21 +64,22 @@
           </section>
           <div>
             <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Next</button>
+            <!-- <button mat-button matStepperNext>Next</button> -->
           </div>
         </mat-step>
-        <mat-step>
+        <!-- <mat-step>
           <ng-template matStepLabel>You are complete!</ng-template>
           <p>Welcome to Budgeter :)</p>
           <div>
             <button mat-button matStepperPrevious>Back</button>
             <button mat-button (click)="stepper.reset()">Reset</button>
           </div>
-        </mat-step>
+        </mat-step> -->
       </form>
     </mat-vertical-stepper>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
+  <button mat-button (click)="stepper.reset()">Reset</button>
   <button mat-button mat-dialog-close>Skip</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click) = "submit()">Submit</button>
+  <button mat-button  mat-dialog-close [disabled]="notcomplete()" cdkFocusInitial (click) = "submit()">Submit</button>
 </mat-dialog-actions>
