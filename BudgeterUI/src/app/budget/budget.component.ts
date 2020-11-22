@@ -13,12 +13,14 @@ import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { EditBudgetComponent } from '../edit-budget/edit-budget.component';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
   selector: 'budget',
   templateUrl: './budget.component.html',
-  styleUrls: ['./budget.component.css']
+  styleUrls: ['./budget.component.css'],
+  providers: [DatePipe]
 })
 export class BudgetComponent implements OnInit {
 
@@ -80,8 +82,11 @@ export class BudgetComponent implements OnInit {
   public chartClicked(e: any): void { }
   public chartHovered(e: any): void { }
   // end budget breakdown
-
-  constructor(private dialog: MatDialog) { }
+  date = new Date();
+  stringDate: string
+  constructor(private dialog: MatDialog, private datePipe: DatePipe) {
+    this.stringDate = this.datePipe.transform(this.date, 'MM-dd-yyyy');
+  }
   breakpoint: number;
   
   ngOnInit() {
@@ -102,7 +107,7 @@ export class BudgetComponent implements OnInit {
   }
 
   add() {
-      const person = { id: 6, date: '11/09/2020', name: '', price: ''}
+      const person = { id: 6, date: this.stringDate, name: '', price: ''}
       this.personList.unshift(person);
   }
 
