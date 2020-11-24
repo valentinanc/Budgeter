@@ -126,37 +126,9 @@
                                                             <mat-label>Monthly Savings</mat-label>
                                                             <input matInput class="form-control" formControlName="savings">
                                                           </mat-form-field>
-                                                    <h2 class="headerleft2">What categories do you spend your money on?</h2>
-                                                    <section class="example-section">
-                                                        <mat-checkbox class="example-margin">Housing</mat-checkbox>
-                                                        <mat-checkbox class="example-margin">Transportation</mat-checkbox>
-                                                        <mat-checkbox class="example-margin">Food</mat-checkbox>
-                                                        <mat-checkbox class="example-margin">Savings</mat-checkbox>
-                                                        <mat-checkbox class="example-margin" (change)="checked1=!checked1">Other</mat-checkbox>
-                                                        <div *ngIf=checked1>
-                                                            <div class="form-group col-md-6">
-                                                                <input type="text" class="form-control" id="other1" placeholder="Type Here">
-                                                            </div>
-                                                        </div>
-                                                    </section>
-                                                    <hr>
-                                                    <h2 class="headerleft2">What are your future goals?</h2>
-                                                    <section class="example-section">
-                                                        <mat-checkbox class="example-margin">Pay off loans</mat-checkbox>
-                                                        <mat-checkbox class="example-margin">Buy Property</mat-checkbox>
-                                                        <mat-checkbox class="example-margin">Travel</mat-checkbox>
-                                                        <mat-checkbox class="example-margin">Start a business</mat-checkbox>
-                                                        <mat-checkbox class="example-margin">Buy a car</mat-checkbox>
-                                                        <mat-checkbox class="example-margin" (change)='checked2=!checked2'>Other</mat-checkbox>
-                                                        <div *ngIf=checked2>
-                                                            <div class="form-group col-md-6">
-                                                                <input type="text" class="form-control" id="other2" placeholder="Type Here">
-                                                            </div>
-                                                        </div>
-                                                    </section>
                                                 </div>
                                     
-                                                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Save Changes</button>
+                                                <button class="btn btn-lg btn-primary btn-block text-uppercase bspace" type="submit">Save Changes</button>
                                                 <div class="alert alert-info text-center" *ngIf="aychange" role="alert">Changes Saved.</div>
                                                 </form>
                                                 </div>
