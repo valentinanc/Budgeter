@@ -118,20 +118,23 @@ export class UserSettingsComponent implements OnInit {
 
 
   updatePassword(){
-    this.submitted = true;
-    if(this.userForm.status == "VALID" && this.passwordCheck())
-  	{
-      let data: any = Object.assign({guid: this.guid}, this.userForm.value);
+    if(this.userForm.value.password != '' || this.userForm.value.password_confirm != ''){
+      this.submitted = true;
+      if(this.userForm.status == "VALID" && this.passwordCheck())
+  	  {
+        let data: any = Object.assign({guid: this.guid}, this.userForm.value);
 
-      this.http.post('/api/customer/settings/', data).subscribe((data:any) => {
+        this.http.post('/api/customer/settings/', data).subscribe((data:any) => {
           
-        if (data.customer == null){
-          alert("Something went wrong.")
-        } else{
-          this.passchange = true;
-        }
-      });
+          if (data.customer == null){
+            alert("Something went wrong.")
+          } else{
+            this.passchange = true;
+          }
+        });
+      }
     }
+    
   }
 
   updateAboutYou(){
