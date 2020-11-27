@@ -13,7 +13,10 @@ import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { EditBudgetComponent } from '../edit-budget/edit-budget.component';
-import { DatePipe } from '@angular/common';
+import { DatePipe } from '@angular/common'
+import { HttpClient } from "@angular/common/http";
+import { Router } from "@angular/router";
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -37,13 +40,13 @@ export class BudgetComponent implements OnInit {
 
   // budget overview
   data = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November'],
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
     datasets: [
         {
             label: 'Total Monthly Budget',
             backgroundColor: '#42A5F5',
             borderColor: '#1E88E5',
-            data: [4023, 4500, 4201, 4300, 5000, 4700, 4500, 5000, 4200, 4700, 5000]
+            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5000]
         }
     ]
   }
@@ -83,13 +86,33 @@ export class BudgetComponent implements OnInit {
   public chartHovered(e: any): void { }
   // end budget breakdown
   date = new Date();
-  stringDate: string
-  constructor(private dialog: MatDialog, private datePipe: DatePipe) {
+  uid: string;
+  stringDate: string;
+  
+  constructor(private dialog: MatDialog, private datePipe: DatePipe, private http: HttpClient, private router: Router, private route: ActivatedRoute) {
     this.stringDate = this.datePipe.transform(this.date, 'MM-dd-yyyy');
+    this.uid = this.route.url["value"][1]["path"];
+    console.log(this.uid);
   }
   breakpoint: number;
   
   ngOnInit() {
+    this.http.get('/api/user-profile/' + this.uid +'/info').subscribe((data:any) => {
+      console.log("datset value: "+this.data.datasets[-1])
+      // Not best solution, but works.
+      this.data = {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        datasets: [
+            {
+                label: 'Total Monthly Budget',
+                backgroundColor: '#42A5F5',
+                borderColor: '#1E88E5',
+                data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, data.userProfile.MBudget]
+            }
+        ]
+      }
+    });
+    console.log("datset value 2: "+this.data.datasets[-1])
     this.breakpoint = (window.innerWidth <= 600) ? 1 : 2;
   }
   
