@@ -68,6 +68,7 @@ export class SavingsComponent implements OnInit {
   public chartHovered(e: any): void { }
   // end savings breakdown
   uid: string;
+  notiMessage: string;
 
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { 
     this.uid = this.route.url["value"][1]["path"];
@@ -76,7 +77,7 @@ export class SavingsComponent implements OnInit {
   ngOnInit(): void {
     this.http.get('/api/user-profile/' + this.uid +'/info').subscribe((data:any) => {
       console.log("datset value: "+this.data.datasets[-1])
-      // Not best solution, but works.
+
       this.data = {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
         datasets: [
@@ -88,6 +89,7 @@ export class SavingsComponent implements OnInit {
             }
         ]
       }
+      this.notiMessage ="On average, you saved $"+data.userProfile.MSavings+" per month.";
     });
   }
 

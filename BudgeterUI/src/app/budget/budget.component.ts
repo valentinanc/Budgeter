@@ -87,6 +87,7 @@ export class BudgetComponent implements OnInit {
   // end budget breakdown
   date = new Date();
   uid: string;
+  notiMessage: string;
   stringDate: string;
   
   constructor(private dialog: MatDialog, private datePipe: DatePipe, private http: HttpClient, private router: Router, private route: ActivatedRoute) {
@@ -111,7 +112,9 @@ export class BudgetComponent implements OnInit {
             }
         ]
       }
+      this.notiMessage ="On average, your total monthly budget is $"+data.userProfile.MBudget+".";
     });
+    
     console.log("datset value 2: "+this.data.datasets[-1])
     this.breakpoint = (window.innerWidth <= 600) ? 1 : 2;
   }
