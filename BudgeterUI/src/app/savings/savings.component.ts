@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
+import { HttpClient } from "@angular/common/http";
+import { Router } from "@angular/router";
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'savings',
@@ -19,13 +22,13 @@ export class SavingsComponent implements OnInit {
 
   // savings overview
   data = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November'],
+    labels: [],
     datasets: [
         {
-            label: 'Total Monthly Savings',
-            backgroundColor: '#51C767',
-            borderColor: '#51A767',
-            data: [2603, 3180, 3001, 2750, 3499, 3700, 3400, 3800, 2800, 3400, 500]
+            label: '',
+            backgroundColor: '',
+            borderColor: '',
+            data: []
         }
     ]
   }
@@ -64,11 +67,28 @@ export class SavingsComponent implements OnInit {
   public chartClicked(e: any): void { }
   public chartHovered(e: any): void { }
   // end savings breakdown
+  uid: string;
 
-  constructor() { }
+  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { 
+    this.uid = this.route.url["value"][1]["path"];
+  }
 
   ngOnInit(): void {
-
+    this.http.get('/api/user-profile/' + this.uid +'/info').subscribe((data:any) => {
+      console.log("datset value: "+this.data.datasets[-1])
+      // Not best solution, but works.
+      this.data = {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        datasets: [
+            {
+                label: 'Total Monthly Savings',
+                backgroundColor: '#51C767',
+                borderColor: '#51A767',
+                data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, data.userProfile.MSavings]
+            }
+        ]
+      }
+    });
   }
 
   updateList(id: number, property: string, event: any) {
