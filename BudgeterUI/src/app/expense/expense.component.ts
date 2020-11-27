@@ -11,6 +11,9 @@ import {MatCardModule} from '@angular/material/card';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
+import { HttpClient } from "@angular/common/http";
+import { Router } from "@angular/router";
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'expense',
@@ -33,13 +36,13 @@ export class ExpenseComponent implements OnInit {
 
   // expense overview
   data = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November'],
+    labels: [],
     datasets: [
         {
-            label: 'Total Monthly Expenses',
-            backgroundColor: '#F53B28',
-            borderColor: '#D53B28',
-            data: [1420, 1320, 1200, 1550, 1501, 1000, 1100, 1200, 1400, 1300, 1500]
+            label: '',
+            backgroundColor: '',
+            borderColor: '',
+            data: []
         }
     ]
   }
@@ -79,10 +82,28 @@ export class ExpenseComponent implements OnInit {
   public chartClicked(e: any): void { }
   public chartHovered(e: any): void { }
   // end expense breakdown
+  uid: string;
 
-  constructor() {}
+  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) {
+    this.uid = this.route.url["value"][1]["path"];
+  }
 
   ngOnInit(): void {
+    this.http.get('/api/user-profile/' + this.uid +'/info').subscribe((data:any) => {
+      console.log("datset value: "+this.data.datasets[-1])
+      // Not best solution, but works.
+      this.data = {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        datasets: [
+            {
+                label: 'Total Monthly Expenses',
+                backgroundColor: '#F53B28',
+                borderColor: '#D53B28',
+                data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, data.userProfile.MExpenses]
+            }
+        ]
+      }
+    });
   }
 
   updateList(id: number, property: string, event: any) {

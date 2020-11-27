@@ -40,13 +40,13 @@ export class BudgetComponent implements OnInit {
 
   // budget overview
   data = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    labels: [],
     datasets: [
         {
-            label: 'Total Monthly Budget',
-            backgroundColor: '#42A5F5',
-            borderColor: '#1E88E5',
-            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5000]
+            label: '',
+            backgroundColor: '',
+            borderColor: '',
+            data: []
         }
     ]
   }
