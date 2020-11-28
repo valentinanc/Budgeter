@@ -14,6 +14,7 @@ export class UserSettingsComponent implements OnInit {
   submitted = false;
   passchange = false;
   userForm: FormGroup;
+  passForm: FormGroup;
   aboutForm: FormGroup;
 	guid: string;
   serviceErrors:any = {};
@@ -34,7 +35,7 @@ export class UserSettingsComponent implements OnInit {
   {
     this.uid = this.route.url["value"][1]["path"];
     console.log(this.uid);
-    this.imgURL = "https://avatarfiles.alphacoders.com/117/117626.jpg";
+    //this.imgURL = "https://avatarfiles.alphacoders.com/117/117626.jpg";
   }
 
   invalidPassword()
@@ -61,14 +62,17 @@ export class UserSettingsComponent implements OnInit {
       this.message = "Only images are supported.";
       return;
     }
- 
+    
     var reader = new FileReader();
     this.imagePath = files;
     reader.readAsDataURL(files[0]); 
     reader.onload = (_event) => { 
-      this.imgURL = reader.result; 
-    }
+      this.imgURL = reader.result;
+      localStorage.setItem(this.uid, this.imgURL) 
+    }  
+
     this.newPP = true;
+    
   }
   ngOnInit()
   {
@@ -105,15 +109,7 @@ export class UserSettingsComponent implements OnInit {
         'id': [this.uid]
       });
     });
-
-      // this.firstFormGroup = this.formBuilder.group({
-      //   firstCtrl: ['', Validators.required]
-      // });
-      // this.secondFormGroup = this.formBuilder.group({
-      //   secondCtrl: ['', Validators.required]
-      // });
-    
-    
+    this.imgURL = localStorage.getItem(this.uid);
   }
 
 

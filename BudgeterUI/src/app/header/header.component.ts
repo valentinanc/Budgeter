@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
   userProfileId: string;
   fname:string;
   lname:string;
+  imgURL:string;
   constructor(private http: HttpClient,private dialog: MatDialog, private route: ActivatedRoute) {
     this.uid = this.route.url["value"][1]["path"];
   }
@@ -30,6 +31,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.fname = '';
     this.lname = '';
+    this.imgURL = localStorage.getItem(this.uid);
     this.http.get('/api/customer/' + this.uid).subscribe((data:any) => {
         this.fname = data.customer.FName;
         this.lname = data.customer.LName
