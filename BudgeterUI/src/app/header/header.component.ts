@@ -31,7 +31,11 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.fname = '';
     this.lname = '';
-    this.imgURL = localStorage.getItem(this.uid);
+    if (localStorage.getItem(this.uid) == null){
+      this.imgURL = "https://community.intersystems.com/sites/default/files/pictures/picture-default.jpg";
+    } else{
+      this.imgURL = localStorage.getItem(this.uid);
+    }
     this.http.get('/api/customer/' + this.uid).subscribe((data:any) => {
         this.fname = data.customer.FName;
         this.lname = data.customer.LName
