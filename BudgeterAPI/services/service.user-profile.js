@@ -35,6 +35,17 @@ class UserProfileService
 		profile.update({MBudget: data["budget"], MExpenses: data["expenses"], MSavings: data["savings"]})
 		return profile;
 	}
+
+	static async updateTotalExpenses(data)
+	{
+		let profile = await UserProfile.findOne({
+			where: {
+				userId: data["id"],
+			}
+		})
+		profile.update({MExpenses: data["expenses"]})
+		return profile;
+	}
 }
 
 module.exports = UserProfileService;
