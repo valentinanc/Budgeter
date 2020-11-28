@@ -114,10 +114,11 @@ export class ExpenseComponent implements OnInit {
     this.clickEventsubscription = this.sharedService.getClickEvent().subscribe(()=>{
       this.http.get('/api/user-profile/' + this.uid).subscribe((data:any) => {
         this.userProfileId = data.userProfileId;
+        console.log(this.userProfileId)
         this.http.get('/api/budget/getBudgetId/' + this.userProfileId).subscribe((data:any) => {
           this.budgetId = data
           console.log("This is the budget id", this.budgetId)
-          this.http.get('/api/expense/'+this.budgetId).subscribe((data:any) => {
+          this.http.get('/api/expense/' + this.budgetId).subscribe((data:any) => {
             for(var i = 0; i < data.length; i++) {
               var obj = data[i];
               this.expenseList.push({id: obj.id,Date:obj.createdAt.slice(0,10),Name: obj.Name, Price: obj.Price, });
