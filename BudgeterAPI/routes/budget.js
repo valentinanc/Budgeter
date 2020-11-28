@@ -64,4 +64,20 @@ router.post('/changeBudget/', async (req, res, next) =>
 	}
 });
 
+
+router.get('/getBudgetId/:userId', async (req, res, next) =>
+{
+	try
+	{
+		console.log("reaching here")
+		const budgetId = await BudgetService.getBudgetId(req.params.userId);
+		return res.json(budgetId);
+	}
+	catch(err)
+	{
+		// unexpected error
+		return next(err);
+	}
+});
+
 module.exports = router;
