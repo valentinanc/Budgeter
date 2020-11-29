@@ -25,8 +25,8 @@ export class HeaderComponent implements OnInit {
 			if (localStorage.getItem(this.uid) == null){
         this.imgURL = "https://community.intersystems.com/sites/default/files/pictures/picture-default.jpg";
       } else{
-        this.imgURL = "https://global-uploads.webflow.com/5d0120ceec96465e052dbdb7/5d4d82ec574a788542d8e1e9_success-2-once.gif";
-        //this.imgURL = localStorage.getItem(this.uid);
+        //this.imgURL = "https://global-uploads.webflow.com/5d0120ceec96465e052dbdb7/5d4d82ec574a788542d8e1e9_success-2-once.gif";
+        this.imgURL = localStorage.getItem(this.uid);
       }
 		});
   }
