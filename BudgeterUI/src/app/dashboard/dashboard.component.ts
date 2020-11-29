@@ -74,12 +74,6 @@ export class DashboardComponent implements OnInit {
 		var newBudget = (<HTMLInputElement>document.getElementById("newBudget")).value;
 		this.http.get('/api/user-profile/getProfile/' + this.uid).subscribe((data:any) => {
 			this.tBudget = data.MBudget;
-			this.mExpenses = data.MExpenses;
-			this.mSavings = data.MSavings;
-			this.rBudget = this.tBudget-this.mExpenses-this.mSavings;
-			if (this.tBudget == 0 && this.mExpenses == 0 && this.mSavings == 0 && this.rBudget == 0) {
-				this.openDialog();	
-			}
 			if(this.tBudget != parseFloat(newBudget)){
 				let data: any = Object.assign({guid: this.guid}, {id: this.uid, budget: newBudget});
 

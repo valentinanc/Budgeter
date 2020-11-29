@@ -3,6 +3,8 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { AddItemsComponent } from '../add-items/add-items.component';
 import { HttpClient } from "@angular/common/http";
+import { Subscription } from 'rxjs';
+import { SharedService } from '../services/service.component';
 
 @Component({
   selector: 'header',
@@ -16,8 +18,17 @@ export class HeaderComponent implements OnInit {
   fname:string;
   lname:string;
   imgURL:string;
-  constructor(private http: HttpClient,private dialog: MatDialog, private route: ActivatedRoute) {
+  clickEventsubscription:Subscription;  
+  constructor(private http: HttpClient,private dialog: MatDialog, private route: ActivatedRoute, private sharedService:SharedService) {
     this.uid = this.route.url["value"][1]["path"];
+    this.clickEventsubscription = this.sharedService.getClickEvent().subscribe(()=>{
+			if (localStorage.getItem(this.uid) == null){
+        this.imgURL = "https://community.intersystems.com/sites/default/files/pictures/picture-default.jpg";
+      } else{
+        this.imgURL = "https://global-uploads.webflow.com/5d0120ceec96465e052dbdb7/5d4d82ec574a788542d8e1e9_success-2-once.gif";
+        //this.imgURL = localStorage.getItem(this.uid);
+      }
+		});
   }
   
   openDialog(): void {

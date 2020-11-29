@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { ActivatedRoute } from '@angular/router';
+import { SharedService } from '../services/service.component';
 
 @Component({
   selector: 'user-settings',
@@ -31,7 +32,7 @@ export class UserSettingsComponent implements OnInit {
   aychange = false;
  
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router, private route: ActivatedRoute)
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router, private route: ActivatedRoute, private sharedService:SharedService)
   {
     this.uid = this.route.url["value"][1]["path"];
     console.log(this.uid);
@@ -69,8 +70,8 @@ export class UserSettingsComponent implements OnInit {
       this.imgURL = reader.result;
       localStorage.setItem(this.uid, this.imgURL) 
     }  
-
     this.newPP = true;
+    this.sharedService.sendClickEvent();
     
   }
   ngOnInit()
