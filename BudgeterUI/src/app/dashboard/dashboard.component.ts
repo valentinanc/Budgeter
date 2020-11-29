@@ -35,7 +35,11 @@ export class DashboardComponent implements OnInit {
 		email: "email@email.com", 
 		password: "Idasn2x2#"});
 	clickEventsubscription:Subscription;  
+	uid: string;
+	guid: string;
 	constructor(private http: HttpClient, private route: ActivatedRoute, private matDialog: MatDialog, private sharedService:SharedService) {
+		this.uid = this.route.url["value"][1]["path"];
+		this.bv = false;
 		let id = this.route.url["value"][1]["path"];
 		this.clickEventsubscription = this.sharedService.getClickEvent().subscribe(()=>{
 			this.http.get('/api/user-profile/getProfile/' + id).subscribe((data:any) => {
@@ -54,7 +58,7 @@ export class DashboardComponent implements OnInit {
 	mSavings = 0;
 	
 	ngOnInit()
-	{
+	{		
 		let id = this.route.url["value"][1]["path"];
 		this.http.get('/api/user-profile/getProfile/' + id).subscribe((data:any) => {
 			this.tBudget = data.MBudget;
@@ -66,7 +70,31 @@ export class DashboardComponent implements OnInit {
 			}
 		});
 	}
-	
+
+	updateBudget(){
+		var newBudget = (<HTMLInputElement>document.getElementById("newBudget")).value;
+		this.http.get('/api/user-profile/getProfile/' + this.uid).subscribe((data:any) => {
+			this.tBudget = data.MBudget;
+			this.mExpenses = data.MExpenses;
+			this.mSavings = data.MSavings;
+			this.rBudget = this.tBudget-this.mExpenses-this.mSavings;
+			if (this.tBudget == 0 && this.mExpenses == 0 && this.mSavings == 0 && this.rBudget == 0) {
+				this.openDialog();	
+			}
+			if(this.tBudget != parseFloat(newBudget)){
+				let data: any = Object.assign({guid: this.guid}, {id: this.uid, budget: newBudget});
+
+      			this.http.post('/api/user-profile/total-budget/', data).subscribe((data:any) => {
+          
+        		if (data.userProfile == null){
+          			alert("Something went wrong.")
+        		} 
+      			});
+			}
+		});
+		
+	}
+
 	openDialog() {
 		const dialogConfig = new MatDialogConfig();
 		this.matDialog.open(AboutYouComponent, dialogConfig);

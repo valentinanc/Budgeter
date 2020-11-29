@@ -10,8 +10,10 @@
 					<div class="row no-gutters align-items-center">
 					  <div class="col mr-2">
 						<div class="text-xs font-weight-bold text-primary text-uppercase mb-1" id="header">Total Budget</div>
-						<div class="h5 mb-0 font-weight-bold text-gray-800"  contentEditable="true" id="number">{{'$' + tBudget}}</div>
-					  </div>
+						<div class="h5 mb-0 font-weight-bold text-gray-800" id="number">$
+						<input type="number" (change)="updateBudget()" class="h5 mb-0 font-weight-bold text-gray-800 inputShape" id="newBudget" value={{tBudget}}>
+					</div>
+					</div>
 					  <div class="col-auto">
 						<i class="fas fa-wallet fa-2x text-gray-300"></i>
 					  </div>
@@ -26,7 +28,7 @@
 					<div class="row no-gutters align-items-center">
 					  <div class="col mr-2">
 						<div class="text-xs font-weight-bold text-warning text-uppercase mb-1" id="header">Remaining Monthly Budget</div>
-						<div class="h5 mb-0 font-weight-bold text-gray-800"  id="number">{{'$' + rBudget}}</div>
+						<div class="h5 mb-0 font-weight-bold text-gray-800"  id="number">{{'$ ' + rBudget}}</div>
 					  </div>
 					  <div class="col-auto">
 						<i class="fas fa-hand-holding-usd fa-2x text-gray-300"></i>
@@ -42,7 +44,7 @@
 					<div class="row no-gutters align-items-center">
 					  <div class="col mr-2">
 						<div class="text-xs font-weight-bold text-danger text-uppercase mb-1" id="header">Monthly Expenses</div>
-						<div class="h5 mb-0 font-weight-bold text-gray-800"  id="number">{{'$' + mExpenses}}</div>
+						<div class="h5 mb-0 font-weight-bold text-gray-800"  id="number">{{'$ ' + mExpenses}}</div>
 					  </div>
 					  <div class="col-auto">
 						<i class="fas fa-user-minus fa-2x text-gray-300"></i>
@@ -58,7 +60,7 @@
 					<div class="row no-gutters align-items-center">
 					  <div class="col mr-2">
 						<div class="text-xs font-weight-bold text-success text-uppercase mb-1" id="header">Monthly Savings</div>
-						<div class="h5 mb-0 font-weight-bold text-gray-800" id="number">{{'$' + mSavings}}</div>
+						<div class="h5 mb-0 font-weight-bold text-gray-800" id="number">{{'$ ' + mSavings}}</div>
 					  </div>
 					  <div class="col-auto">
 						<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>

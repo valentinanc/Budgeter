@@ -63,3 +63,15 @@ h3.card-title{
 #number{
     color: #5a5c69!important;
 }
+
+.inputShape{
+    border: 0;
+    color: #5a5c69;
+    width: 50%;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
