@@ -39,7 +39,6 @@ export class DashboardComponent implements OnInit {
 	guid: string;
 	constructor(private http: HttpClient, private route: ActivatedRoute, private matDialog: MatDialog, private sharedService:SharedService) {
 		this.uid = this.route.url["value"][1]["path"];
-		this.bv = false;
 		let id = this.route.url["value"][1]["path"];
 		this.clickEventsubscription = this.sharedService.getClickEvent().subscribe(()=>{
 			this.http.get('/api/user-profile/getProfile/' + id).subscribe((data:any) => {
