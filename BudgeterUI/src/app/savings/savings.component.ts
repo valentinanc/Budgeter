@@ -5,7 +5,14 @@ import { Label } from 'ng2-charts';
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { ActivatedRoute } from '@angular/router';
-
+import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
+import { SharedService } from '../services/service.component';
+export class SavingsList{
+  id:number;
+  Name:string = '';
+  Price: number;
+  Date:string;
+}
 @Component({
   selector: 'savings',
   templateUrl: './savings.component.html',
@@ -15,9 +22,7 @@ export class SavingsComponent implements OnInit {
 
   // savings table
   editField = ""
-  personList: Array<any> = [
-    { id: 4, date: '11/04/2020', name: "Tesla Stonks", price: '500'},
-  ];
+
   // end savings table
 
   // savings overview
@@ -67,11 +72,62 @@ export class SavingsComponent implements OnInit {
   public chartClicked(e: any): void { }
   public chartHovered(e: any): void { }
   // end savings breakdown
-  uid: string;
   notiMessage: string;
+  Price: string;
+  savingList: SavingsList[] = [];
+  items : [];
+  workTodo: string;
+  inEditMode: boolean = false;
+  currentTodoId: number;
+  currentTodoStateWorkTodo: string;
+  currentTodoStateisCompleted : boolean = false;
+  uid: string;
+  guid: string;
+  userProfileId: string;
+  serviceErrors:any = {};
+  iterableDiffer: any;
+  differ: any;
+  clickEventsubscription:Subscription;
+  previouslySet = false;
+  // { id: 1, date: '11/01/2020', name: "Rent", price: '1500'},
+  savingListrow: Array<any> = [];
+  budgetId:string;
+  totalSaving:number;
 
-  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { 
+  constructor(private http: HttpClient, private route: ActivatedRoute, private sharedService:SharedService) {
+    
     this.uid = this.route.url["value"][1]["path"];
+    this.totalSaving = 0;
+    console.log("this is the uid", this.uid)
+    this.clickEventsubscription = this.sharedService.getClickEvent().subscribe(()=>{
+      this.http.get('/api/user-profile/' + this.uid).subscribe((data:any) => {
+        this.userProfileId = data.userProfileId;
+        console.log(this.userProfileId)
+        this.http.get('/api/budget/getBudgetId/' + this.userProfileId).subscribe((data:any) => {
+          this.budgetId = data
+          console.log("This is the budget id", this.budgetId)
+          this.http.get('/api/saving/' + this.budgetId).subscribe((data:any) => {
+            this.savingListrow.length = 0
+            this.savingList  = []
+            for(var i = 0; i < data.length; i++) {
+              var obj = data[i];
+              this.savingList.push({id: obj.id,Date:obj.createdAt.slice(0,10),Name: obj.Name, Price: obj.Price });
+              console.log(this.savingList)
+              this.savingListrow = this.savingList
+              console.log("this is the savingListrow list" , this.savingListrow)
+          }
+          }, error => {
+              console.log("There was an error displaying the financial goals", error);
+          });
+        }, error => {
+            console.log("There was an error displaying the financial goals", error);
+        });
+        
+      }, error => {
+          console.log("There was an error retrieving the user profile id", error);
+      });
+      this.previouslySet = true;
+    })
   }
 
   ngOnInit(): void {
@@ -95,16 +151,16 @@ export class SavingsComponent implements OnInit {
 
   updateList(id: number, property: string, event: any) {
     const editField = event.target.textContent;
-    this.personList[id][property] = editField;
+    this.savingListrow[id][property] = editField;
   }
 
   remove(id: any) {
-    this.personList.splice(id, 1);
+    this.savingListrow.splice(id, 1);
   }
 
   add() {
       const person = { id: 6, date: '2020/11/09', name: '', price: ''}
-      this.personList.unshift(person);
+      this.savingListrow.unshift(person);
   }
 
   changeValue(id: number, property: string, event: any) {

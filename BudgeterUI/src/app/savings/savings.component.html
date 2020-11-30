@@ -67,7 +67,7 @@
 			<mat-card class="card-header">
 				<h5>Savings Table (COMING SOON)</h5>
 					<div id="table" class="table-editable">
-						<table class="table table-striped table-responsive-md btn-table">
+						<table class="table table-striped table-responsive-md btn-table"  >
 							<tr>
 								<th class="text-center">Date</th>
 								<th class="text-center">Name</th>
@@ -78,15 +78,15 @@
 									</a>
 								</span>
 							</tr>
-							<tr style="font-size: 0.8rem;" *ngFor="let person of personList; let id = index">
+							<tr style="font-size: 0.8rem;" *ngFor="let saving of savingListrow; let id = index">
 								<td>
-								  <span (keyup)="changeValue(id, 'date', $event)" (blur)="updateList(id, 'date', $event)" contenteditable="true">{{person.date}}</span>
+								  <span (keyup)="changeValue(id, 'date', $event)" (blur)="updateList(id, 'date', $event)" contenteditable="true">{{saving.Date}}</span>
 								</td>
 								<td>
-								  <span contenteditable="true" (keyup)="changeValue(id, 'name', $event)" (blur)="updateList(id, 'name', $event)">{{person.name}}</span>
+								  <span contenteditable="true" (keyup)="changeValue(id, 'name', $event)" (blur)="updateList(id, 'name', $event)">{{saving.Name}}</span>
 								</td>
 								<td>
-								  <span contenteditable="true" (keyup)="changeValue(id, 'price', $event)" (blur)="updateList(id, 'price', $event)">{{person.price}}</span>
+								  <span contenteditable="true" (keyup)="changeValue(id, 'price', $event)" (blur)="updateList(id, 'price', $event)">{{saving.Price}}</span>
 								</td>
 								<td>
 								  <span class="table-remove">

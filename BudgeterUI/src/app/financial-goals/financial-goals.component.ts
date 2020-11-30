@@ -69,6 +69,7 @@ export class FinancialGoalsComponent implements OnInit {
       this.http.get('/api/user-profile/' + this.uid).subscribe((data:any) => {
         this.userProfileId = data.userProfileId;
         this.http.get('/api/financial-goals/' + this.userProfileId).subscribe((data:any) => {
+          this.todos = []
           for(var i = 0; i < data.length; i++) {
             var obj = data[i];
             this.todos.push({id: obj.id, workTodo: obj.Name, isCompleted: obj.IsCompleted});

@@ -9,6 +9,7 @@ var financialGoals = require('./routes/financial-goals');
 var userProfile = require('./routes/user-profile');
 var budget = require('./routes/budget');
 var expense = require('./routes/expense')
+var saving = require('./routes/saving')
 let reporter = function (type, ...rest)
 {
 	// remote reporter logic goes here
@@ -51,6 +52,7 @@ app.use('/api/financial-goals', financialGoals);
 app.use('/api/user-profile', userProfile);
 app.use('/api/budget', budget);
 app.use('/api/expense', expense);
+app.use('/api/saving', saving);
 
 
 const db = require("./config/db.initialize.js");

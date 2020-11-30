@@ -119,6 +119,8 @@ export class ExpenseComponent implements OnInit {
           this.budgetId = data
           console.log("This is the budget id", this.budgetId)
           this.http.get('/api/expense/' + this.budgetId).subscribe((data:any) => {
+            this.personList.length = 0
+            this.expenseList  = []
             for(var i = 0; i < data.length; i++) {
               var obj = data[i];
               this.expenseList.push({id: obj.id,Date:obj.createdAt.slice(0,10),Name: obj.Name, Price: obj.Price, });
