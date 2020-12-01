@@ -37,18 +37,7 @@ export class SavingsComponent implements OnInit {
         }
     ]
   }
-  options = {
-    responsive: true,
-    maintainAspectRatio: true,
-    scales: {
-      yAxes: [{
-        ticks: {
-          beginAtZero: true,
-          max: 7000
-        }
-      }]
-    }
-  };
+  options = {}
   // end savings overview
 
   
@@ -188,7 +177,50 @@ export class SavingsComponent implements OnInit {
             }
         ]
       }
+      this.options = {
+        responsive: true,
+        maintainAspectRatio: true,
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              max: data.userProfile.MBudget
+            }
+          }]
+        }
+      };
       this.notiMessage ="On average, you saved $"+data.userProfile.MSavings+" per month.";
+    });
+
+    this.http.get('/api/user-profile/' + this.uid).subscribe((data:any) => {
+      this.userProfileId = data.userProfileId;
+      this.http.get('/api/budget/getBudgetId/' + this.userProfileId).subscribe((data:any) => {
+        this.budgetId = data
+        console.log("This is the budget id", this.budgetId)
+        this.http.get('/api/saving/'+this.budgetId).subscribe((data:any) => {
+          for(var i = 0; i < data.length; i++) {
+            var obj = data[i];
+            this.totalSaving = this.totalSaving + obj.Price;
+        }
+        console.log("This is the total exp", this.totalSaving)
+        //Added below post
+        let dataSaving: any = Object.assign({guid: this.guid}, {id: this.uid, savings: this.totalSaving});
+
+        this.http.post('/api/user-profile/total-savings/', dataSaving).subscribe((dataSaving:any) => {
+            
+          if (dataSaving.userProfile == null){
+            alert("Something went wrong.")
+          }
+        });
+        }, error => {
+            console.log("There was an error displaying the financial goals", error);
+        });
+      }, error => {
+          console.log("There was an error displaying the financial goals", error);
+      });
+      
+    }, error => {
+        console.log("There was an error retrieving the user profile id", error);
     });
   }
 
