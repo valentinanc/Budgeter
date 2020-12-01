@@ -52,18 +52,7 @@ export class BudgetComponent implements OnInit {
         }
     ]
   }
-  options = {
-    responsive: true,
-    maintainAspectRatio: true,
-    scales: {
-      yAxes: [{
-        ticks: {
-          beginAtZero: true,
-          max: 7000
-        }
-      }]
-    }
-  };
+  options = {}
   // end budget overview
 
   
@@ -170,6 +159,18 @@ export class BudgetComponent implements OnInit {
             }
         ]
       }
+      this.options = {
+        responsive: true,
+        maintainAspectRatio: true,
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              max: data.userProfile.MBudget
+            }
+          }]
+        }
+      };
       var monthlyRemaining = data.userProfile.MBudget-data.userProfile.MSavings-data.userProfile.MExpenses;
       let budgetBreakdownLabels = []
       let budgetBreakdownChartData = []

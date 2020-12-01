@@ -37,18 +37,7 @@ export class SavingsComponent implements OnInit {
         }
     ]
   }
-  options = {
-    responsive: true,
-    maintainAspectRatio: true,
-    scales: {
-      yAxes: [{
-        ticks: {
-          beginAtZero: true,
-          max: 7000
-        }
-      }]
-    }
-  };
+  options = {}
   // end savings overview
 
   
@@ -188,6 +177,18 @@ export class SavingsComponent implements OnInit {
             }
         ]
       }
+      this.options = {
+        responsive: true,
+        maintainAspectRatio: true,
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              max: data.userProfile.MBudget
+            }
+          }]
+        }
+      };
       this.notiMessage ="On average, you saved $"+data.userProfile.MSavings+" per month.";
     });
 

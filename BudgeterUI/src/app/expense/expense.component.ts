@@ -49,18 +49,7 @@ export class ExpenseComponent implements OnInit {
         }
     ]
   }
-  options = {
-    responsive: true,
-    maintainAspectRatio: true,
-    scales: {
-      yAxes: [{
-        ticks: {
-          beginAtZero: true,
-          max: 3500
-        }
-      }]
-    }
-  };
+  options = {}
   // end expense overview
 
   
@@ -208,6 +197,18 @@ export class ExpenseComponent implements OnInit {
             }
         ]
       }
+      this.options = {
+        responsive: true,
+        maintainAspectRatio: true,
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              max: data.userProfile.MBudget
+            }
+          }]
+        }
+      };
       this.notiMessage ="On average, you spend $"+data.userProfile.MExpenses+" per month.";
     });
     //Chage is here below
