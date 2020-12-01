@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'Footer',
@@ -7,8 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private route: ActivatedRoute) {
+    this.uid = this.route.url["value"][1]["path"];
+   }
+  uid: string;
   ngOnInit(): void {
   }
 
