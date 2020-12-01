@@ -1,10 +1,13 @@
 <!--Navbar-->
-<mdb-navbar SideClass="navbar navbar-expand-lg navbar-light lighten-1" [containerInside]="false">
+<div *ngIf="!loggedIn">
+  <mdb-navbar SideClass="navbar navbar-expand-lg navbar-light lighten-1" [containerInside]="false">
 
     <!-- Navbar brand -->
+    <div *ngIf="!loggedIn">
     <mdb-navbar-brand><a class="navbar-brand" href="#">
       <img src="login150.png" alt=""> &nbsp;Budgeter</a></mdb-navbar-brand>
-  
+    </div>
+
     <!-- Collapsible content -->
     <links>
   
@@ -14,7 +17,7 @@
       </ul>
       <!-- Links -->
   
-      <ul class="navbar-nav ml-auto nav-flex-icons">
+      <ul *ngIf="!loggedIn" class="navbar-nav ml-auto nav-flex-icons">
         <li class="nav-item">
           <button class="btn btn-outline-success my-2 my-sm-0" type="link" routerLink="/" routerLinkActive="">Login</button>
         </li>
@@ -25,6 +28,11 @@
     </links>
     <!-- Collapsible content -->
   </mdb-navbar>
+</div>
+<div *ngIf="loggedIn">
+  <header></header>
+</div>
+
     
     <body>
       <div class="jumbotron text-center" style="padding:7rem;">
@@ -101,80 +109,84 @@
           <br><br>
       </div>
       <!-- Footer -->
-<footer class="page-footer font-small" style="background: linear-gradient(to right, #0062E6, #33AEFF);">
+<div *ngIf="!loggedIn">
+  <footer class="page-footer font-small" style="background: linear-gradient(to right, #0062E6, #33AEFF);">
 
-  <!-- Footer Links -->
-  <div class="container">
+    <!-- Footer Links -->
+    <div class="container">
 
-    <!-- Grid row-->
-    <div class="row text-center d-flex justify-content-center pt-5 mb-3">
+      <!-- Grid row-->
+      <div class="row text-center d-flex justify-content-center pt-5 mb-3">
 
-      <!-- Grid column -->
-      <div class="col-md-2 mb-3">
-        <h6 class="text-uppercase font-weight-bold">
-          <a href="#" routerLink="/about-us" routerLinkActive="active">About us</a>
-        </h6>
-      </div>
-      <!-- Grid column -->
-      <!-- Grid column -->
-
-      <!-- Grid column -->
-      <div class="col-md-2 mb-3">
-        <h6 class="text-uppercase font-weight-bold">
-          <a href="#!">Contact</a>
-        </h6>
-      </div>
-      <!-- Grid column -->
-
-    </div>
-    <!-- Grid row-->
-    <hr class="rgba-white-light" style="margin: 0 15%;">
-
-   
-    <!-- Grid row-->
-    <hr class="clearfix d-md-none rgba-white-light" style="margin: 10% 15% 5%;">
-
-    <!-- Grid row-->
-    <div class="row pb-3">
-
-      <!-- Grid column -->
-      <div class="col-md-12">
-
-        <div class="mb-5 flex-center">
-
-          <!-- Facebook -->
-          <a class="fb-ic">
-            <i class="fab fa-facebook-f fa-lg white-text mr-4"> </i>
-          </a>
-          <!-- Twitter -->
-
-
-          <!--Linkedin -->
-   
-          <!--Instagram-->
-          <a class="ins-ic">
-            <i class="fab fa-instagram fa-lg white-text mr-4"> </i>
-          </a>
-          <!--Pinterest-->
-         
+        <div class="col-md-2 mb-3">
+          <h6 class="text-uppercase font-weight-bold">
+            <a href="#!">Home</a>
+          </h6>
         </div>
 
+        <!-- Grid column -->
+        <div class="col-md-2 mb-3">
+          <h6 class="text-uppercase font-weight-bold">
+            <a href="#" routerLink="/about-us" routerLinkActive="active">About us</a>
+          </h6>
+        </div>
+        <!-- Grid column -->
+        <!-- Grid column -->
+
+
       </div>
-      <!-- Grid column -->
+      <!-- Grid row-->
+      <hr class="rgba-white-light" style="margin: 0 15%;">
+
+    
+      <!-- Grid row-->
+      <hr class="clearfix d-md-none rgba-white-light" style="margin: 10% 15% 5%;">
+
+      <!-- Grid row-->
+      <div class="row pb-3">
+
+        <!-- Grid column -->
+        <div class="col-md-12">
+
+          <div class="mb-5 flex-center">
+
+            <!-- Facebook -->
+            <a class="fb-ic">
+              <i class="fab fa-facebook-f fa-lg white-text mr-4"> </i>
+            </a>
+            <!-- Twitter -->
+
+
+            <!--Linkedin -->
+    
+            <!--Instagram-->
+            <a class="ins-ic">
+              <i class="fab fa-instagram fa-lg white-text mr-4"> </i>
+            </a>
+            <!--Pinterest-->
+          
+          </div>
+
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row-->
 
     </div>
-    <!-- Grid row-->
+    <!-- Footer Links -->
 
-  </div>
-  <!-- Footer Links -->
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+      <a href=""> Budgeter</a>
+    </div>
+    <!-- Copyright -->
 
-  <!-- Copyright -->
-  <div class="footer-copyright text-center py-3">© 2020 Copyright:
-    <a href=""> Budgeter</a>
-  </div>
-  <!-- Copyright -->
-
-</footer>
+  </footer>
+</div>
+<div *ngIf="loggedIn">
+  <Footer></Footer>
+</div>
 <!-- Footer -->
     </body>
 
