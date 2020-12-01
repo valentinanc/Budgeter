@@ -29,7 +29,6 @@ class BudgetService
 	}
 
 	static async addCategoryExpense(data){
-		console.log("THIS IS CATEGORY EXPENSE DATA CREATINGGG: ", data)
 		let budgetId = data.budgetId
 		let categoryName = data.body.Name
 		let expenseId = data.body.ExpenseId
@@ -98,7 +97,6 @@ class BudgetService
 		var allValid =  jsonParse.filter(function (el) {
 			return el.expenseId !=null ||  el.savingId !=null
 		});
-		console.log("THOSE ARE ALL CATEGORIESEEEEEEEEEEEEEEEEEEEEEEESADASDSA: ", allValid)
 		for (var item of allValid){
 			var id = -1;
 			var isExpense = false;
@@ -112,25 +110,28 @@ class BudgetService
 			item["price"] = value; 
 		}
 		return allValid;
-		// var hash = [];
-		// for (var item of allValid){
-		// 	var id = -1;
-		// 	var isExpense = false;
-		// 	var value = 0;
-		// 	if (item.expenseId != null){
-		// 		isExpense = true;
-		// 		value = await ExpensesService.getExpense(item.expenseId)
-		// 	} else{
-		// 		value = await SavingsService.getSaving(item.savingId)
-		// 	}
-		// 	var lookupKey = {name: item.Name, isExpense: isExpense}
-		// 	if (hash[lookupKey] != null){ 
-		// 		hash[lookupKey] += value
-		// 	} else{
-		// 		hash[lookupKey] = value
-		// 	}
-		// }
 	}
+
+	static async editCategory(data)
+	{
+		let category = await Category.update(
+            { Name: data["categoryName"]}, {
+			where: {
+				Name: data["oldCategoryName"],
+			}
+		})
+		return category;
+	}
+
+	static async deleteCategory(data)
+	{
+		let category = await Category.destroy({
+			where: {
+				Name: data
+			}
+		})
+		return category;
+    }
 
 
 }

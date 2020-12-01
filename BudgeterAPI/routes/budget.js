@@ -70,6 +70,38 @@ router.post('/addCategorySavings/', async (req, res, next) =>
 	}
 });
 
+router.put('/editCategory/', async (req, res, next) =>
+{
+	const body = req.body;
+
+	try
+	{
+		const category = await BudgetService.editCategory(body);
+		return res.status(201).json({ category: category });
+	}
+	catch(err)
+	{
+		// unexpected error
+		return next(err);
+	}
+});
+
+router.delete('/deleteCategory/:name', async (req, res, next) =>
+{
+	try
+	{
+		const category = await BudgetService.deleteCategory(req.params.name);
+		return res.json(category);
+	}
+	catch(err)
+	{
+		// unexpected error
+		return next(err);
+	}
+});
+
+
+
 
 router.get('/getCategories/:id', async (req, res, next) =>
 {
@@ -114,7 +146,6 @@ router.get('/getBudgetId/:userId', async (req, res, next) =>
 {
 	try
 	{
-		console.log("reaching here")
 		const budgetId = await BudgetService.getBudgetId(req.params.userId);
 		return res.json(budgetId);
 	}
@@ -131,7 +162,6 @@ router.get('/getBudgetBreakdownCategories/:id', async (req, res, next) =>
 	try
 	{
 		const categories = await BudgetService.getBudgetBreakdownCategories(req.params.id);
-		console.log("HERE ARE CATEGORIE11111111111111111S: ", categories)
 		return res.json(categories);
 	}
 	catch(err)

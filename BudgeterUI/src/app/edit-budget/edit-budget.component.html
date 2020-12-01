@@ -1,33 +1,42 @@
-<h1 mat-dialog-title>Edit Total Budget</h1>
-<div [formGroup]="firstFormGroup">
-    <div mat-dialog-content>
-    What is your new total budget?<br>
-    <mat-form-field appearance="outline">
-        <mat-label>Total Budget Allocation</mat-label>
-        <input matInput placeholder="$5000" formControlName="firstCtrl" required type="number">
-    </mat-form-field>
-    <br>
-</div>
-<div [formGroup]="secondFormGroup">
-    How much money do you want to allocate to your monthly expenses?<br>
-    <mat-form-field appearance="outline">
-        <mat-label>Expenses Allocation</mat-label>
-        <input matInput formControlName="secondCtrl" placeholder="$5"
-            required type="number">
-    </mat-form-field>
-    </div>
-    <br>
-</div>
-<div [formGroup]="secondFormGroup">
-  How much money do you want to allocate to your monthly savings?<br>
-  <mat-form-field appearance="outline">
-    <mat-label>Savings Allocation</mat-label>
-    <input matInput formControlName="secondCtrl" placeholder="$5"
-           required type="number">
-  </mat-form-field>
-</div>
+<h1 mat-dialog-title>Edit Budget Categories</h1>
+<section class="inputarea">
+  <form name="formCategories" action="" method="POST" enctype="multipart/form-data">
+      <div class="row">
+          <div class="col-sm" style="display: flex;">
+            <mat-form-field class="example-form-field" style="width:90% !important">
+              <mat-label>New Category Name</mat-label>
+              <input matInput type="text" id="categoryName" name="categoryName" [(ngModel)]="categoryName" (keyup.escape)="cancelEdit()" autofocus>
+            </mat-form-field>
+            <button mat-raised-button color="primary" style="height: 50%;" (click)="addEditCategory()" (keyup.enter)="addEditCategory()" type="submit">{{inEditMode==false?"ADD":"Update&nbsp;"}}</button>
+            <button mat-raised-button *ngIf="inEditMode==true" color="warn" style="height: 50%;" (click)="cancelEdit()" type="button">Cancel&nbsp;</button>
+          </div>
+      </div>
+  </form>
+</section>
+<br />
+<section class="listarea">
+  <div class="row">
+      <div class="col-md-12">
+          <ul class="list-group list-group-flush" *ngIf="categories.length > 0" >
+              <li class="list-group-item" *ngFor="let category of categories; let i=index" [class.completed]="category.isCompleted">
+                      <div class="pull-left">
+                          <label class="container capitalize" style="font-size: 0.9rem;">
+                             <mat-checkbox class="example-margin" [(ngModel)]="category.isCompleted">
+                               &nbsp;{{category.categoryName}}
+                              </mat-checkbox>
+                          </label>
+                      </div>
+                      <div class="pull-right">
+                              <button class="btn btn-primary btn-sm fa fa-pencil" (click)="editCategory(category)"></button> &nbsp;
+                              <button class="btn btn-danger btn-sm fa fa-trash-o" (click)="deleteCategory(category,i)"></button>
+                      </div>
+              </li>
+                
+          </ul>
+      </div>
+  </div>
+</section>
 
 <div mat-dialog-actions align="end">
   <button mat-button [mat-dialog-close]="true">Close</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Submit</button>
 </div>

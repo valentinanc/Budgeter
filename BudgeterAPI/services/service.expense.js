@@ -8,8 +8,6 @@ class ExpensesService
 {
 	static async create(data)
 	{
-
-		console.log("THIS IS EXPENSE DATA CREATINGGG: ", data)
 		// Retrieve all Tutorials from the database.
 		const expense =  await Expenses.create(
 			{

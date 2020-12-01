@@ -69,9 +69,7 @@ export class AddItemsComponent implements OnInit {
           selectedCategory = this.firstFormGroup.value["oCategory"]
       }
       var data = {Name: this.firstFormGroup.value["name"], Expense:this.expenseSelected, Category:selectedCategory, Price: this.firstFormGroup.value["price"]}
-      console.log("data: ", data)
       let id = this.router.url.split("/")[2];
-      console.log("user id: ", id)
       // Get profile Id
       this.http.get('/api/user-profile/' + id).subscribe((res1:any) => {
         let upId = res1.userProfileId;

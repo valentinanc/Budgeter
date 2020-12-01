@@ -96,7 +96,6 @@ export class BudgetComponent implements OnInit {
     this.uid = this.route.url["value"][1]["path"];
     console.log(this.uid);
     this.clickEventsubscription = this.sharedService.getClickEvent().subscribe(()=>{
-      console.log("GETTING CLICK EVENT FROM BUDGET")
       this.http.get('/api/user-profile/' + this.uid +'/info').subscribe((data:any) => {
         var monthlyRemaining = data.userProfile.MBudget-data.userProfile.MSavings-data.userProfile.MExpenses;
         let budgetBreakdownLabels = []
