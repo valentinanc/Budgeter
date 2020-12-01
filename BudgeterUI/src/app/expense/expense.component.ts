@@ -66,15 +66,12 @@ export class ExpenseComponent implements OnInit {
   
   // expense breakdown
   public chartType: string = 'doughnut';
-  public chartDatasets: Array<any> = [
-    { data: [1500, 125, 25, 50], label: 'My First dataset' }
-  ];
-
-  public chartLabels: Array<any> = ['Rent', 'Grocery', 'Tim Hortons Party', 'TTC (Take The Car)'];
+  public chartDatasets: Array<any> = [{data : []}]
+  public chartLabels: Array<any> = [];
   public chartColors: Array<any> = [
     {
-      backgroundColor: ['#F7464A', '#46BFBD', '#FDB45C', '#949FB1'],
-      hoverBackgroundColor: ['#FF5A5E', '#5AD3D1', '#FFC870', '#A8B3C5'],
+      backgroundColor: [],
+      hoverBackgroundColor: [],
       borderWidth: 2,
     }
   ];
@@ -135,12 +132,65 @@ export class ExpenseComponent implements OnInit {
         }, error => {
             console.log("There was an error displaying the financial goals", error);
         });
-        
+        let budgetBreakdownLabels = []
+        let budgetBreakdownChartData = []
+        let budgetBreakdownBc = []
+        let budgetBreakdownHbc = []
+        this.http.get('/api/budget/getBudgetBreakdownCategories/' + this.uid).subscribe((data:any) => {
+            var hash  = new Map();
+            for (var item of data){
+              var isExpense = false;
+              var value = 0;
+              if (item.expenseId != null){
+                isExpense = true;
+                value = item.price
+              } else{
+                value = item.price
+              }
+              var lookupKey = item.Name + "," + isExpense
+              if (!hash.has(lookupKey)){
+                hash.set(lookupKey, value); 
+              } else {
+                hash.set(lookupKey, hash.get(lookupKey) + value);
+              }
+            }
+            for (var pair of hash){
+              if (pair[0].split(",")[1] == 'true'){
+                let value = pair[1]
+                budgetBreakdownChartData.push(value)
+                budgetBreakdownLabels.push(pair[0].split(",")[0])
+                var randomColor = this.getRandomColor2()
+                budgetBreakdownBc.push(randomColor)
+                budgetBreakdownHbc.push(randomColor)
+              }
+            }
+            this.chartDatasets = [
+              { data: budgetBreakdownChartData}
+            ];
+            this.chartLabels = budgetBreakdownLabels;
+            this.chartColors = [
+              {
+                backgroundColor: budgetBreakdownBc,
+                hoverBackgroundColor: budgetBreakdownHbc,
+                borderWidth: 2,
+              }
+            ];
+        }, error => {
+            console.log("error getting categories for budget breakdown", error);
+        });
       }, error => {
           console.log("There was an error retrieving the user profile id", error);
       });
       this.previouslySet = true;
     })
+  }
+
+  getRandomColor2() {
+    var length = 6;
+    var chars = '0123456789ABCDEF';
+    var hex = '#';
+    while(length--) hex += chars[(Math.random() * 16) | 0];
+    return hex;
   }
 
   ngOnInit(): void {

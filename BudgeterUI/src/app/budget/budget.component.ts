@@ -17,6 +17,8 @@ import { DatePipe } from '@angular/common'
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { ActivatedRoute } from '@angular/router';
+import { SharedService } from '../services/service.component';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -67,14 +69,12 @@ export class BudgetComponent implements OnInit {
   
   // budget breakdown
   public chartType: string = 'doughnut';
-  public chartDatasets: Array<any> = [
-    { data: [150, 1250, 50, 500, 3000], label: 'My First dataset' }
-  ];
-  public chartLabels: Array<any> = ['Food', 'Housing', 'Transportation', 'Savings', 'Remaining'];
+  public chartDatasets: Array<any> = [{data : []}]
+  public chartLabels: Array<any> = [];
   public chartColors: Array<any> = [
     {
-      backgroundColor: ['#F7464A', '#46BFBD', '#4D5360', '#949FB1', '#ffc107'],
-      hoverBackgroundColor: ['#FF5A5E', '#5AD3D1', '#616774', '#A8B3C5', '#ffc107'],
+      backgroundColor: [],
+      hoverBackgroundColor: [],
       borderWidth: 2,
     }
   ];
@@ -89,11 +89,69 @@ export class BudgetComponent implements OnInit {
   uid: string;
   notiMessage: string;
   stringDate: string;
+  clickEventsubscription: Subscription;
   
-  constructor(private dialog: MatDialog, private datePipe: DatePipe, private http: HttpClient, private router: Router, private route: ActivatedRoute) {
+  constructor(private dialog: MatDialog, private datePipe: DatePipe, private http: HttpClient, private router: Router, private route: ActivatedRoute,  private sharedService: SharedService) {
     this.stringDate = this.datePipe.transform(this.date, 'MM-dd-yyyy');
     this.uid = this.route.url["value"][1]["path"];
     console.log(this.uid);
+    this.clickEventsubscription = this.sharedService.getClickEvent().subscribe(()=>{
+      console.log("GETTING CLICK EVENT FROM BUDGET")
+      this.http.get('/api/user-profile/' + this.uid +'/info').subscribe((data:any) => {
+        var monthlyRemaining = data.userProfile.MBudget-data.userProfile.MSavings-data.userProfile.MExpenses;
+        let budgetBreakdownLabels = []
+        let budgetBreakdownChartData = []
+        let budgetBreakdownBc = []
+        let budgetBreakdownHbc = []
+        if (monthlyRemaining> 0){
+          budgetBreakdownChartData.push(monthlyRemaining)
+          budgetBreakdownLabels.push('Remaining')
+          budgetBreakdownBc.push('#ffc107')
+          budgetBreakdownHbc.push('#ffc107')
+        }
+        this.http.get('/api/budget/getBudgetBreakdownCategories/' + this.uid).subscribe((data:any) => {
+            var hash  = new Map();
+            for (var item of data){
+              var isExpense = false;
+              var value = 0;
+              if (item.expenseId != null){
+                isExpense = true;
+                value = item.price
+              } else{
+                value = item.price
+              }
+              var lookupKey = item.Name + "," + isExpense
+              if (!hash.has(lookupKey)){
+                hash.set(lookupKey, value); 
+              } else {
+                hash.set(lookupKey, hash.get(lookupKey) + value);
+              }
+            }
+            for (var pair of hash){
+              let value = pair[1]
+              budgetBreakdownChartData.push(value)
+              budgetBreakdownLabels.push(pair[0].split(",")[0])
+              var randomColor = this.getRandomColor2()
+              budgetBreakdownBc.push(randomColor)
+              budgetBreakdownHbc.push(randomColor)
+            }
+            this.chartDatasets = [
+              { data: budgetBreakdownChartData}
+            ];
+            this.chartLabels = budgetBreakdownLabels;
+            this.chartColors = [
+              {
+                backgroundColor: budgetBreakdownBc,
+                hoverBackgroundColor: budgetBreakdownHbc,
+                borderWidth: 2,
+              }
+            ];
+        }, error => {
+            console.log("error getting categories for budget breakdown", error);
+        });      
+      })
+      
+    })
   }
   breakpoint: number;
   
@@ -112,13 +170,74 @@ export class BudgetComponent implements OnInit {
             }
         ]
       }
+      var monthlyRemaining = data.userProfile.MBudget-data.userProfile.MSavings-data.userProfile.MExpenses;
+      let budgetBreakdownLabels = []
+      let budgetBreakdownChartData = []
+      let budgetBreakdownBc = []
+      let budgetBreakdownHbc = []
+      if (monthlyRemaining> 0){
+        budgetBreakdownChartData.push(monthlyRemaining)
+        budgetBreakdownLabels.push('Remaining')
+        budgetBreakdownBc.push('#ffc107')
+        budgetBreakdownHbc.push('#ffc107')
+      }
+      this.http.get('/api/budget/getBudgetBreakdownCategories/' + this.uid).subscribe((data:any) => {
+          var hash  = new Map();
+          for (var item of data){
+            var isExpense = false;
+            var value = 0;
+            if (item.expenseId != null){
+              isExpense = true;
+              value = item.price
+            } else{
+              value = item.price
+            }
+            var lookupKey = item.Name + "," + isExpense
+            if (!hash.has(lookupKey)){
+              hash.set(lookupKey, value); 
+            } else {
+              hash.set(lookupKey, hash.get(lookupKey) + value);
+            }
+          }
+          for (var pair of hash){
+            let value = pair[1]
+            budgetBreakdownChartData.push(value)
+            budgetBreakdownLabels.push(pair[0].split(",")[0])
+            var randomColor = this.getRandomColor2()
+            budgetBreakdownBc.push(randomColor)
+            budgetBreakdownHbc.push(randomColor)
+          }
+          this.chartDatasets = [
+            { data: budgetBreakdownChartData}
+          ];
+          this.chartLabels = budgetBreakdownLabels;
+          this.chartColors = [
+            {
+              backgroundColor: budgetBreakdownBc,
+              hoverBackgroundColor: budgetBreakdownHbc,
+              borderWidth: 2,
+            }
+          ];
+      }, error => {
+          console.log("error getting categories for budget breakdown", error);
+      });      
       this.notiMessage ="On average, your total monthly budget is $"+data.userProfile.MBudget+".";
+      
+
     });
-    
     console.log("datset value 2: "+this.data.datasets[-1])
     this.breakpoint = (window.innerWidth <= 600) ? 1 : 2;
+
   }
-  
+
+  getRandomColor2() {
+    var length = 6;
+    var chars = '0123456789ABCDEF';
+    var hex = '#';
+    while(length--) hex += chars[(Math.random() * 16) | 0];
+    return hex;
+  }
+
   onResize(event) {
     this.breakpoint = (event.target.innerWidth <= 600) ? 1 : 2;
   }

@@ -105,9 +105,9 @@ export class AddItemsComponent implements OnInit {
                 });
             });
           }
+          this.sharedService.sendClickEvent();
         });
       });
-      this.sharedService.sendClickEvent();
     }
   }
 }

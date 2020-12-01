@@ -125,4 +125,21 @@ router.get('/getBudgetId/:userId', async (req, res, next) =>
 	}
 });
 
+
+router.get('/getBudgetBreakdownCategories/:id', async (req, res, next) =>
+{
+	try
+	{
+		const categories = await BudgetService.getBudgetBreakdownCategories(req.params.id);
+		console.log("HERE ARE CATEGORIE11111111111111111S: ", categories)
+		return res.json(categories);
+	}
+	catch(err)
+	{
+		// unexpected error
+		return next(err);
+	}
+});
+
+
 module.exports = router;

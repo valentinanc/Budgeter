@@ -56,6 +56,17 @@ class ExpensesService
 		})
 		return expenses;
 	}
+
+	static async getExpense(expenseId)
+	{
+		let expense = await Expenses.findOne({
+			where: {
+				id: expenseId,
+			}
+		})
+		return expense;
+	}
+
 }
 
 module.exports = ExpensesService;

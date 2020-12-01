@@ -54,6 +54,16 @@ class SavingsService
 		})
 		return savings;
 	}
+
+	static async getSaving(savingId)
+	{
+		let saving = await Savings.findOne({
+			where: {
+				id: savingId,
+			}
+		})
+		return saving;
+	}
 }
 
 module.exports = SavingsService;
