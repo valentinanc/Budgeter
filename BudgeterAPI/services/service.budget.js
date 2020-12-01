@@ -26,6 +26,31 @@ class BudgetService
 		return listResult;
 	}
 
+	static async addCategoryExpense(data){
+		console.log("THIS IS CATEGORY EXPENSE DATA CREATINGGG: ", data)
+		let budgetId = data.budgetId
+		let categoryName = data.body.Name
+		let expenseId = data.body.ExpenseId
+		let cat = await Category.create({
+			Name: categoryName,
+			budgetId: budgetId,
+			expenseId: expenseId
+		})
+		return cat;
+	}
+
+	static async addCategorySavings(data){
+		let budgetId = data.budgetId
+		let categoryName = data.body.Name
+		let savingsId = data.body.SavingsId
+		let cat = await Category.create({
+			Name: categoryName,
+			budgetId: budgetId,
+			savingId: savingsId
+		})
+		return cat;
+	}
+
 	static async getCategories(data)
 	{
 		let userProfileId = await UserProfileService.getUserProfileId(data)
@@ -42,8 +67,8 @@ class BudgetService
 	{
 		let userId = data.userId
 		let monthlyBudget = data.body.mbudget
-		let monthlySavings = data.body.msavings
-		let monthlyExpenses = data.body.mexpenses
+		let monthlySavings = 0
+		let monthlyExpenses = 0
 		let userProfile = await UserProfile.update(
             { MBudget: monthlyBudget,  MExpenses: monthlyExpenses, MSavings: monthlySavings}, {
 			where: {

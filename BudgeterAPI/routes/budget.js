@@ -26,6 +26,51 @@ router.post('/addCategories/', async (req, res, next) =>
 });
 
 
+router.post('/addCategoryExpense/', async (req, res, next) =>
+{
+	const body = req.body;
+
+	try
+	{
+		const categories = await BudgetService.addCategoryExpense(body);
+		// created the categories! 
+		return res.status(201).json({ categories: categories });
+	}
+	catch(err)
+	{
+		if (err.name === 'ValidationError')
+		{
+        	return res.status(400).json({ error: err.message });
+		}
+
+		// unexpected error
+		return next(err);
+	}
+});
+
+router.post('/addCategorySavings/', async (req, res, next) =>
+{
+	const body = req.body;
+
+	try
+	{
+		const categories = await BudgetService.addCategorySavings(body);
+		// created the categories! 
+		return res.status(201).json({ categories: categories });
+	}
+	catch(err)
+	{
+		if (err.name === 'ValidationError')
+		{
+        	return res.status(400).json({ error: err.message });
+		}
+
+		// unexpected error
+		return next(err);
+	}
+});
+
+
 router.get('/getCategories/:id', async (req, res, next) =>
 {
 	try

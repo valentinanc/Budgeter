@@ -37,8 +37,8 @@ export class AboutYouComponent implements OnInit {
   ngOnInit(): void {
     this.userForm = this.formBuilder.group({
   		mbudget: ['', [Validators.required,Validators.min(1)]],
-  		mexpenses: ['', [Validators.required,Validators.min(1)]],
-      msavings: ['', [Validators.required,Validators.min(1)]],
+  		// mexpenses: ['', [Validators.required,Validators.min(1)]],
+      // msavings: ['', [Validators.required,Validators.min(1)]],
       oCategory:  [''],
       ofGoal:  ['']
 	  });
@@ -68,7 +68,8 @@ export class AboutYouComponent implements OnInit {
       let id = this.router.url.split("/")[2];
       // Add monthly budget/expense/savings
 
-      let budgetData: any = Object.assign({body: {mbudget: this.userForm.value["mbudget"], mexpenses: this.userForm.value["mexpenses"], msavings: this.userForm.value["msavings"]}, userId: id});
+      // let budgetData: any = Object.assign({body: {mbudget: this.userForm.value["mbudget"], mexpenses: this.userForm.value["mexpenses"], msavings: this.userForm.value["msavings"]}, userId: id});
+      let budgetData: any = Object.assign({body: {mbudget: this.userForm.value["mbudget"]}, userId: id});
       this.http.post('/api/budget/changeBudget', budgetData).subscribe((data:any) => {
           console.log("budget changed: ", data)
       });

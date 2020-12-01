@@ -1,34 +1,41 @@
 <h1 mat-dialog-title>Add Items to Budget</h1>
 <div [formGroup]="firstFormGroup">
-<div mat-dialog-content>
-  Enter the item name<br>
-  <mat-form-field appearance="outline">
-    <mat-label>Enter the item name</mat-label>
-    <input matInput placeholder="coffee" formControlName="firstCtrl" required>
-  </mat-form-field>
-</div>
-</div>
-<br>
-  <div [formGroup]="secondFormGroup">
-  What category does the item belong to?<br>
-  <mat-form-field>
-    <mat-select>
-      <mat-option *ngFor="let category of categories" [value]="category.value">
-        {{category.viewValue}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
-<br>
-<div [formGroup]="secondFormGroup">
-  How much was the item?<br>
-  <mat-form-field appearance="outline">
-    <mat-label>Item Price</mat-label>
-    <input matInput formControlName="secondCtrl" placeholder="$5"
-           required type="number">
-  </mat-form-field>
+  <div mat-dialog-content>
+    Enter the item name<br>
+    <mat-form-field appearance="outline">
+      <mat-label>Enter the item name</mat-label>
+      <input matInput placeholder="coffee" formControlName="name" required>
+    </mat-form-field>
+  </div>
+  <div class="btn-group" role="group" aria-label="Basic example">
+    <button mdbBtn type="button" [ngClass] ="{'btn-danger': expenseSelected}" class="waves-light" (click)="expenseSelected=true" mdbWavesEffect>Expense</button>
+    <button mdbBtn type="button" [ngClass]= "{'btn-success': !expenseSelected}" class="waves-light" (click)="expenseSelected=false" mdbWavesEffect>Savings</button>
+  </div>
+  <br>
+  <br>
+    What category does the item belong to?<br>
+    <mat-form-field>
+      <mat-select #selectWidget formControlName="category">
+        <mat-option *ngFor="let category of categories" [value]="category.value">
+          {{category.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div *ngIf="selectWidget.value == categories.length-1">
+      <mat-form-field>
+        <input matInput formControlName="oCategory" placeholder="Type Here" required type="text">
+      </mat-form-field>
+    </div> 
+    
+  <br>
+    How much was the item?<br>
+    <mat-form-field appearance="outline">
+      <mat-label>Item Price</mat-label>
+      <input matInput formControlName="price" placeholder="$5"
+            required type="number">
+    </mat-form-field>
 </div>
 <div mat-dialog-actions align="end">
   <button mat-button [mat-dialog-close]="true">Close</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Submit</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click) = "submit()">Submit</button>
 </div>

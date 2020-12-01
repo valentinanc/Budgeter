@@ -5,4 +5,14 @@
 h1 {
     color: #4e73df;
 }
-  
+
+
+.mat-button-toggle {
+    background-color: mat-color(blue);
+    color: mat-color(blue, default-contrast);
+}
+
+.mat-button-toggle-checked {
+    background-color: mat-color(red);
+    color: mat-color(red, default-contrast);
+}
