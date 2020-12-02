@@ -89,7 +89,6 @@ export class SavingsComponent implements OnInit {
     this.clickEventsubscription = this.sharedService.getClickEvent().subscribe(()=>{
       this.http.get('/api/user-profile/' + this.uid + '/info').subscribe((data:any) => {
         this.userProfileId = data.userProfile.id;
-        this.notiMessage ="On average, you saved $"+data.userProfile.MSavings+" per month.";
         console.log(this.userProfileId)
         this.http.get('/api/budget/getBudgetId/' + this.userProfileId).subscribe((data:any) => {
           this.budgetId = data

@@ -86,8 +86,6 @@ export class UserSettingsComponent implements OnInit {
 
     this.aboutForm = this.formBuilder.group({
       budget: [''],
-      expenses: [''],
-      savings: [''],
       id: [this.uid]
     });
 
@@ -104,8 +102,6 @@ export class UserSettingsComponent implements OnInit {
     this.http.get('/api/user-profile/' + this.uid +'/info').subscribe((data:any) => {
       this.aboutForm = this.formBuilder.group({
         'budget': [data.userProfile.MBudget==undefined?'': data.userProfile.MBudget.toFixed(2)],
-        'expenses': [data.userProfile.MExpenses==undefined?'': data.userProfile.MExpenses.toFixed(2)],
-        'savings': [data.userProfile.MSavings==undefined?'': data.userProfile.MSavings.toFixed(2)],
         'id': [this.uid]
       });
     });
@@ -141,7 +137,7 @@ export class UserSettingsComponent implements OnInit {
     
       let data: any = Object.assign({guid: this.guid}, this.aboutForm.value);
 
-      this.http.post('/api/user-profile/about-you-settings/', data).subscribe((data:any) => {
+      this.http.post('/api/user-profile/total-budget/', data).subscribe((data:any) => {
           
         if (data.userProfile == null){
           alert("Something went wrong.")
