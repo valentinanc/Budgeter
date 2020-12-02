@@ -165,7 +165,7 @@ export class BudgetComponent implements OnInit {
           yAxes: [{
             ticks: {
               beginAtZero: true,
-              max: data.userProfile.MBudget
+              suggestedMax: data.userProfile.MBudget
             }
           }]
         }

@@ -100,29 +100,6 @@ export class ExpenseComponent implements OnInit {
     this.clickEventsubscription = this.sharedService.getClickEvent().subscribe(()=>{
       this.http.get('/api/user-profile/' + this.uid+'/info').subscribe((data:any) => {
         this.userProfileId = data.userProfile.id;
-        this.data = {
-          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-          datasets: [
-              {
-                  label: 'Total Monthly Expenses',
-                  backgroundColor: '#F53B28',
-                  borderColor: '#D53B28',
-                  data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, data.userProfile.MExpenses]
-              }
-          ]
-        }
-        this.options = {
-          responsive: true,
-          maintainAspectRatio: true,
-          scales: {
-            yAxes: [{
-              ticks: {
-                beginAtZero: true,
-                max: data.userProfile.MBudget
-              }
-            }]
-          }
-        };
         this.notiMessage ="On average, you spend $"+data.userProfile.MExpenses+" per month.";
         console.log(this.userProfileId)
         this.http.get('/api/budget/getBudgetId/' + this.userProfileId).subscribe((data:any) => {
@@ -228,7 +205,7 @@ export class ExpenseComponent implements OnInit {
           yAxes: [{
             ticks: {
               beginAtZero: true,
-              max: data.userProfile.MBudget
+              suggestedMax: data.userProfile.MExpenses
             }
           }]
         }
