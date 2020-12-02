@@ -20,20 +20,10 @@
 
 	<mat-grid-list cols="2" rowHeight="2:1" [gutterSize]="'5%'">
 		<mat-grid-tile >
-			<mat-card class="card-header"  style="left:90px">
-				<div class="row">
-					<div class="col-sm-8">
-						<h5>Budget Overview (COMING SOON) <i class="fas fa-info-circle" matTooltip="This overview shows your past total monthly budgets." matTooltipClass="spec-tooltip"></i></h5>
-					</div>
-				</div>
-				<div class="col-sm-5">
-					<p-chart type="bar" [data]="data" width="31vw" height="17vw" [options]="options"></p-chart>
-				</div>
-			<!-- <div class="card-header">
-				<h5>Budget Overview</h5>
-				
-			</div> -->
-			</mat-card>
+			<div class="card-header">
+				<h5>Budget Overview (COMING SOON) <i class="fas fa-info-circle" matTooltip="This overview shows your past total monthly budgets." matTooltipClass="spec-tooltip"></i></h5>
+				<p-chart type="bar" [data]="data" width="31vw" height="17vw" [options]="options"></p-chart>
+			</div>
 		</mat-grid-tile>
 
 
