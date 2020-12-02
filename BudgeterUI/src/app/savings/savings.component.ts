@@ -87,8 +87,32 @@ export class SavingsComponent implements OnInit {
     this.totalSaving = 0;
     console.log("this is the uid", this.uid)
     this.clickEventsubscription = this.sharedService.getClickEvent().subscribe(()=>{
-      this.http.get('/api/user-profile/' + this.uid).subscribe((data:any) => {
-        this.userProfileId = data.userProfileId;
+      this.http.get('/api/user-profile/' + this.uid + '/info').subscribe((data:any) => {
+        this.userProfileId = data.userProfile.id;
+        this.data = {
+          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+          datasets: [
+              {
+                  label: 'Total Monthly Savings',
+                  backgroundColor: '#51C767',
+                  borderColor: '#51A767',
+                  data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, data.userProfile.MSavings]
+              }
+          ]
+        }
+        this.options = {
+          responsive: true,
+          maintainAspectRatio: true,
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true,
+                max: data.userProfile.MBudget
+              }
+            }]
+          }
+        };
+        this.notiMessage ="On average, you saved $"+data.userProfile.MSavings+" per month.";
         console.log(this.userProfileId)
         this.http.get('/api/budget/getBudgetId/' + this.userProfileId).subscribe((data:any) => {
           this.budgetId = data
