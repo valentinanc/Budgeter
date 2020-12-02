@@ -138,7 +138,7 @@ export class BudgetComponent implements OnInit {
             console.log("error getting categories for budget breakdown", error);
         });      
       })
-      
+      this.ngOnInit();
     })
   }
   breakpoint: number;
