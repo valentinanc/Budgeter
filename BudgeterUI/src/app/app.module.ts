@@ -44,6 +44,7 @@ import { AddItemsComponent } from './add-items/add-items.component';
 import {ChartModule} from 'primeng/chart';
 import { EditBudgetComponent } from './edit-budget/edit-budget.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatTooltipModule} from '@angular/material/tooltip';
 // For MDB Angular Free
 
 const routes: Routes = [
@@ -124,7 +125,8 @@ const routes: Routes = [
     ScrollingModule,
     MatSelectModule,
     ChartModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatTooltipModule
   ],
   providers: [ SharedService ],
   bootstrap: [AppComponent],
