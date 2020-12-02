@@ -75,3 +75,7 @@
 .alert {
   margin: auto; display: table;
 }
+
+::ng-deep .spec-tooltip {
+  background: #4e73df;
+}
