@@ -2,7 +2,7 @@
                         <br>
                         <br>
                         <mat-tab-group mat-align-tabs="center">   
-                                <mat-tab label="User Settings" id="title"> 
+                                <mat-tab label="Account Settings" id="title"> 
                                     <div class="row animate__animated animate__fadeIn">
                                         <div class="form-group col-md-7">
                                             <body>
@@ -97,7 +97,7 @@
                                         </div>
                                     </div>
                                 </mat-tab>
-                                <mat-tab label="Profile Information"> 
+                                <mat-tab label="Budget Settings"> 
                                     <body>
                                         <div class="container">
                                         <div class="row animate__animated animate__animated animate__fadeIn" >
@@ -107,7 +107,7 @@
                                                 <!-- Background image for card set in CSS! -->
                                                 </div>
                                                 <div class="card-body" style="box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);">
-                                                <h2 class="headercen">About You</h2>
+                                                <h2 class="headercen">Manage Your Money</h2>
                                                 <form [formGroup]="aboutForm" (ngSubmit)="updateAboutYou()" class="form-signin">
                                     
                                                 <div class="form-group">
@@ -116,16 +116,6 @@
                                                         <mat-label>Monthly Budget</mat-label>
                                                         <input matInput class="form-control" formControlName="budget">
                                                       </mat-form-field>
-                                                      <h2 class="headerleft2">What is your monthly expenses?</h2>
-                                                      <mat-form-field>
-                                                          <mat-label>Monthly Expenses</mat-label>
-                                                          <input matInput class="form-control" formControlName="expenses">
-                                                        </mat-form-field>
-                                                        <h2 class="headerleft2">What is your monthly savings?</h2>
-                                                        <mat-form-field>
-                                                            <mat-label>Monthly Savings</mat-label>
-                                                            <input matInput class="form-control" formControlName="savings">
-                                                          </mat-form-field>
                                                 </div>
                                     
                                                 <button class="btn btn-lg btn-primary btn-block text-uppercase bspace" type="submit">Save Changes</button>
