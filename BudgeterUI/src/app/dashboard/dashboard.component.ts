@@ -79,14 +79,13 @@ export class DashboardComponent implements OnInit {
 				let data: any = Object.assign({guid: this.guid}, {id: this.uid, budget: newBudget});
 
       			this.http.post('/api/user-profile/total-budget/', data).subscribe((data:any) => {
-          
+				this.sharedService.sendClickEvent();
         		if (data.userProfile == null){
           			alert("Something went wrong.")
         		} 
       			});
 			}
 		});
-		this.sharedService.sendClickEvent();
 		
 	}
 
