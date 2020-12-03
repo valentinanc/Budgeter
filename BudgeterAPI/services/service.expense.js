@@ -1,7 +1,8 @@
 
 const db = require("../config/db.initialize.js");
 const Expenses = db.expense;
-
+const UserProfile = db.userProfile;
+const Budget = db.budget;
 
 /* static financial goals service class */
 class ExpensesService
@@ -19,6 +20,16 @@ class ExpensesService
 			});
 		if (expense == undefined){
 			return null;
+		} else{
+			// get user profile id from budgetid
+			let budget = await Budget.findOne({
+				where: {
+					id: data["budgetId"],
+				}
+			})
+			var userProfileId = budget.userProfileId;
+			var price = data["price"]
+			await UserProfile.increment('MExpenses', {by: price, where: {id: userProfileId}});
 		}
 		return expense
 

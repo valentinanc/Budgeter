@@ -1,6 +1,8 @@
 
 const db = require("../config/db.initialize.js");
 const  Savings = db.savings;
+const UserProfile = db.userProfile;
+const Budget = db.budget;
 
 
 /* static financial goals service class */
@@ -16,12 +18,21 @@ class SavingsService
 				budgetId: data["budgetId"]              
 			}).catch(err => {
 				console.log("error creating financial goal")
-			});
+			})
 		if (savings == undefined){
 			return null;
+		} else{
+			// get user profile id from budgetid
+			let budget = await Budget.findOne({
+				where: {
+					id: data["budgetId"],
+				}
+			})
+			var userProfileId = budget.userProfileId;
+			var price = data["price"]
+			await UserProfile.increment('MSavings', {by: price, where: {id: userProfileId}});
 		}
 		return savings
-
     }
     
     static async getSavings(data)
