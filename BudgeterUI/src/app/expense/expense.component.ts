@@ -16,6 +16,10 @@ import { Router } from "@angular/router";
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
 import { SharedService } from '../services/service.component';
+import { AddItemsComponent } from '../add-items/add-items.component';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { Inject } from '@angular/core';
 
 export class ExpenseList{
   id:number;
@@ -72,7 +76,7 @@ export class ExpenseComponent implements OnInit {
   public chartHovered(e: any): void { }
   // end expense breakdown
   notiMessage: string;
-  Price: string;
+  Price: number;
   expenseList: ExpenseList[] = [];
   items : [];
   workTodo: string;
@@ -92,8 +96,8 @@ export class ExpenseComponent implements OnInit {
   personList: Array<any> = [];
   budgetId:string;
   totalExpense:number;
-
-  constructor(private http: HttpClient, private route: ActivatedRoute, private sharedService:SharedService) {
+  green:true;
+  constructor(private http: HttpClient, private route: ActivatedRoute,private dialog: MatDialog, private sharedService:SharedService) {
     this.uid = this.route.url["value"][1]["path"];
     this.totalExpense = 0;
     console.log("this is the uid", this.uid)
@@ -109,7 +113,7 @@ export class ExpenseComponent implements OnInit {
             this.expenseList  = []
             for(var i = 0; i < data.length; i++) {
               var obj = data[i];
-              this.expenseList.push({id: obj.id,Date:obj.createdAt.slice(0,10),Name: obj.Name, Price: obj.Price, });
+              this.expenseList.unshift({id: obj.id,Date:obj.createdAt.slice(0,10),Name: obj.Name, Price: obj.Price, });
               console.log(this.expenseList)
               this.personList = this.expenseList
               console.log(this.personList)
@@ -173,6 +177,14 @@ export class ExpenseComponent implements OnInit {
       this.previouslySet = true;
     })
   }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AddItemsComponent, {});
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
 
   getRandomColor2() {
     var length = 6;

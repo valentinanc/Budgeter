@@ -7,6 +7,12 @@ import { Router } from "@angular/router";
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
 import { SharedService } from '../services/service.component';
+import { AddItemsComponent } from '../add-items/add-items.component';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Inject } from '@angular/core';
+import { MatDialogModule } from '@angular/material/dialog';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+
 export class SavingsList{
   id:number;
   Name:string = '';
@@ -81,7 +87,7 @@ export class SavingsComponent implements OnInit {
   budgetId:string;
   totalSaving:number;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private sharedService:SharedService) {
+  constructor(private http: HttpClient, private route: ActivatedRoute,private dialog: MatDialog, private sharedService:SharedService) {
     
     this.uid = this.route.url["value"][1]["path"];
     this.totalSaving = 0;
@@ -98,7 +104,7 @@ export class SavingsComponent implements OnInit {
             this.savingList  = []
             for(var i = 0; i < data.length; i++) {
               var obj = data[i];
-              this.savingList.push({id: obj.id,Date:obj.createdAt.slice(0,10),Name: obj.Name, Price: obj.Price });
+              this.savingList.unshift({id: obj.id,Date:obj.createdAt.slice(0,10),Name: obj.Name, Price: obj.Price });
               console.log(this.savingList)
               this.savingListrow = this.savingList
               console.log("this is the savingListrow list" , this.savingListrow)
@@ -221,6 +227,13 @@ export class SavingsComponent implements OnInit {
       
     }, error => {
         console.log("There was an error retrieving the user profile id", error);
+    });
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AddItemsComponent, {data:{green:true}});
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
     });
   }
 

@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { SharedService } from '../services/service.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { Inject } from '@angular/core';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 interface Category {
   value: string;
   viewValue: string;
@@ -26,7 +28,13 @@ export class AddItemsComponent implements OnInit {
   checked1 = false;
   expenseSelected=true;
   clickEventsubscription: Subscription;
-  constructor(public dialogRef: MatDialogRef<AddItemsComponent>, private _formBuilder: FormBuilder, private sharedService:SharedService, private http: HttpClient, private router: Router) {
+  constructor(public dialogRef: MatDialogRef<AddItemsComponent>, private _formBuilder: FormBuilder, private sharedService:SharedService, private http: HttpClient, private router: Router,@Inject(MAT_DIALOG_DATA) public data: any) {
+    console.log("hopefully this works",data)
+    if(data != null){
+      if(data.green){
+        this.expenseSelected = false;
+      }
+    }
     this.uid = this.router.url.split("/")[2];
     this.categories = []
     this.http.get('/api/budget/getCategories/' + this.uid).subscribe((data:any) => {

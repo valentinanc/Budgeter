@@ -9,7 +9,7 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING
         },
         Price: {
-            type: Sequelize.INTEGER
+            type: Sequelize.FLOAT
         }
     });
     return Savings;

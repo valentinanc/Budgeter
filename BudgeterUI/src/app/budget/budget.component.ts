@@ -20,6 +20,19 @@ import { ActivatedRoute } from '@angular/router';
 import { SharedService } from '../services/service.component';
 import { Subscription } from 'rxjs';
 
+export class ExpenseList{
+  id:number;
+  Name:string = '';
+  Price: number;
+  Date:string;
+}
+
+export class SavingsList{
+  id:number;
+  Name:string = '';
+  Price: number;
+  Date:string;
+}
 
 @Component({
   selector: 'budget',
