@@ -111,13 +111,39 @@ export class ExpenseComponent implements OnInit {
           this.http.get('/api/expense/' + this.budgetId).subscribe((data:any) => {
             this.personList.length = 0
             this.expenseList  = []
+            let total = 0
             for(var i = 0; i < data.length; i++) {
               var obj = data[i];
+              total = total + obj.Price;
               this.expenseList.unshift({id: obj.id,Date:obj.createdAt.slice(0,10),Name: obj.Name, Price: obj.Price, });
               console.log(this.expenseList)
               this.personList = this.expenseList
               console.log(this.personList)
           }
+          this.data = {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+            datasets: [
+                {
+                    label: 'Total Monthly Expenses',
+                    backgroundColor: '#F53B28',
+                    borderColor: '#D53B28',
+                    data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, total]
+                }
+            ]
+          }
+          this.options = {
+            responsive: true,
+            maintainAspectRatio: true,
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true,
+                  suggestedMax: total * 2
+                }
+              }]
+            }
+          };
+          this.notiMessage ="On average, you spend $"+total+" per month.";
             console.log("this is the data" , data)
           }, error => {
               console.log("There was an error displaying the financial goals", error);
@@ -195,51 +221,48 @@ export class ExpenseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.http.get('/api/user-profile/' + this.uid +'/info').subscribe((data:any) => {
-      console.log("datset value: "+this.data.datasets[-1])
-
-      this.data = {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-        datasets: [
-            {
-                label: 'Total Monthly Expenses',
-                backgroundColor: '#F53B28',
-                borderColor: '#D53B28',
-                data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, data.userProfile.MExpenses]
-            }
-        ]
-      }
-      this.options = {
-        responsive: true,
-        maintainAspectRatio: true,
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true,
-              suggestedMax: data.userProfile.MExpenses * 2
-            }
-          }]
-        }
-      };
-      this.notiMessage ="On average, you spend $"+data.userProfile.MExpenses+" per month.";
-    });
-    //Chage is here below
+    //Change is here below
     this.http.get('/api/user-profile/' + this.uid).subscribe((data:any) => {
       this.userProfileId = data.userProfileId;
       this.http.get('/api/budget/getBudgetId/' + this.userProfileId).subscribe((data:any) => {
         this.budgetId = data
         console.log("This is the budget id", this.budgetId)
         this.http.get('/api/expense/'+this.budgetId).subscribe((data:any) => {
+          let total = 0
           for(var i = 0; i < data.length; i++) {
             var obj = data[i];
-            this.totalExpense = this.totalExpense + obj.Price;
+            total = total + obj.Price;
         }
-        console.log("This is the total exp", this.totalExpense)
+        this.data = {
+          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+          datasets: [
+              {
+                  label: 'Total Monthly Expenses',
+                  backgroundColor: '#F53B28',
+                  borderColor: '#D53B28',
+                  data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, total]
+              }
+          ]
+        }
+        this.options = {
+          responsive: true,
+          maintainAspectRatio: true,
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true,
+                suggestedMax: total * 2
+              }
+            }]
+          }
+        };
+        this.notiMessage ="On average, you spend $"+total+" per month.";
+        
         //Added below post
-        let dataExpense: any = Object.assign({guid: this.guid}, {id: this.uid, expenses: this.totalExpense});
+        let dataExpense: any = Object.assign({guid: this.guid}, {id: this.uid, expenses: total});
 
         this.http.post('/api/user-profile/total-expenses/', dataExpense).subscribe((dataExpense:any) => {
-            
+          this.sharedService.sendClickEvent();
           if (dataExpense.userProfile == null){
             alert("Something went wrong.")
           }
@@ -270,6 +293,7 @@ export class ExpenseComponent implements OnInit {
   let data: any = Object.assign({id:person.id});
   console.log("Person id: " + data.id);
   this.http.delete('/api/expense/' + data.id).subscribe((data:any) => {
+    this.sharedService.sendClickEvent();
     }, error =>
   {
     this.serviceErrors = error.error.error;

@@ -86,6 +86,7 @@ export class AddItemsComponent implements OnInit {
                 var ed = {Name: selectedCategory, ExpenseId: expenseId}
                 let catD: any = Object.assign({body: ed, budgetId: budgetId});
                 this.http.post('/api/budget/addCategoryExpense', catD).subscribe((res4:any) => {
+                    this.sharedService.sendClickEvent();
                     console.log("categorie expense added: ", res4)
                 });
             });
@@ -99,11 +100,12 @@ export class AddItemsComponent implements OnInit {
                 var sd = {Name: selectedCategory, SavingsId: savingsId}
                 let catD: any = Object.assign({body: sd, budgetId: budgetId});
                 this.http.post('/api/budget/addCategorySavings', catD).subscribe((res4:any) => {
+                  this.sharedService.sendClickEvent();
                     console.log("categorie savings added: ", res4)
                 });
             });
           }
-          this.sharedService.sendClickEvent();
+          //this.sharedService.sendClickEvent();
         });
       });
     }

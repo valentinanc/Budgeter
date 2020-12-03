@@ -102,13 +102,39 @@ export class SavingsComponent implements OnInit {
           this.http.get('/api/saving/' + this.budgetId).subscribe((data:any) => {
             this.savingListrow.length = 0
             this.savingList  = []
+            let total = 0
             for(var i = 0; i < data.length; i++) {
               var obj = data[i];
+              total = total + obj.Price;
               this.savingList.unshift({id: obj.id,Date:obj.createdAt.slice(0,10),Name: obj.Name, Price: obj.Price });
               console.log(this.savingList)
               this.savingListrow = this.savingList
               console.log("this is the savingListrow list" , this.savingListrow)
           }
+          this.data = {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+            datasets: [
+                {
+                    label: 'Total Monthly Savings',
+                    backgroundColor: '#51C767',
+                    borderColor: '#51A767',
+                    data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, total]
+                }
+            ]
+          }
+          this.options = {
+            responsive: true,
+            maintainAspectRatio: true,
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true,
+                  suggestedMax: total * 2
+                }
+              }]
+            }
+          };
+          this.notiMessage ="On average, you saved $"+total+" per month.";
           }, error => {
               console.log("There was an error displaying the financial goals", error);
           });
@@ -172,30 +198,7 @@ export class SavingsComponent implements OnInit {
     this.http.get('/api/user-profile/' + this.uid +'/info').subscribe((data:any) => {
       console.log("datset value: "+this.data.datasets[-1])
 
-      this.data = {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-        datasets: [
-            {
-                label: 'Total Monthly Savings',
-                backgroundColor: '#51C767',
-                borderColor: '#51A767',
-                data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, data.userProfile.MSavings]
-            }
-        ]
-      }
-      this.options = {
-        responsive: true,
-        maintainAspectRatio: true,
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true,
-              suggestedMax: data.userProfile.MSavings * 2
-            }
-          }]
-        }
-      };
-      this.notiMessage ="On average, you saved $"+data.userProfile.MSavings+" per month.";
+      
     });
 
     this.http.get('/api/user-profile/' + this.uid).subscribe((data:any) => {
@@ -204,16 +207,41 @@ export class SavingsComponent implements OnInit {
         this.budgetId = data
         console.log("This is the budget id", this.budgetId)
         this.http.get('/api/saving/'+this.budgetId).subscribe((data:any) => {
+          let total = 0
           for(var i = 0; i < data.length; i++) {
             var obj = data[i];
-            this.totalSaving = this.totalSaving + obj.Price;
+            total = total + obj.Price;
         }
-        console.log("This is the total exp", this.totalSaving)
+        this.data = {
+          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+          datasets: [
+              {
+                  label: 'Total Monthly Savings',
+                  backgroundColor: '#51C767',
+                  borderColor: '#51A767',
+                  data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, total]
+              }
+          ]
+        }
+        this.options = {
+          responsive: true,
+          maintainAspectRatio: true,
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true,
+                suggestedMax: total * 2
+              }
+            }]
+          }
+        };
+        this.notiMessage ="On average, you saved $"+total+" per month.";
+
         //Added below post
-        let dataSaving: any = Object.assign({guid: this.guid}, {id: this.uid, savings: this.totalSaving});
+        let dataSaving: any = Object.assign({guid: this.guid}, {id: this.uid, savings: total});
 
         this.http.post('/api/user-profile/total-savings/', dataSaving).subscribe((dataSaving:any) => {
-            
+          this.sharedService.sendClickEvent();
           if (dataSaving.userProfile == null){
             alert("Something went wrong.")
           }
@@ -258,6 +286,7 @@ export class SavingsComponent implements OnInit {
    let data: any = Object.assign({id:person.id});
    console.log("Person id: " + data.id);
    this.http.delete('/api/saving/' + data.id).subscribe((data:any) => {
+     this.sharedService.sendClickEvent();
      }, error =>
    {
      this.serviceErrors = error.error.error;
