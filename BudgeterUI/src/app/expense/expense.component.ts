@@ -216,7 +216,7 @@ export class ExpenseComponent implements OnInit {
           yAxes: [{
             ticks: {
               beginAtZero: true,
-              suggestedMax: data.userProfile.MExpenses
+              suggestedMax: data.userProfile.MExpenses * 2
             }
           }]
         }

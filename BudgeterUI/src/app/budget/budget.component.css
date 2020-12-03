@@ -1,4 +1,12 @@
 /* Structure */
+.positive {
+  color: #28a745!important;
+}
+
+.negative {
+  color: #dc3545!important;
+}
+
 .example-container {
     display: flex;
     flex-direction: column;

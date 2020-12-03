@@ -19,19 +19,22 @@ import { Router } from "@angular/router";
 import { ActivatedRoute } from '@angular/router';
 import { SharedService } from '../services/service.component';
 import { Subscription } from 'rxjs';
+import { AddItemsComponent } from '../add-items/add-items.component';
 
-export class ExpenseList{
+export class BudgetList{
   id:number;
   Name:string = '';
   Price: number;
-  Date:string;
-}
+  Date:Date;
+  Category:string;
 
+}
 export class SavingsList{
   id:number;
   Name:string = '';
   Price: number;
   Date:string;
+  Category:string;
 }
 
 @Component({
@@ -44,13 +47,7 @@ export class BudgetComponent implements OnInit {
 
   // budget table
   editField = ""
-  personList: Array<any> = [
-    { id: 5, date: '11/05/2020', name: "TTC (Take The Car)", price: '50'},
-    { id: 4, date: '11/04/2020', name: "Tesla Stonks", price: '500'},
-    { id: 3, date: '11/03/2020', name: 'Tim Hortons Party', price: '25'},
-    { id: 2, date: '11/03/2020', name: 'Grocery', price: '125'},
-    { id: 1, date: '11/01/2020', name: "Rent", price: '1500'},
-  ];
+
   // end budget table
 
   // budget overview
@@ -91,6 +88,10 @@ export class BudgetComponent implements OnInit {
   uid: string;
   notiMessage: string;
   stringDate: string;
+  personList: Array<any> = [ ];
+  budgetId:string;
+  savingListrow: Array<any> = [];
+  savingList: SavingsList[] = [];
   clickEventsubscription: Subscription;
   
   constructor(private dialog: MatDialog, private datePipe: DatePipe, private http: HttpClient, private router: Router, private route: ActivatedRoute,  private sharedService: SharedService) {
@@ -110,6 +111,39 @@ export class BudgetComponent implements OnInit {
           budgetBreakdownBc.push('#ffc107')
           budgetBreakdownHbc.push('#ffc107')
         }
+        //savings 
+        this.http.get('/api/budget/getBudgetId/' + this.uid).subscribe((data:any) => {
+          this.budgetId = data
+          console.log("This is the budget id", this.budgetId)
+          this.http.get('/api/saving/' + this.budgetId).subscribe((data:any) => {
+            this.savingListrow.length = 0
+            this.savingList  = []
+            for(var i = 0; i < data.length; i++) {
+              var obj = data[i];
+              this.savingList.unshift({id: obj.id,Date:obj.createdAt.slice(0,10),Name: obj.Name, Price: obj.Price,Category:"Savings" });
+              console.log(this.savingList)
+              this.savingListrow = this.savingList
+              console.log("this is the savingListrow list" , this.savingListrow)
+            }
+            this.http.get('/api/expense/' + this.budgetId).subscribe((data:any) => {
+              for(var i = 0; i < data.length; i++) {
+                var obj = data[i];
+                this.savingList.unshift({id: obj.id,Date:obj.createdAt.slice(0,10),Name: obj.Name, Price: obj.Price,Category:"Expense" });
+                console.log(this.savingList)
+                this.savingListrow = this.savingList
+                console.log("this is the savingListrow list" , this.savingListrow)
+              }
+            }, error => {
+                console.log("There was an error displaying the financial goals", error);
+            });
+
+          }, error => {
+              console.log("There was an error displaying the financial goals", error);
+          });
+        }, error => {
+            console.log("There was an error displaying the financial goals", error);
+        });
+
         this.http.get('/api/budget/getBudgetBreakdownCategories/' + this.uid).subscribe((data:any) => {
             var hash  = new Map();
             for (var item of data){
@@ -178,7 +212,7 @@ export class BudgetComponent implements OnInit {
           yAxes: [{
             ticks: {
               beginAtZero: true,
-              suggestedMax: data.userProfile.MBudget
+              suggestedMax: data.userProfile.MBudget 
             }
           }]
         }
@@ -194,6 +228,46 @@ export class BudgetComponent implements OnInit {
         budgetBreakdownBc.push('#ffc107')
         budgetBreakdownHbc.push('#ffc107')
       }
+      this.http.get('/api/budget/getBudgetId/' + data.userProfile.id).subscribe((data:any) => {
+        this.budgetId = data
+        console.log("This is the budget id", this.budgetId)
+        this.http.get('/api/saving/' + this.budgetId).subscribe((data:any) => {
+          this.savingListrow.length = 0
+          this.savingList  = []
+          for(var i = 0; i < data.length; i++) {
+            var obj = data[i];
+            this.savingList.unshift({id: obj.id,Date:obj.createdAt.slice(0,10),Name: obj.Name, Price: obj.Price,Category:"Savings" });
+            console.log(this.savingList)
+            this.savingListrow = this.savingList
+            console.log("this is the savingListrow list" , this.savingListrow)
+          }
+          this.http.get('/api/expense/' + this.budgetId).subscribe((data:any) => {
+            for(var i = 0; i < data.length; i++) {
+              var obj = data[i];
+              this.savingList.unshift({id: obj.id,Date:obj.createdAt.slice(0,10),Name: obj.Name, Price: obj.Price,Category:"Expense"});
+              console.log(this.savingList)
+              this.savingListrow = this.savingList
+              console.log("this is the savingListrow list" , this.savingListrow)
+            }
+            // const sortedActivities =  this.savingList.sort((a, b) => b.Date - a.Date)
+            // console.log("sorted array", sortedActivities)
+            this.savingList.sort(function(a, b) {
+              var dateA = new Date(a.Date)
+              var dateB = new Date(b.Date);
+              return dateB.valueOf() - dateA.valueOf();
+             });
+             this.savingListrow = this.savingList
+          }, error => {
+              console.log("There was an error displaying the financial goals", error);
+          });
+
+        }, error => {
+            console.log("There was an error displaying the financial goals", error);
+        });
+      }, error => {
+          console.log("There was an error displaying the financial goals", error);
+      });
+
       this.http.get('/api/budget/getBudgetBreakdownCategories/' + this.uid).subscribe((data:any) => {
           var hash  = new Map();
           for (var item of data){
@@ -260,14 +334,38 @@ export class BudgetComponent implements OnInit {
     this.personList[id][property] = editField;
   }
 
-  remove(id: any) {
-    this.personList.splice(id, 1);
+  // remove(id: any) {
+  //   this.savingListrow.splice(id, 1);
+    
+  // }
+  remove(budget:any,index): void {
+    console.log(budget);
+    console.log(index);
+    console.log("THis is the category", budget.Category)
+    if(budget.Category == "Expense"){
+      this.savingListrow.splice(index,1)
+     let data: any = Object.assign({id:budget.id});
+     console.log("Person id: " + data.id);
+    this.http.delete('/api/expense/' + data.id).subscribe((data:any) => {
+      }, error =>
+    {
+    });
+    }
+    else if(budget.Category == "Savings"){
+      this.savingListrow.splice(index,1)
+     let data: any = Object.assign({id:budget.id});
+     console.log("Person id: " + data.id);
+    this.http.delete('/api/saving/' + data.id).subscribe((data:any) => {
+      }, error =>
+    {
+    });
+    
+    }
   }
-
-  add() {
-      const person = { id: 6, date: this.stringDate, name: '', price: ''}
-      this.personList.unshift(person);
-  }
+   
+  
+   
+ 
 
   changeValue(id: number, property: string, event: any) {
     this.editField = event.target.textContent;
@@ -277,6 +375,12 @@ export class BudgetComponent implements OnInit {
     const dialogRef = this.dialog.open(EditBudgetComponent, {
     });
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+  openAddItem(): void {
+    const dialogRef = this.dialog.open(AddItemsComponent, {});
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });

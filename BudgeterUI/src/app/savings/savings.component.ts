@@ -190,7 +190,7 @@ export class SavingsComponent implements OnInit {
           yAxes: [{
             ticks: {
               beginAtZero: true,
-              suggestedMax: data.userProfile.MSavings
+              suggestedMax: data.userProfile.MSavings * 2
             }
           }]
         }
@@ -250,9 +250,21 @@ export class SavingsComponent implements OnInit {
     this.savingListrow[id][property] = editField;
   }
 
-  remove(id: any) {
-    this.savingListrow.splice(id, 1);
-  }
+  deleteSaving(person:any, index): void {
+    console.log(person);
+    console.log(index);
+   
+   this.savingList.splice(index,1)
+   let data: any = Object.assign({id:person.id});
+   console.log("Person id: " + data.id);
+   this.http.delete('/api/saving/' + data.id).subscribe((data:any) => {
+     }, error =>
+   {
+     this.serviceErrors = error.error.error;
+   });
+   // this._todoService.deleteTodo(todo, index);
+   
+ }
 
   add() {
       const person = { id: 6, date: '2020/11/09', name: '', price: ''}

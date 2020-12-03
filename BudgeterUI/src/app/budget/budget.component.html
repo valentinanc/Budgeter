@@ -21,7 +21,7 @@
 	<mat-grid-list cols="2" rowHeight="2:1" [gutterSize]="'5%'">
 		<mat-grid-tile >
 			<mat-card class="card-header" style="left:90px">
-				<h5>Budget Overview (COMING SOON) <i class="fas fa-info-circle" matTooltip="This overview shows your past total monthly budgets." matTooltipClass="spec-tooltip"></i></h5>
+				<h5>Budget Overview <i class="fas fa-info-circle" matTooltip="This overview shows your past total monthly budgets." matTooltipClass="spec-tooltip"></i></h5>
 				<p-chart type="bar" [data]="data" width="31vw" height="17vw" [options]="options"></p-chart>
 			</mat-card>
 		</mat-grid-tile>
@@ -80,32 +80,40 @@
 		</mat-grid-tile>
 		<mat-grid-tile>
 			<mat-card class="card-header"  style="right:90px">
-				<h5>Budget Table (COMING SOON) <i class="fas fa-info-circle" matTooltip="This table consists of all the items you have recorded as expenses and savings." matTooltipClass="spec-tooltip" ></i></h5>
+				<h5>Budget Table <i class="fas fa-info-circle" matTooltip="This table consists of all the items you have recorded as expenses and savings." matTooltipClass="spec-tooltip" ></i></h5>
 					<div id="table" class="table-editable">
 						<table class="table table-striped table-responsive-md btn-table">
 							<tr>
+								
 								<th class="text-center">Date</th>
+								<th class="text-center">Category</th>
 								<th class="text-center">Name</th>
 								<th class="text-center">Price</th>
 								<span class="table-add float-right mb-3 mr-2">
-									<a style="font-size: 1rem; color: Dodgerblue;" (click)="add()">
+									<a style="font-size: 1rem; color: Dodgerblue;" (click)="openAddItem()">
 									  <mdb-icon fas icon="plus-square" size="2x"></mdb-icon>
 									</a>
 								</span>
 							</tr>
-							<tr style="font-size: 0.8rem;" *ngFor="let person of personList; let id = index">
+							<tr style="font-size: 0.8rem;" *ngFor="let budget of savingListrow; let id = index">
 								<td>
-								  <span (keyup)="changeValue(id, 'date', $event)" (blur)="updateList(id, 'date', $event)" contenteditable="true">{{person.date}}</span>
+								  <span (keyup)="changeValue(id, 'date', $event)" (blur)="updateList(id, 'date', $event)" contenteditable="false">{{budget.Date}}</span>
 								</td>
 								<td>
-								  <span contenteditable="true" (keyup)="changeValue(id, 'name', $event)" (blur)="updateList(id, 'name', $event)">{{person.name}}</span>
+									<span contenteditable="false" [ngClass]="{
+										'positive' : budget.Category === 'Savings',
+										'negative' : budget.Category === 'Expense'
+									 }" (keyup)="changeValue(id, 'category', $event)" (blur)="updateList(id, 'category', $event)">{{budget.Category}}</span>
+								  </td>
+								<td>
+								  <span contenteditable="true" (keyup)="changeValue(id, 'name', $event)" (blur)="updateList(id, 'name', $event)">{{budget.Name}}</span>
 								</td>
 								<td>
-								  <span contenteditable="true" (keyup)="changeValue(id, 'price', $event)" (blur)="updateList(id, 'price', $event)">{{person.price}}</span>
+								  <span contenteditable="true" (keyup)="changeValue(id, 'price', $event)" (blur)="updateList(id, 'price', $event)">{{budget.Price}}</span>
 								</td>
 								<td>
 								  <span class="table-remove">
-									<button class="btn btn-danger btn-sm fa fa-trash-o" (click)="remove(id)" title="Remove the item"></button>
+									<button class="btn btn-danger btn-sm fa fa-trash-o" (click)="remove(budget,id)" title="Remove the item"></button>
 								  </span>
 								</td>
 							  </tr>
