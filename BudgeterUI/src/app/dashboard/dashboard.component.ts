@@ -41,7 +41,6 @@ export class DashboardComponent implements OnInit {
 		this.uid = this.route.url["value"][1]["path"];
 		let id = this.route.url["value"][1]["path"];
 		this.clickEventsubscription = this.sharedService.getClickEvent().subscribe(()=>{
-			this.ngOnInit();
 			this.http.get('/api/user-profile/getProfile/' + id).subscribe((data:any) => {
 				this.tBudget = data.MBudget;
 				this.mExpenses = data.MExpenses;
