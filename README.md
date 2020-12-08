@@ -27,5 +27,8 @@ localhost:3000 API
 start Angular: 
 ng serve --proxy-config proxy.conf.json
 
-start NodeJs Server API:
+start NodeJs Server:
 npm start
+
+Setup of local MySQL DB is also needed.
+Settings for local db can be found in Budgeter/BudgeterAPI/config/db.config.js
